@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sarcastic or not? (1/2) - Vaibhav Ahuja</title>
+  <meta name="description" content="my personal space where i write about stuff that excites me.">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/nlp/sarcasm-detection">
+  <link rel="alternate" type="application/rss+xml" title="Vaibhav Ahuja" href="http://localhost:4000/feed.xml">
+</head>
+
+  <body>
+    <div class="page-content">
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Sarcastic or not? (1/2)</h1>
+    <p class="post-meta">
+      <time datetime="2018-04-25T16:51:29+05:30" itemprop="datePublished">Apr 25, 2018</time>
+      
+
+      
+  		
+
+  		
+  		
+
+  		&middot;	<span class="tags" itemprop="tags">
+  				<a href="http://localhost:4000/tagged#machine-learning">#Machine Learning</a>
+  			</span>
+
+  	  
+
+    </p>
+  </header>
+  <div class="post-content" itemprop="articleBody">
+    <blockquote>
+  <p>Benzema is the best player ever.</p>
+</blockquote>
+
+<p>This is 100% pure sarcasm. Okay, there is no such thing as <em>100% pure sarcasm</em> but what there is are sarcastic and non sarcastic sentences.
+For example, as soon as you read the above statement about Benzema, you could decipher that this is a statement which is definitely not true and is somewhat ironic in a mocking way. Someone who watches football, and has game sense would know that this sentence was a satirical remark. Someone who does not watch football, might think of this statement as <span style="color: #1eb300;"> True. </span> Hence we can say, that sarcasm is relative and highly depends on the context.</p>
+
+<p>Try to understand the complexity of this problem, we as humans, find it really difficult to understand sarcasm, like we can only understand sarcasm once we have an idea about what is the context it is being used in, and the body language, the tone of the voice. If we closely observe someone saying a sarcastic sentence, the pitch of the voice varies. When English speakers remark sarcasm with the word  <em>“Thanks!”</em>, they often use a nasal tone. The nasal tone shows a connection between sarcasm and extreme disgust. It is like the speaker does not only want to remove the word from the mouth but also from the nose! So so many factors contributing to sarcasm makes it really really difficult to understand sarcasm for us, as humans, let alone computers.</p>
+
+<p>I took the NLP class this semester at college, which dealt with understanding how Natural Language Processing works and reading and understanding research papers which was something that I was not used to, as bookish knowledge and Youtube was the only source of knowledge so far. TBH it was the most interesting class in this semester compared to my otherwise boring core Electrical Engineering subjects <em>literally very boring, I slept through most of my lectures <del> or maybe it is because of the faculty </del></em> Coming back to the point, I decided to make a project using the Natural Language Processing techniques learnt in this class and the ML algorithms to <span class="bg-dark-gray white" style="padding:2 px;"> Detect Sarcasm in Tweets. </span></p>
+
+<p>I basically aimed to create something to solve the complex problem of detecting sarcasm in the tweets. Machines are typically programmed to read the text as it is. It understands anything based strictly on what it is. So, detecting sarcasm was a difficult task. The reason why I chose twitter was because of the abundance of data available for the training of the supervised model. The main motivation behind understanding sarcasm using machines was in order to have a better understanding of one’s data. So that the product reviewing system which scrape the websites can collect better data to analyze their product impact, and so that one can actually understand what the other person is trying to say. As there is no vocabulary defined for sarcasm, it becomes a difficult task, that is something more complicated than a simple classification technique like a <em>Spam Detection ALgorithm</em> which would simply learn the vocabulary associated with the spam emails and filter them from the rest.</p>
+
+<p>Sarcasm has been a widely studied topic in linguistics. Due to the advancement in technology and availability of data across the world, Sarcasm Detection has witnessed some great interest from the sentiment analysis community and become an active research area. Basically, what we are trying to achieve can be summed down as follow:</p>
+<blockquote>
+  <p>Aiming to implement a model that can detect Sarcasm in Tweets, using NLP and ML techniques.</p>
+</blockquote>
+
+<h3 id="methodology">Methodology</h3>
+
+<p>The main idea behind understanding sarcasm was that the first part of a sarcastic sentence would have more Positive sentiment as compared to the second part which would be inclined towards more Negative Sentiment. Or we can say that, if (+)ve Sentiment  and (-)ve Sentiment words appear in close proximity, the sentence might be sarcastic.</p>
+
+<p>Taking an example: <span style="padding:2 px; color: #595959"> Benzema is the best. </span> We see that BENZEMA is a negative sentiment<small>(trust me)</small> and “is the best” positive. Okay, not the best of the examples; so a better example will be something like this <span style="padding:2 px; color: #595959;"> I am so happy that I failed again. </span>. If we analyze the statement: positive sentiment will be <em>“happy”</em> and the word with negative sentiment will be <em>“failed”</em>. They are in close proximity and hence we might say that this is a sarcastic sentence. We choose this as one of the features <small> (to be discussed later) </small> and let the classifier decide. This sentiment based approach is the key part of the method. The complete methodology can be somewhat visualized as below:</p>
+
+<p><em><img src="https://i.imgur.com/wlByWoL.png" alt="method" /></em></p>
+
+<p>I will be explaining the implementation part using the above image in detail in the next part <small> will come really soon </small>. Thanks for reading this.</p>
+
+<p>Have a good day. :)</p>
+
+  </div>
+  <hr>
+  
+    
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname  = 'https-vaibhavahuja-github-io-1';
+    var disqus_identifier = '/nlp/sarcasm-detection';
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+
+  
+</article>
+
+      <div class="copyright">
+      <p> Powered by <a href="https://jekyllrb.com/">Jekyll</a> </p>
+      </div>
+    </div>
+    
+  </body>
+</html>

@@ -1,0 +1,24 @@
+# Site settings
+title: "Vaibhav Ahuja"
+description: "my personal space where i write about stuff that excites me."
+# baseurl: "/textlog" # required if used under gh-pages branch, else (under master branch) just leave empty/blank
+url: ""
+author: "Vaibhav Ahuja"
+
+# Build settings
+kramdown:
+  input: GFM
+permalink: pretty
+
+# Third-party services
+# just leave empty to disable it
+google_analytics:
+disqus_shortname: 'https-vaibhavahuja-github-io-1'
+
+
+plugins:
+  - jekyll-sitemap
+
+exclude: ["LICENSE", "README.md", "CNAME", "vendor", "Gemfile", "script"]
+
+permalink: /:categories/:title

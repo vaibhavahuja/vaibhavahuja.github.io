@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vaibhav Ahuja</title>
+    <description>my personal space where i write about stuff that excites me.</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 13 Feb 2020 12:38:31 +0530</pubDate>
+    <lastBuildDate>Thu, 13 Feb 2020 12:38:31 +0530</lastBuildDate>
+    <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>Cryptocurrency explained</title>
+        <description>&lt;!-- # cryptocurrency explained.  --&gt;
+
+&lt;p&gt;Over the past few days I have been going through various blogs, research papers, youtube videos, books to read and gain knowledge about Cryptocurrency, which has been a pretty talked about topic recently. Unless you have been living under a rock, it is highly unlikely that you have never heard of &lt;em&gt;(bitcoin, blockchain, ethereum, mining)&lt;/em&gt; before. Through this post, I will try to explain how these technologies/currencies work and why were they created, and how can they change the way we do transactions now.&lt;/p&gt;
+
+&lt;p&gt;To understand this Digital Currency, let us understand, how currency works and has been working so far. 
+Initially, we had &lt;a href=&quot;https://en.wikipedia.org/wiki/Barter&quot;&gt;barter&lt;/a&gt; system, which was replaced by money mainly because exchange is not always convenient and efficient. 
+Due to this, currency started to mint. The exchange problems were solved and this system was largely based on trust. The kings used to have their &lt;a href=&quot;https://en.wikipedia.org/wiki/Alyattes_of_Lydia&quot;&gt;royal seal&lt;/a&gt; on the coin signifying that this currency is valid. However forgery was very common as making a coin and copying the seal was not that a difficult task, but still way much better than Barter. 
+With time, the gold coins transformed into paper money, which was widely circulated across the world by &lt;a href=&quot;https://en.wikisource.org/wiki/The_Travels_of_Marco_Polo/Book_2/Chapter_24&quot;&gt;explorers&lt;/a&gt;. Trade flourished across countries through this paper money, and exchange of currency started around that time too, and by around 1860, Western Union, spearheaded e-money with electronic func transfer via telegram. With time cards came, and with the rise of internet the e-money started to boom. 
+The reason, why I am focussing on the history of currency, is because I want you to understand what is common between all these systems of currency. From exchanging coins with royal seals, to exchanging paper currency, with issuance from bank/government, to starting e-money (banks giving cards). If you try to find the pattern, you will see that all of these currencies are &lt;strong&gt;Centralized&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;By centralized, what I mean is that everytime there is an authority that is responsible for issuing the currency. Someone who says that, Yes, I am accountable for this currency and this currency is valid. Be it a king, who imprints the coin with its royal seal, or the government. The transactions have always been based on &lt;strong&gt;Trust&lt;/strong&gt;. If I pay ₹100 to X, the bank issuing the currency is responsible to pay that ₹100 to X. Hence the currency so far being used is based on Trust, and is Centralized. Due to this we are always bound to law, cannot be innovative and creative with our money, always under control and at a risk of interference. Also, the banks would charge some amount for transactions as &lt;em&gt;transaction fee&lt;/em&gt;. The point to be noted is that, crypto currency is not flawless, so it just provides as an alternative currency as of now. Due to all this, a currency was needed which was not based on trust, and is not centralized.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Cryptocurrency is a decentralized trustless verification system + Math.&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now, one thing I would like to mention here is that just like normal currency, you need not know how cryptocurrency is made or how it works to use it. Diving into the technical details, let us understand everything with an example.&lt;/p&gt;
+
+&lt;p&gt;Say there are 4 friends A, B, C and D who hang out pretty often, and hence they need a system to keep track of money. What they do is, they keep a ledger and add all the transactions in it. At the end of the month they take all the transactions and then total it up and settle it and pay accordingly.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* ledger *
+A gives B 200 rupees
+B gives C 500 rupees
+C gives A 1000 rupees
+D gives B 300 rupees
+..............and so on
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The catch here is that the ledger is accessible to all four of them, i.e anyone can add or delete the transactions. D might just add that, &lt;code class=&quot;highlighter-rouge&quot;&gt;C gives D 500 rupees&lt;/code&gt;, as there is no one stopping D. He can keep on adding fraudulent transactions until someone catches him, and resolve this. So, what we need is a system to verify that the correct person is writing the ledger. The solution to this is &lt;em&gt;Digital Signatures&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Before I start with explaining what Digital Signatures are, I would like to mention Cryptographic Hashing. Hashing is a method that converts any form of data in a unique string of text. Typically the output of every hash function is a fixed length of string. Now what cryptographic hash functions are, are hash functions which cannot be reversed. 
+So cryptographic hash functions will take any input, no matter how big or small, and output a fixed length of string which is irreversible. It is practically impossible to determine what input caused that hash except hit and trial. Now coming to digital signatures, these are used to verify the identity of the person signing a message. Through digital signatures we can be sure that the person signing the message is actually the person writing the message. It mainly consists of &lt;em&gt;private key and public key.&lt;/em&gt; Private key can be thought of your PIN card and public key as your A/C number. You keep the private key with yourself, but can give everyone your public key. Now to make a transaction, you write a message and encrypt that with your private key. And you send the hash message to the receiver. The receiver would see the hashed message, and verify if it was sent by you using the public key. The cryptographic hash function used is mainly SHA-256. The bit string generated is 256 digits long, i.e there can be 2&lt;sup&gt;256&lt;/sup&gt; combinations. 2 &lt;sup&gt;256&lt;/sup&gt; is an extremely large large number.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/bitcoin2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The functions would look something like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dig_sign(message, private key) -&amp;gt; signature
+
+verify(message, signature, public key) -&amp;gt; true/false
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now that you have a fair idea of how digital signatures work, we can go back to the example. D can no longer write any fraudulent transactions in the ledger as they all will be from now on digitally signed. The verification system apart from checking if the message was signed from the trusted party or not, it also checks if the party sending the money actually has it or not.&lt;/p&gt;
+
+&lt;p&gt;The problem with this solution is that the fate of the entire money system depends on the company running the mint, with every transaction having to go through them, just like a bank. We need a way for the payee to know that the previous owners did not sign any earlier transactions.&lt;/p&gt;
+
+&lt;p&gt;One thing which you might have noticed, is that this system of ledger that I just explained is centralized as well, which I had focussed on earlier. We have found a way to secure the transactions but there is only one ledger, and everyone is making transactions in their own ledger. As I had mentioned earlier, the cryptocurrency is decentralized. To make this currency decentralized, we will give one copy of the ledger to all four friends (A B C and D). Now this ledger becomes a decentralized currency.&lt;/p&gt;
+
+&lt;p&gt;So now, all have personal copies of the ledger, and now adding the transaction has become a different process. Like they can still add the transaction in their personal ledger, but it wont match with the ledger of someone else. Say, B adds &lt;code class=&quot;highlighter-rouge&quot;&gt;B gave ₹5000 to C&lt;/code&gt; to his ledger, but that information wont be added on the ledger of A or C or D. To have all the ledgers on the same track, one must broadcast their ledger so that everyone in the network updates their ledgers with the most recent transactions. So, B would update its ledger, and then broadcast his ledger so that everyone verifies the transaction and update their ledgers as well. Hence through this example, we have made a trustless decentralized verification system.&lt;/p&gt;
+
+&lt;p&gt;A big problem with this system is that, what if D broadcasts that he has sent 500 rupees to A, and at the same time, it broadcasts that he has sent 500 rupees to B. This is how D can double spend his money. This problem has been address in the original &lt;a href=&quot;https://bitcoin.org/bitcoin.pdf&quot;&gt;Bitcoin Paper&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The bitcoin paper mainly said to trust the block/ledger with the most computational work being done &lt;em&gt;(proof of work)&lt;/em&gt;. This ledger is mainly the blockchain. The below diagram will help you understand the chain structure of the ledger.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/bitcoin1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The proof of work involves scanning for a value that when hashed, such as with SHA-256 the hash begins with a number of &lt;code class=&quot;highlighter-rouge&quot;&gt;n zero bits&lt;/code&gt;. 
+For our network, we implement the proof of work by incrementing a nonce in the block until a value is found that gives the blocks hash the required zero bits. Finding this number is called &lt;em&gt;mining&lt;/em&gt;, and the people who do this are called &lt;em&gt;miners&lt;/em&gt;. The paper also said to trust that chain with the most number of nodes, hence while updating their ledger, they also keep track of all other chains, and then eliminate the smaller chains as miners start working on the longest chain. 
+Proof-of-work is essentially one-CPU-one-vote. The majority decision is represented by the longest chain, which has the greatest proof-of-work effort invested in it. If a majority of CPU power is controlled by honest nodes, the honest chain will grow the fastest and outpace any competing chains. To modify a past block, an attacker would have to redo the proof-of-work of the block and all blocks after it and then catch up with and surpass the work of the honest nodes the number of zeros vary a lot. What the miner gets in return is a block reward. With every block added to the network, the total amount of money increases in the economy, as there is no one issuing the block reward. Hence through this proof of work, it is nearly impossible to create fraudulent transactions. This miniature lottery is such that there is one winner every 10 minutes (in case of  bitcoin). This time may change for other cryptocurrencies.&lt;/p&gt;
+
+&lt;p&gt;We can understand the whole network through these steps&lt;/p&gt;
+
+&lt;p&gt;The steps to run the network are as follows:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;New transactions are broadcast to all nodes.&lt;/li&gt;
+  &lt;li&gt;Each node collects new transactions into a block.&lt;/li&gt;
+  &lt;li&gt;Each node works on finding a difficult proof-of-work for its block.&lt;/li&gt;
+  &lt;li&gt;When a node finds a proof-of-work, it broadcasts the block to all nodes.&lt;/li&gt;
+  &lt;li&gt;Nodes accept the block only if all transactions in it are valid and not already spent.&lt;/li&gt;
+  &lt;li&gt;Nodes express their acceptance of the block by working on creating the next block in the chain, using the hash of the accepted block as the previous hash. Nodes always consider the longest chain to be the correct one and will keep working on extending it. If two nodes broadcast different versions of the next block simultaneously, some nodes may receive one or the other first. In that case, they work on the first one they received, but save the other branch in case it becomes longer. The tie will be broken when the next proof of work is found and one branch becomes longer; the nodes that were working on the other branch will then switch to the longer one.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Through this post, I hope you have a fair idea of how cryptocurrencies work.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 05 Oct 2019 18:01:19 +0530</pubDate>
+        <link>http://localhost:4000/blockchain/understanding-bitcoin</link>
+        <guid isPermaLink="true">http://localhost:4000/blockchain/understanding-bitcoin</guid>
+        
+        <category>Blockchain</category>
+        
+        
+        <category>blockchain</category>
+        
+      </item>
+    
+      <item>
+        <title>The P10 Display.</title>
+        <description>&lt;p&gt;In this post, we will be seeing on how can we use the STM8s microcontroller to drive the Chinese dot matrix display. In this process we will be understanding how exactly does the display work &lt;em&gt;(the schematics and work flow)&lt;/em&gt;, and further will be interfacing the display with the &lt;a href=&quot;https://www.st.com/en/evaluation-tools/stm8s-discovery.html&quot;&gt;STM8s Discovery Board&lt;/a&gt; (&lt;em&gt;both the code and hardware will be discussed&lt;/em&gt;.) Once we understand how the display works, writing the code should be a piece of cake then.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-the-p10-display&quot;&gt;What is the P10 display?&lt;/h3&gt;
+
+&lt;p&gt;The P10 display is an LED Panel, a very cheap one, &lt;strong&gt;32X16&lt;/strong&gt; i.e has 32 LED’s in horizontal and 16 in vertical (one panel). The 10 in P10 stands for the pixel distance that is 10mm. It is widely used in advertising and to grab attention in local markets. You must have seen a variant of P10 display on the Buses in Delhi (image below). This one has a much bigger pixel distance something around 13-15mm so these might be P13 or P15 displays but the working concept is the same. Further, we can cascade more and more LED panels to get a bigger panel.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;img src=&quot;/images/p15.png?raw=true&quot; alt=&quot;p15&quot; /&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The thing about these Chinese displays are that they come with absolutely 0 documentation. I tried searching on the web and was able to find a few russian blogs but it did not help much. These displays are based on an undocumented protocol (hub12). The Chinese don’t want anyone to replicate their extreme low cost design and remove their monopoly in this market so they dont provide any reference to understand their products. However, this not being a very complex device, it was easy to reverse engineer the display.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-display&quot;&gt;The display&lt;/h3&gt;
+&lt;p&gt;The front panel consists of 512 LED’s in a 32*16 matrix. On seeing the backside of the panel we see sixteen &lt;strong&gt;74HC595&lt;/strong&gt;. This is an 8 bit serial-in parallel-out &lt;a href=&quot;https://en.wikipedia.org/wiki/Shift_register&quot;&gt;Shift Register&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;img src=&quot;/images/rearpanel.jpg?raw=true&quot; alt=&quot;rearpanel&quot; /&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Every single 8 bit shift register can be used to control 8 LED’s. So we can control 128 LED’s by the given number of shift registers on one panel but the number of LED’s are 512. How does the display control 512 LED’s when it is just capable of controlling 128 LED’s? Here comes the concept of refresh rate.&lt;/p&gt;
+
+&lt;p&gt;At one instant, the shift registers can only control at a maximum of 128 LED’s so we select which of the 128 LED’s to be controlled by using two extra bits. The rows switch faster than the refresh rate of the human eyes, such that for the human eye it looks static. Think of this as when you take a laser light and move it from one place to another, you see a line of that laser light, but is it actually a light? Its just a dot in real. This is the concept of refresh rate used in this P10 display to smartly reduce the production cost. To understand this concept better, see this image.
+It took me an hour or two to figure out how data shifts through the 74HC95. I’d recommend the reader to try this on their own after reading this post. &lt;em&gt;Refer the picture on the right.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;img src=&quot;/images/led_rows.jpg?raw=true&quot; alt=&quot;rearpanel&quot; /&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The white boxes show the LED’s controlled by every shift register. At one instant only one row out of the four can be enabled/controlled by using the A and B control bits as below.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;A&lt;/th&gt;
+      &lt;th&gt;B&lt;/th&gt;
+      &lt;th&gt;Row&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1,5,9,13&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;2,6,10,14&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;3,7,11,15&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;4,8,12,16&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Now that we know how exactly the display works, we can get started on writing the code and making the hardware connections to display any content on the display. Things will be a lot clear once we write the code and make the connections.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-connections&quot;&gt;The Connections&lt;/h3&gt;
+
+&lt;p&gt;The connections are pretty straight forward. The pin configuration for the display was available online &lt;em&gt;(shown in the image below)&lt;/em&gt; , and as we are communicating through &lt;a href=&quot;https://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus&quot;&gt;SPI&lt;/a&gt;, we just need to configure the pins accordingly. Do keep the pin configuration of the STM8s discovery board handy. It is available &lt;a href=&quot;https://www.st.com/content/ccc/resource/technical/document/user_manual/30/f0/2f/7e/96/5a/44/80/CD00250600.pdf/files/CD00250600.pdf/jcr:content/translations/en.CD00250600.pdf&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;img src=&quot;/images/connections.png?raw=true&quot; alt=&quot;connections&quot; /&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The connections which I have used are as follows:
+&lt;em&gt;Refer the &lt;a href=&quot;https://www.st.com/content/ccc/resource/technical/document/user_manual/30/f0/2f/7e/96/5a/44/80/CD00250600.pdf/files/CD00250600.pdf/jcr:content/translations/en.CD00250600.pdf&quot;&gt;user manual&lt;/a&gt; to understand these connections.&lt;/em&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CN2&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CN1&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CN2&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CN2&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CN2&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CN1&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CN2&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;small&gt;
+&lt;em&gt;PS: Don’t forget to connect power supply to the P10 board and the microcontroller.
+A 5v, 2A adapter should be sufficient to power the P10 board.
+Always power the display board first and then the other microcontroller
+otherwise the board might suck power from the microcontroller thus damaging the
+controller.&lt;/em&gt;
+&lt;/small&gt;&lt;/p&gt;
+
+&lt;p&gt;Now that we are done with the connections, lets get started by writing the code to drive the display.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-code&quot;&gt;The Code.&lt;/h3&gt;
+
+&lt;p&gt;To start with, we will need to configure the GPIO’s of the microcontroller. Comments are added so it should be easy to understand the code.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configurePins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPIO_Init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_MODE_OUT_PP_LOW_FAST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// PC6 SPI MOSI Pin (CN2/9)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPIO_Init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_MODE_IN_FL_NO_IT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// PC7 SPI MISO Pin&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPIO_Init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_MODE_OUT_PP_LOW_FAST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// PC5 SPI Clock OUT Pin (CN2/6)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPIO_Init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_MODE_OUT_PP_LOW_FAST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// PE5 SPI nSEL Pin&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPIO_Init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_MODE_OUT_PP_LOW_FAST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// Port C2 is used for external EO Output Enable (CN2/3 Discovery Board)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPIO_Init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_MODE_OUT_PP_LOW_FAST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// Port G0 is used for external A Sel (CN2/11 Discovery Board)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPIO_Init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_MODE_OUT_PP_LOW_FAST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// Port C4 is used for external B Sel (CN2/5 Discovery Board)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPIO_Init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_MODE_OUT_PP_LOW_FAST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// Port A3 is used for SCLK or Strobe (CN1/9 Discovery Board)&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;//Deinitialize the SPI Block&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;SPI_DeInit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Initialize SPI in Master mode&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;SPI_Init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SPI_FIRSTBIT_LSB&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SPI_BAUDRATEPRESCALER_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SPI_MODE_MASTER&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SPI_CLOCKPOLARITY_LOW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SPI_CLOCKPHASE_1EDGE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SPI_DATADIRECTION_2LINES_FULLDUPLEX&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SPI_NSS_SOFT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x07&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;SPI_Cmd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ENABLE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;GPIO_WriteLow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// Initially A = 0 Configure P10 to scan first row&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPIO_WriteLow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// Initially B = 0 Configure P10 to scan first row&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPIO_WriteLow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// Initially EO = 1 Output enable low (Disabled)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPIO_WriteLow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// Initially Strobe = 0 Strobe low&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Once we write configure the GPIO pins to do the custom functions as per our connections to the P10 display, we are ready to send data to the display through SPI. The SPI block is configured and initialized as well.&lt;/p&gt;
+
+&lt;p&gt;To send the data through SPI we write another function, which sends an unsigned 8 bit integer through SPI. We also add a delay function, which just counts from a 32bit number to 0 according to the clock speed.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;send_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u8&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;SPI_SendData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;//checks for completion of transmission&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SPI_GetFlagStatus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SPI_FLAG_TXE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;uint32_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Decrement nCount value&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;nCount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now, like we saw previously, the display has a scan ratio of 1/4. Hence we need to scan one row at a time. We also saw how to configure the A and B bits to choose the row which we need to display.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;scanRow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;//A == G0 and B == C4&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;GPIO_WriteLow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPIO_WriteLow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;   
+  &lt;span class=&quot;n&quot;&gt;GPIO_WriteLow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPIO_WriteHigh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;   
+  &lt;span class=&quot;n&quot;&gt;GPIO_WriteLow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPIO_WriteLow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;   
+  &lt;span class=&quot;n&quot;&gt;GPIO_WriteHigh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPIO_WriteHigh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;   
+  &lt;span class=&quot;n&quot;&gt;GPIO_WriteHigh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We need to have something which we need to display. I wont go into much detail here, and advise the reader to try to understand the code by trying and testing.
+Make a digits2 array and enter random 8 bit values(0xFE, 0xFA etc.) to get started. You will understand eventually.&lt;/p&gt;
+
+&lt;p&gt;I am adding a sample digits[2] array which you can modify to test.&lt;/p&gt;
+
+&lt;p&gt;The code is as below:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;n&quot;&gt;u8&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;digits2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;mh&quot;&gt;0xe0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xf8&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x1c&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x6&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x6&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xff&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xfb&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x73&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x13&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xe3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xc6&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x6&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x1c&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xf8&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xe0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x7&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x1f&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x38&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x60&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x60&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xff&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xdf&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xce&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xc0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xc8&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xc7&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x63&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x60&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x38&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x1f&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x7&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;mh&quot;&gt;0x0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x80&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x80&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x80&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xc0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xfe&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xfc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xf8&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xf0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xe0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xf0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x70&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x30&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x18&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x7f&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x3f&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x1f&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xf&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x7&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xf&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xe&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x18&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x0&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Then, just show each row accordingly. I would recommend the reader to play around these values in digits2[] and see how the display changes. It will help the reader greatly in order to understand the exact functioning of the board.&lt;/p&gt;
+
+&lt;p&gt;One important thing to note is that in the P10 display, the LED burns on &lt;strong&gt;0&lt;/strong&gt; and is off on &lt;strong&gt;1&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;showRow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;scanRow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//enable encoder&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;send_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;digits2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;send_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;digits2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPIO_WriteHigh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//A3 pin is for the Strobe or SCLK.&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPIO_WriteLow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;GPIO_WriteHigh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIOC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GPIO_PIN_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//C2 is output enabled&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;//we can also add PWM to increase or decrease the brightness. Try this.&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Finally our main program would look something like this&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// function prototype declarations&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configurePins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;uint32_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;send_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u8&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;showRow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;scanRow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//main function&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;CLK_HSIPrescalerConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CLK_PRESCALER_HSIDIV1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;configurePins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;showRow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;   
+    &lt;span class=&quot;n&quot;&gt;showRow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;showRow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;showRow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;So it is quite clear that in this we configure the clock and the pins, and in the infinite loop, we display, the first row, second row, third row and fourth row thus using the concept of Scan Ratio and Refresh Rate.
+to see how this works add a delay in between the showRow(i); something like This&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;showRow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;   
+  &lt;span class=&quot;n&quot;&gt;Delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;showRow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;showRow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;showRow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You will get an idea how this actually works.&lt;/p&gt;
+
+&lt;p&gt;Hoping by now, you have a fair idea on how to work with the P10 display using the STM8s microcontroller.&lt;/p&gt;
+
+&lt;p&gt;Thanks for reading!&lt;/p&gt;
+</description>
+        <pubDate>Thu, 21 Jun 2018 18:01:19 +0530</pubDate>
+        <link>http://localhost:4000/stm8s/the-chinese-LED-display</link>
+        <guid isPermaLink="true">http://localhost:4000/stm8s/the-chinese-LED-display</guid>
+        
+        <category>IoT</category>
+        
+        
+        <category>stm8s</category>
+        
+      </item>
+    
+      <item>
+        <title>Sarcastic or not? (1/2)</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;Benzema is the best player ever.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is 100% pure sarcasm. Okay, there is no such thing as &lt;em&gt;100% pure sarcasm&lt;/em&gt; but what there is are sarcastic and non sarcastic sentences.
+For example, as soon as you read the above statement about Benzema, you could decipher that this is a statement which is definitely not true and is somewhat ironic in a mocking way. Someone who watches football, and has game sense would know that this sentence was a satirical remark. Someone who does not watch football, might think of this statement as &lt;span style=&quot;color: #1eb300;&quot;&gt; True. &lt;/span&gt; Hence we can say, that sarcasm is relative and highly depends on the context.&lt;/p&gt;
+
+&lt;p&gt;Try to understand the complexity of this problem, we as humans, find it really difficult to understand sarcasm, like we can only understand sarcasm once we have an idea about what is the context it is being used in, and the body language, the tone of the voice. If we closely observe someone saying a sarcastic sentence, the pitch of the voice varies. When English speakers remark sarcasm with the word  &lt;em&gt;“Thanks!”&lt;/em&gt;, they often use a nasal tone. The nasal tone shows a connection between sarcasm and extreme disgust. It is like the speaker does not only want to remove the word from the mouth but also from the nose! So so many factors contributing to sarcasm makes it really really difficult to understand sarcasm for us, as humans, let alone computers.&lt;/p&gt;
+
+&lt;p&gt;I took the NLP class this semester at college, which dealt with understanding how Natural Language Processing works and reading and understanding research papers which was something that I was not used to, as bookish knowledge and Youtube was the only source of knowledge so far. TBH it was the most interesting class in this semester compared to my otherwise boring core Electrical Engineering subjects &lt;em&gt;literally very boring, I slept through most of my lectures &lt;del&gt; or maybe it is because of the faculty &lt;/del&gt;&lt;/em&gt; Coming back to the point, I decided to make a project using the Natural Language Processing techniques learnt in this class and the ML algorithms to &lt;span class=&quot;bg-dark-gray white&quot; style=&quot;padding:2 px;&quot;&gt; Detect Sarcasm in Tweets. &lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;I basically aimed to create something to solve the complex problem of detecting sarcasm in the tweets. Machines are typically programmed to read the text as it is. It understands anything based strictly on what it is. So, detecting sarcasm was a difficult task. The reason why I chose twitter was because of the abundance of data available for the training of the supervised model. The main motivation behind understanding sarcasm using machines was in order to have a better understanding of one’s data. So that the product reviewing system which scrape the websites can collect better data to analyze their product impact, and so that one can actually understand what the other person is trying to say. As there is no vocabulary defined for sarcasm, it becomes a difficult task, that is something more complicated than a simple classification technique like a &lt;em&gt;Spam Detection ALgorithm&lt;/em&gt; which would simply learn the vocabulary associated with the spam emails and filter them from the rest.&lt;/p&gt;
+
+&lt;p&gt;Sarcasm has been a widely studied topic in linguistics. Due to the advancement in technology and availability of data across the world, Sarcasm Detection has witnessed some great interest from the sentiment analysis community and become an active research area. Basically, what we are trying to achieve can be summed down as follow:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Aiming to implement a model that can detect Sarcasm in Tweets, using NLP and ML techniques.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;methodology&quot;&gt;Methodology&lt;/h3&gt;
+
+&lt;p&gt;The main idea behind understanding sarcasm was that the first part of a sarcastic sentence would have more Positive sentiment as compared to the second part which would be inclined towards more Negative Sentiment. Or we can say that, if (+)ve Sentiment  and (-)ve Sentiment words appear in close proximity, the sentence might be sarcastic.&lt;/p&gt;
+
+&lt;p&gt;Taking an example: &lt;span style=&quot;padding:2 px; color: #595959&quot;&gt; Benzema is the best. &lt;/span&gt; We see that BENZEMA is a negative sentiment&lt;small&gt;(trust me)&lt;/small&gt; and “is the best” positive. Okay, not the best of the examples; so a better example will be something like this &lt;span style=&quot;padding:2 px; color: #595959;&quot;&gt; I am so happy that I failed again. &lt;/span&gt;. If we analyze the statement: positive sentiment will be &lt;em&gt;“happy”&lt;/em&gt; and the word with negative sentiment will be &lt;em&gt;“failed”&lt;/em&gt;. They are in close proximity and hence we might say that this is a sarcastic sentence. We choose this as one of the features &lt;small&gt; (to be discussed later) &lt;/small&gt; and let the classifier decide. This sentiment based approach is the key part of the method. The complete methodology can be somewhat visualized as below:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;img src=&quot;https://i.imgur.com/wlByWoL.png&quot; alt=&quot;method&quot; /&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I will be explaining the implementation part using the above image in detail in the next part &lt;small&gt; will come really soon &lt;/small&gt;. Thanks for reading this.&lt;/p&gt;
+
+&lt;p&gt;Have a good day. :)&lt;/p&gt;
+</description>
+        <pubDate>Wed, 25 Apr 2018 16:51:29 +0530</pubDate>
+        <link>http://localhost:4000/nlp/sarcasm-detection</link>
+        <guid isPermaLink="true">http://localhost:4000/nlp/sarcasm-detection</guid>
+        
+        <category>Machine Learning</category>
+        
+        
+        <category>nlp</category>
+        
+      </item>
+    
+  </channel>
+</rss>
