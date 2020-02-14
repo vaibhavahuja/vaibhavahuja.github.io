@@ -6,6 +6,9 @@ summary:    developing discipline
 categories: codes
 tags: [div2C, codes]
 comment: true
+
+green: "#d5e9dd"
+red: "#ddafb6"
 ---
 
 Below is a list of problems I will be solving during this February - March'20. It consists of 100 problems, all of which are Div2C, of codeforces. I will try to write the explanation of each problem, based on my understanding, and how I approached the solution. Hoping to solve 3 problems everyday and stay consistent. I will be updating my progress below. I am starting this on - {{page.date | date_to_long_string}}.
@@ -18,41 +21,41 @@ Below is a list of problems I will be solving during this February - March'20. I
 		<th style="width:15%;">Difficulty Level</th>
 		<th style="width:30%;">Status</th>
 	</tr>
-	<tr style="background-color: #d5e9dd;">
+	<tr style="background-color: {{page.green}};">
 		<td>1</td>
 		<td><a href="http://codeforces.com/problemset/problem/489/C" target="_blank">Given Length and Sum of Digits...</a></td>
 		<td>1</td>
 		<td>Accepted | 13th Feb'20</td>
 	</tr>
-	<tr style="background-color: #d5e9dd;">
+	<tr style="background-color: {{page.green}};">
 		<td>2</td>
 		<td><a href="http://codeforces.com/problemset/problem/466/C" target="_blank">Number of Ways</a></td>
 		<td>4</td>
 		<td>Accepted | 13th Feb'20</td>
 	</tr>
-	<tr style="background-color: #d5e9dd;">
+	<tr style="background-color: {{page.green}};">
 		<td>3</td>
 		<td><a href="http://codeforces.com/problemset/problem/401/C" target="_blank">Team</a></td>
 		<td>4</td>
 		<td>Accepted | 13th Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>4</td>
 		<td><a href="http://codeforces.com/problemset/problem/479/C" target="_blank">Exams</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 14th Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.red}};">
 		<td>5</td>
 		<td><a href="http://codeforces.com/problemset/problem/455/A" target="_blank">Boredom</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>To try on weekend(DP) </td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>6</td>
 		<td><a href="http://codeforces.com/problemset/problem/478/C" target="_blank">Table Decorations</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 14th Feb'20</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>7</td>

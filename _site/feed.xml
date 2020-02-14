@@ -5,8 +5,8 @@
     <description>my personal space where i write about stuff that excites me.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 13 Feb 2020 15:23:32 +0530</pubDate>
-    <lastBuildDate>Thu, 13 Feb 2020 15:23:32 +0530</lastBuildDate>
+    <pubDate>Fri, 14 Feb 2020 22:53:13 +0530</pubDate>
+    <lastBuildDate>Fri, 14 Feb 2020 22:53:13 +0530</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
@@ -38,23 +38,23 @@
 		&lt;td&gt;4&lt;/td&gt;
 		&lt;td&gt;Accepted | 13th Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;4&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/479/C&quot; target=&quot;_blank&quot;&gt;Exams&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 14th Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #ddafb6;&quot;&gt;
 		&lt;td&gt;5&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/455/A&quot; target=&quot;_blank&quot;&gt;Boredom&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;To try on weekend(DP) &lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;6&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/478/C&quot; target=&quot;_blank&quot;&gt;Table Decorations&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 14th Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
 	&lt;tr style=&quot;background-color: white;&quot;&gt;
 		&lt;td&gt;7&lt;/td&gt;
