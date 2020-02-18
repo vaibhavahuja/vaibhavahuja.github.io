@@ -64,11 +64,7 @@ Below is a list of problems I will be solving during this February - March'20. I
 		<td>4</td>
 		<td>Accepted | 18th Feb'20</td>
 	</tr>
-<<<<<<< HEAD
 	<tr style="background-color: {{page.yellow}};">
-=======
-	<tr style="background-color: {{page.red}};">
->>>>>>> 8992b6263512beba85ffbdd29070722ffd9e6f93
 		<td>8</td>
 		<td><a href="http://codeforces.com/problemset/problem/431/C" target="_blank">k-Tree</a></td>
 		<td>4</td>
