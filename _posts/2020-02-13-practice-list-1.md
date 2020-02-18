@@ -9,6 +9,7 @@ comment: true
 
 green: "#d5e9dd"
 red: "#ddafb6"
+yellow: "#FCF4A3"
 ---
 
 Below is a list of problems I will be solving during this February - March'20. It consists of 100 problems, all of which are Div2C, of codeforces. I will try to write the explanation of each problem, based on my understanding, and how I approached the solution. Hoping to solve 3 problems everyday and stay consistent. I will be updating my progress below. I am starting this on - {{page.date | date_to_long_string}}.
@@ -57,23 +58,23 @@ Below is a list of problems I will be solving during this February - March'20. I
 		<td>4</td>
 		<td>Accepted | 14th Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>7</td>
 		<td><a href="http://codeforces.com/problemset/problem/268/C" target="_blank">Beautiful Sets of Points</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 18th Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>8</td>
 		<td><a href="http://codeforces.com/problemset/problem/431/C" target="_blank">k-Tree</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>9</td>
 		<td><a href="http://codeforces.com/problemset/problem/441/C" target="_blank">Valera and Tubes </a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 18th Feb'20</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>10</td>
