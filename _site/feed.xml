@@ -5,13 +5,8 @@
     <description>my personal space where i write about stuff that excites me.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-<<<<<<< HEAD
-    <pubDate>Tue, 18 Feb 2020 23:13:37 +0530</pubDate>
-    <lastBuildDate>Tue, 18 Feb 2020 23:13:37 +0530</lastBuildDate>
-=======
-    <pubDate>Tue, 18 Feb 2020 22:59:59 +0530</pubDate>
-    <lastBuildDate>Tue, 18 Feb 2020 22:59:59 +0530</lastBuildDate>
->>>>>>> 8992b6263512beba85ffbdd29070722ffd9e6f93
+    <pubDate>Wed, 19 Feb 2020 22:57:25 +0530</pubDate>
+    <lastBuildDate>Wed, 19 Feb 2020 22:57:25 +0530</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
@@ -67,11 +62,7 @@
 		&lt;td&gt;4&lt;/td&gt;
 		&lt;td&gt;Accepted | 18th Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
-<<<<<<< HEAD
 	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
-=======
-	&lt;tr style=&quot;background-color: #ddafb6;&quot;&gt;
->>>>>>> 8992b6263512beba85ffbdd29070722ffd9e6f93
 		&lt;td&gt;8&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/431/C&quot; target=&quot;_blank&quot;&gt;k-Tree&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
@@ -83,11 +74,11 @@
 		&lt;td&gt;4&lt;/td&gt;
 		&lt;td&gt;Accepted | 18th Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;10&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/486/C&quot; target=&quot;_blank&quot;&gt;Palindrome Transformation&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 18th Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
 	&lt;tr style=&quot;background-color: white;&quot;&gt;
 		&lt;td&gt;11&lt;/td&gt;
