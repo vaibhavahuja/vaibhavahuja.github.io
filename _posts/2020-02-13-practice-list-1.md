@@ -46,11 +46,11 @@ Below is a list of problems I will be solving during this February - March'20. I
 		<td>4</td>
 		<td>Accepted | 14th Feb'20</td>
 	</tr>
-	<tr style="background-color: {{page.red}};">
+	<tr style="background-color: {{page.yellow}};">
 		<td>5</td>
 		<td><a href="http://codeforces.com/problemset/problem/455/A" target="_blank">Boredom</a></td>
 		<td>4</td>
-		<td>To try on weekend(DP) </td>
+		<td> to do </td>
 	</tr>
 	<tr style="background-color: {{page.green}};">
 		<td>6</td>
@@ -82,35 +82,35 @@ Below is a list of problems I will be solving during this February - March'20. I
 		<td>4</td>
 		<td>Accepted | 18th Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>11</td>
 		<td><a href="http://codeforces.com/problemset/problem/363/C" target="_blank">Fixing Typos</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 21st Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>12</td>
 		<td><a href="http://codeforces.com/problemset/problem/490/C" target="_blank">Hacking Cypher</a></td>
 		<td>2</td>
-		<td>NA</td>
+		<td>Accepted | 21st Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>13</td>
 		<td><a href="http://codeforces.com/problemset/problem/463/C" target="_blank">Gargari and Bishops</a></td>
 		<td>5</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>14</td>
 		<td><a href="http://codeforces.com/problemset/problem/152/C" target="_blank">Pocket Book</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 21st Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>15</td>
 		<td><a href="http://codeforces.com/problemset/problem/109/A" target="_blank">Lucky Sum of Digits</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted | 21st Feb'20</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>16</td>
