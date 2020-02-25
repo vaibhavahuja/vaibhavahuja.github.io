@@ -112,23 +112,23 @@ Below is a list of problems I will be solving during this February - March'20. I
 		<td>3</td>
 		<td>Accepted | 21st Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>16</td>
 		<td><a href="http://codeforces.com/problemset/problem/382/C" target="_blank">Arithmetic Progression</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 24th Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>17</td>
 		<td><a href="http://codeforces.com/problemset/problem/388/A" target="_blank">Fox and Box Accumulation</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted | 24th Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>18</td>
 		<td><a href="http://codeforces.com/problemset/problem/9/C" target="_blank">Hexadecimal's Numbers</a></td>
 		<td>2</td>
-		<td>NA</td>
+		<td>Accepted | 24th Feb'20</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>19</td>
