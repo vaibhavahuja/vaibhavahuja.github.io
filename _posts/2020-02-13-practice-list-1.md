@@ -148,11 +148,11 @@ Below is a list of problems I will be solving during this February - March'20. I
 		<td>5</td>
 		<td>NA</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>22</td>
 		<td><a href="http://codeforces.com/problemset/problem/220/A" target="_blank">Little Elephant and Problem</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 25th Feb'20</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>23</td>
