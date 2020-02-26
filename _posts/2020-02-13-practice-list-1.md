@@ -130,23 +130,23 @@ Below is a list of problems I will be solving during this February - March'20. I
 		<td>2</td>
 		<td>Accepted | 24th Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>19</td>
 		<td><a href="http://codeforces.com/problemset/problem/339/C" target="_blank">Xenia and Weights</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>20</td>
 		<td><a href="http://codeforces.com/problemset/problem/350/C" target="_blank">Bombs</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 26th Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>21</td>
 		<td><a href="http://codeforces.com/problemset/problem/459/C" target="_blank">Pashmak and Buses</a></td>
 		<td>5</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
 	<tr style="background-color: {{page.green}};">
 		<td>22</td>
