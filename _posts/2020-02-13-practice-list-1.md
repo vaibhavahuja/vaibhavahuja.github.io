@@ -154,17 +154,17 @@ Below is a list of problems I will be solving during this February - March'20. I
 		<td>4</td>
 		<td>Accepted | 25th Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>23</td>
 		<td><a href="http://codeforces.com/problemset/problem/377/A" target="_blank">Maze</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 4th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>24</td>
 		<td><a href="http://codeforces.com/problemset/problem/217/A" target="_blank">Ice Skating</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted | 4th Mar'20</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>25</td>
