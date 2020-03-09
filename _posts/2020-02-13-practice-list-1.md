@@ -172,23 +172,23 @@ Below is a list of problems I will be solving during this February - March'20. I
 		<td>4</td>
 		<td>Accepted | 5th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>26</td>
 		<td><a href="http://codeforces.com/problemset/problem/385/C" target="_blank">Bear and Prime Numbers</a></td>
 		<td>5</td>
-		<td>NA</td>
+		<td>Getting TLE idk why | 8th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>27</td>
 		<td><a href="http://codeforces.com/problemset/problem/137/C" target="_blank">History</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 8th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>28</td>
 		<td><a href="http://codeforces.com/problemset/problem/427/C" target="_blank">Checkposts</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 8th Mar'20</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>29</td>
