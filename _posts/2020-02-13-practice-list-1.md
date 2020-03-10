@@ -208,23 +208,23 @@ Below is a list of problems I will be solving during this February - March'20. I
 		<td>3</td>
 		<td>Accepted | 10th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>32</td>
 		<td><a href="http://codeforces.com/problemset/problem/149/C" target="_blank">Division into Teams</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 11th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>33</td>
 		<td><a href="http://codeforces.com/problemset/problem/225/C" target="_blank">Barcode</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>High time, really need to start dp.</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>34</td>
 		<td><a href="http://codeforces.com/problemset/problem/18/C" target="_blank">Stripe</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted | 11th Mar'20</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>35</td>
