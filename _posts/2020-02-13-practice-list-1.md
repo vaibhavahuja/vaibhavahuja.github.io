@@ -226,23 +226,23 @@ Below is a list of problems I will be solving during this February - March'20. I
 		<td>3</td>
 		<td>Accepted | 11th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>35</td>
 		<td><a href="http://codeforces.com/problemset/problem/348/A" target="_blank">Mafia</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 12th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.red}};">
 		<td>36</td>
 		<td><a href="http://codeforces.com/problemset/problem/283/A" target="_blank">Cows and Sequence</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>logic seems fine still getting WA | 12th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>37</td>
 		<td><a href="http://codeforces.com/problemset/problem/231/C" target="_blank">To Add or Not to Add</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 18th Mar'20</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>38</td>
