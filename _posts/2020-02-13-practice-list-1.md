@@ -232,11 +232,11 @@ Below is a list of problems I will be solving during this February - March'20. I
 		<td>4</td>
 		<td>Accepted | 12th Mar'20</td>
 	</tr>
-	<tr style="background-color: {{page.red}};">
+	<tr style="background-color: {{page.yellow}};">
 		<td>36</td>
 		<td><a href="http://codeforces.com/problemset/problem/283/A" target="_blank">Cows and Sequence</a></td>
 		<td>4</td>
-		<td>logic seems fine still getting WA | 12th Mar'20</td>
+		<td> getting WA; to do | 12th Mar'20</td>
 	</tr>
 	<tr style="background-color: {{page.green}};">
 		<td>37</td>
