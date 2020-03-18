@@ -244,17 +244,17 @@ Below is a list of problems I will be solving during this February - March'20. I
 		<td>4</td>
 		<td>Accepted | 18th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>38</td>
 		<td><a href="http://codeforces.com/problemset/problem/429/A" target="_blank">Xor-tree</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>39</td>
 		<td><a href="http://codeforces.com/problemset/problem/235/A" target="_blank">LCM Challenge</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 18th Mar'20</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>40</td>
