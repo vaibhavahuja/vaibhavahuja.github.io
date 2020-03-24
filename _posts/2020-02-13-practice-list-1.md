@@ -256,23 +256,23 @@ Below is a list of problems I will be solving during this February - April'20. I
 		<td>4</td>
 		<td>Accepted | 18th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>40</td>
 		<td><a href="http://codeforces.com/problemset/problem/343/A" target="_blank">Rational Resistance</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>41</td>
 		<td><a href="http://codeforces.com/problemset/problem/251/A" target="_blank">Points on Line</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>42</td>
 		<td><a href="http://codeforces.com/problemset/problem/464/A" target="_blank">No to Palindromes!</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>43</td>
