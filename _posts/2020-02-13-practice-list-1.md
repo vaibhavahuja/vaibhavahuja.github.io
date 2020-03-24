@@ -12,7 +12,7 @@ red: "#ddafb6"
 yellow: "#FCF4A3"
 ---
 
-Below is a list of problems I will be solving during this February - March'20. It consists of 100 problems, all of which are Div2C, of codeforces. I will try to write the explanation of each problem, based on my understanding, and how I approached the solution. Hoping to solve 3 problems everyday and stay consistent. I will be updating my progress below. I am starting this on - {{page.date | date_to_long_string}}. 
+Below is a list of problems I will be solving during this February - April'20. It consists of 100 problems, all of which are Div2C, of codeforces. I will try to write the explanation of each problem, based on my understanding, and how I approached the solution. I am starting this on - {{page.date | date_to_long_string}}. 
 
 
 <table>
