@@ -272,25 +272,25 @@ Below is a list of problems I will be solving during this February - April'20. I
 		<td>42</td>
 		<td><a href="http://codeforces.com/problemset/problem/464/A" target="_blank">No to Palindromes!</a></td>
 		<td>4</td>
+		<td>to do\</td>
+	</tr>
+	<tr style="background-color: {{page.yellow}};">
+		<td>43</td>
+		<td><a href="http://codeforces.com/problemset/problem/424/C" target="_blank">To do</a></td>
+		<td>4</td>
 		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
-		<td>43</td>
-		<td><a href="http://codeforces.com/problemset/problem/424/C" target="_blank">Magic Formulas</a></td>
-		<td>4</td>
-		<td>NA</td>
-	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>44</td>
 		<td><a href="http://codeforces.com/problemset/problem/300/C" target="_blank">Beautiful Numbers</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>45</td>
 		<td><a href="http://codeforces.com/problemset/problem/337/C" target="_blank">Quiz</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>46</td>
