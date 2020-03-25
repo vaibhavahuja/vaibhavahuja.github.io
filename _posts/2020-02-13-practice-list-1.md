@@ -292,11 +292,11 @@ Below is a list of problems I will be solving during this February - April'20. I
 		<td>4</td>
 		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>46</td>
 		<td><a href="http://codeforces.com/problemset/problem/135/A" target="_blank">Replacement</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>47</td>
