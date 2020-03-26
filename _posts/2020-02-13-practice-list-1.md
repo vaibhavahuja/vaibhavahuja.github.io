@@ -298,11 +298,11 @@ Below is a list of problems I will be solving during this February - April'20. I
 		<td>3</td>
 		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>47</td>
 		<td><a href="http://codeforces.com/problemset/problem/354/A" target="_blank">Vasya and Robot</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
 	<tr style="background-color: {{page.green}};">
 		<td>48</td>
@@ -310,11 +310,11 @@ Below is a list of problems I will be solving during this February - April'20. I
 		<td>4</td>
 		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>49</td>
 		<td><a href="http://codeforces.com/problemset/problem/150/A" target="_blank">Win or Freeze</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>50</td>
