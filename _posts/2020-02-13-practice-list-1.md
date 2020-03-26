@@ -304,11 +304,11 @@ Below is a list of problems I will be solving during this February - April'20. I
 		<td>4</td>
 		<td>NA</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>48</td>
 		<td><a href="http://codeforces.com/problemset/problem/474/C" target="_blank">Captain Marmot</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>49</td>
