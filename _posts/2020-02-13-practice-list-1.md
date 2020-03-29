@@ -316,23 +316,23 @@ Below is a list of problems I will be solving during this February - April'20. I
 		<td>4</td>
 		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>50</td>
 		<td><a href="http://codeforces.com/problemset/problem/364/A" target="_blank">Matrix</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>51</td>
 		<td><a href="http://codeforces.com/problemset/problem/53/C" target="_blank">Little Frog</a></td>
 		<td>2</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>52</td>
 		<td><a href="http://codeforces.com/problemset/problem/121/A" target="_blank">Lucky Sum</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>53</td>
