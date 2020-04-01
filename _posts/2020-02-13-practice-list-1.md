@@ -344,13 +344,13 @@ Below is a list of problems I will be solving during this February - April'20. I
 		<td>54</td>
 		<td><a href="http://codeforces.com/problemset/problem/407/A" target="_blank">Triangle</a></td>
 		<td>4</td>
-		<td>ACcepted</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>55</td>
 		<td><a href="http://codeforces.com/problemset/problem/257/C" target="_blank">View Angle</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>56</td>
