@@ -352,17 +352,17 @@ Below is a list of problems I will be solving during this February - April'20. I
 		<td>4</td>
 		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>56</td>
 		<td><a href="http://codeforces.com/problemset/problem/242/C" target="_blank">King's Path</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>57</td>
 		<td><a href="http://codeforces.com/problemset/problem/71/C" target="_blank">Round Table Knights</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>58</td>
