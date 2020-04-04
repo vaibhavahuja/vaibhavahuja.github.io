@@ -388,11 +388,11 @@ Below is a list of problems I will be solving during this February - April'20. I
 		<td>4</td>
 		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>62</td>
 		<td><a href="http://codeforces.com/problemset/problem/154/A" target="_blank">Hometask</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>63</td>
