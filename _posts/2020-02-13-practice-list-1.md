@@ -382,11 +382,11 @@ Below is a list of problems I will be solving during this February - April'20. I
 		<td>3</td>
 		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>61</td>
 		<td><a href="http://codeforces.com/problemset/problem/375/A" target="_blank">Divisible by Seven</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>62</td>
