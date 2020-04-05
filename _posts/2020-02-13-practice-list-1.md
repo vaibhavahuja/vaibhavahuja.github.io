@@ -394,11 +394,11 @@ Below is a list of problems I will be solving during this February - April'20. I
 		<td>4</td>
 		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>63</td>
 		<td><a href="http://codeforces.com/problemset/problem/204/A" target="_blank">Little Elephant and Interval</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>64</td>
