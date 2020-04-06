@@ -412,11 +412,11 @@ Below is a list of problems I will be solving during this February - April'20. I
 		<td>5</td>
 		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>66</td>
 		<td><a href="http://codeforces.com/problemset/problem/359/C" target="_blank">Prime Number</a></td>
 		<td>5</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>67</td>
