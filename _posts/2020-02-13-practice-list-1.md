@@ -436,11 +436,11 @@ Below is a list of problems I will be solving during this February - April'20. I
 		<td>4</td>
 		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>70</td>
 		<td><a href="http://codeforces.com/problemset/problem/358/C" target="_blank">Dima and Containers</a></td>
 		<td>5</td>
-		<td>NA</td>
+		<td>to do :/</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>71</td>
@@ -451,8 +451,8 @@ Below is a list of problems I will be solving during this February - April'20. I
 	<tr style="background-color: white;">
 		<td>72</td>
 		<td><a href="http://codeforces.com/problemset/problem/255/C" target="_blank">Almost Arithmetical Progression</a></td>
-		<td>NA</td>
 		<td>4</td>
+		<td>NA</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>73</td>
