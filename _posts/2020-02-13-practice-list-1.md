@@ -418,17 +418,17 @@ Below is a list of problems I will be solving during this February - April'20. I
 		<td>5</td>
 		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>67</td>
 		<td><a href="http://codeforces.com/problemset/problem/243/A" target="_blank">The Brand New Function</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>68</td>
 		<td><a href="http://codeforces.com/problemset/problem/198/A" target="_blank">About Bacteria</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>69</td>
