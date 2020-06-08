@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Educational DP contest - Vaibhav Ahuja</title>
+  <meta name="description" content="my personal space where i write about stuff that excites me.">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/codes/atcoder-dp">
+  <link rel="alternate" type="application/rss+xml" title="Vaibhav Ahuja" href="http://localhost:4000/feed.xml">
+</head>
+
+  <body>
+    <div class="page-content">
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Educational DP contest</h1>
+    <p class="post-meta">
+      <time datetime="2020-05-07T05:30:00+05:30" itemprop="datePublished">May 07, 2020</time>
+      
+
+      
+  		
+
+  		
+  		
+
+  		&middot;	<span class="tags" itemprop="tags">
+  				
+  				
+  				
+  				<a href="http://localhost:4000/tagged#dp">#dp</a>
+  			<a href="http://localhost:4000/tagged#codes">#codes</a>
+  			<a href="http://localhost:4000/tagged#wip">#wip</a>
+  			<a href="http://localhost:4000/tagged#algo">#algo</a>
+  			</span>
+
+  	  
+
+    </p>
+  </header>
+  <div class="post-content" itemprop="articleBody">
+    <p><strong>PS: This is still WIP.</strong></p>
+
+<p>I will be writing down the solutions (and my approach) of the dynamic programming problems I have solved from the <a href="https://atcoder.jp/contests/dp">Atcoder Educational DP Contest</a>. This post will be used a reference whenever I wish to revise Dynamic Programming.
+This contest has 26 problems [A-Z] of varying difficulties. I will be writing the solution for first 12-13 problems and the rest will come in a later post.
+I will be writing about the thought I had while identifying the state, what exactly does the DP state signify (meaning of DP <sub>i, j, …</sub>) and the DP relation.</p>
+
+<p><strong>A</strong>      <a href="https://atcoder.jp/contests/dp/tasks/dp_a">FROG 1</a></p>
+
+<p><strong>PROBLEM LINK:</strong> https://atcoder.jp/contests/dp/tasks/dp_a</p>
+
+<p><strong>SOLUTION</strong></p>
+
+<p><em>Identifying the states</em></p>
+
+<p>We can see that in reaching from one stone to another, only the stone number changes and we can get the height of any stone number (an array of heights is given), so there will be only one state that is : <strong>stone number</strong>
+cost of <code class="highlighter-rouge">|h[i] - h[j]|</code> is incurred when we jump from i<sup>th</sup> stone to j<sup>th</sup> stone</p>
+
+<p><em>Meaning of DP state</em></p>
+
+<p>Here <code class="highlighter-rouge">DP[i]</code> means the minimum cost incurred for the frog to reach i<sup>th</sup> stone. So since a frog can reach i<sup>th</sup> stone only from (i-1)<sup>th</sup> stone and (i-2)<sup>th</sup> stone the dp relation will be as follow:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">((</span><span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">abs</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])),</span> <span class="p">(</span><span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">abs</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">]))</span></code></pre></figure>
+
+<p>The final answer will be <code class="highlighter-rouge">DP[n]</code> which means the minimum cost incurred to reach n<sup>th</sup> stone. 
+We can also see that since the answer for  <code class="highlighter-rouge">i</code> is only dependent on <code class="highlighter-rouge">(i-1)</code> and <code class="highlighter-rouge">(i-2)</code> stone we can do it in constant space.</p>
+
+<hr />
+
+<p><strong>B</strong>      <a href="https://atcoder.jp/contests/dp/tasks/dp_b">FROG 2</a></p>
+
+<p><strong>PROBLEM LINK:</strong> https://atcoder.jp/contests/dp/tasks/dp_b</p>
+
+<p><strong>SOLUTION</strong></p>
+
+<p><em>Identifying the states</em></p>
+
+<p>This problem is similar to previous one however now the frog can jump from any stonein the range <code class="highlighter-rouge">[i-1, i-2, i-3,...., i-K]</code> with the same <code class="highlighter-rouge">|h[i]-h[j]|</code> cost incurred. Again the state will be the <strong>stone number</strong> since only the stone number matters.</p>
+
+<p><em>Meaning of DP state</em></p>
+
+<p>Here <code class="highlighter-rouge">DP[i]</code> means the minimum cost incurred for the frog to reach <code class="highlighter-rouge">i</code> stone. So since a frog can reach <code class="highlighter-rouge">i</code> stone from any of these stones : <code class="highlighter-rouge">[i-1, i-2, i-3,...., i-K]</code>.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="n">K</span><span class="p">);</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+    <span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="p">(</span><span class="n">DP</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">abs</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">h</span><span class="p">[</span><span class="n">j</span><span class="p">]));</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>The final answer will be <code class="highlighter-rouge">DP[n]</code> which means the minimum cost incurred to reach <code class="highlighter-rouge">n</code> stone. The time complexity will be <code class="highlighter-rouge">O(n^2)</code> and the space complexity will be <code class="highlighter-rouge">O(n)</code>.</p>
+
+<hr />
+
+<p><strong>C</strong>      <a href="https://atcoder.jp/contests/dp/tasks/dp_c">VACATION</a></p>
+
+<p><strong>PROBLEM LINK:</strong> https://atcoder.jp/contests/dp/tasks/dp_c</p>
+
+<p><strong>SOLUTION</strong></p>
+
+<p><em>Identifying the states</em></p>
+
+<p>Seeing the problem it is clear that the vacation consists of <code class="highlighter-rouge">N</code> days, and we need to find the maximum total points. Also, Taro has some activities out of which he does one on <code class="highlighter-rouge">i</code> day and does not repeat for two or more consecutive days so the dp states will be <code class="highlighter-rouge">days</code> and <code class="highlighter-rouge">activity performed</code> (since every activity has different points). Hence we create a DP array of <code class="highlighter-rouge">Days * activities</code>.</p>
+
+<p><em>Meaning of DP state</em></p>
+
+<p><code class="highlighter-rouge">DP[i][j]</code> would mean the maximum number of points on <code class="highlighter-rouge">i</code> day given that Taro performs <code class="highlighter-rouge">j</code> activity. 
+We also need to make sure that Taro does not repeat an activity so the solution will be something like below :</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">days</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">activities</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">pointsofactivity_j_on_i_day</span> <span class="o">+</span> <span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">all</span> <span class="n">activities</span> <span class="n">except</span> <span class="n">j</span><span class="p">]);</span>
+        <span class="c1">//we need to make sure that we do not include j as the previous activity. </span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>The final answer will be max of <code class="highlighter-rouge">DP[N][j]</code> where N is total number of days and <code class="highlighter-rouge">j</code> are all the activities.</p>
+<hr />
+
+<p><strong>D</strong>      <a href="https://atcoder.jp/contests/dp/tasks/dp_d">KNAPSACK 1</a></p>
+
+<p><strong>PROBLEM LINK:</strong> https://atcoder.jp/contests/dp/tasks/dp_d</p>
+
+<p><strong>SOLUTION</strong></p>
+
+<p><em>Identifying the states</em></p>
+
+<p>Well it is the classical Knapsack and we can see that Taro has to choose some N items and maximum capacity is W. He has to have the maximum value and he only has two choices, either to pick an item and put it in his bag or not to pick the item. So the DP states will be <code class="highlighter-rouge">N</code> and <code class="highlighter-rouge">W</code> since it only matters the number of items Taro picks up and the total weight in the knapsack.</p>
+
+<p><em>Meaning of DP state</em></p>
+
+<p>Here <code class="highlighter-rouge">DP[i][j]</code> would mean the maximum <strong>value</strong>* we get after choosing (yes or no) the first <code class="highlighter-rouge">i</code> items and maximum weight as <code class="highlighter-rouge">j</code>. We get two options, either take an item or not to take the item.
+Hence it will be the maximum of:</p>
+<ol>
+  <li>Taking the item: <code class="highlighter-rouge">val[i] + DP[i-1][j-wt[i]]</code> (weight empty reduces)</li>
+  <li>Not taking item : <code class="highlighter-rouge">DP[i-1][j]</code> (weight empty is still the same)</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">wt</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="n">wt</span><span class="p">[</span><span class="n">i</span><span class="p">]]);</span>
+
+        <span class="c1">// (need to make sure that wt[i] &lt;= j)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>The final answer will be <code class="highlighter-rouge">DP[N][W]</code> which means the maximum value with all the N items seen and maximum weight as W.</p>
+<hr />
+
+<p><strong>E</strong>      <a href="https://atcoder.jp/contests/dp/tasks/dp_e">KNAPSACK 2</a></p>
+
+<p><strong>PROBLEM LINK:</strong> https://atcoder.jp/contests/dp/tasks/dp_e</p>
+
+<p><strong>SOLUTION</strong></p>
+
+<p><em>Identifying the states</em> 
+This problem is just the same as the previous problem with a few changes. The limits have been changed. 
+Now,</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 ≤ N ≤ 100
+1 ≤ W ≤ 10^9
+1 ≤ w[i] ≤ W 
+1 ≤ v[i] ≤ 10^3
+</code></pre></div></div>
+
+<p>We can see that the value of W we used in the previous problem is <code class="highlighter-rouge">1e9</code> which is too large for us to make it as a DP state, hence we will change the DP state from W to <code class="highlighter-rouge">V</code> where <code class="highlighter-rouge">V</code> means the maximum value (which can be just 1e3).</p>
+
+<p><em>Meaning of DP state</em></p>
+
+<p>Since we changed the state the meaning of DP state changes as well. 
+Now, <code class="highlighter-rouge">DP[i][j]</code> is the minimum weight we can use to make maxValue as <code class="highlighter-rouge">j</code> and by using <code class="highlighter-rouge">i</code> items (again choosing or not choosing is a choice).</p>
+
+<p>Just like the previous problem, we will either take the item or not take it.</p>
+
+<ol>
+  <li>Taking the item: <code class="highlighter-rouge">wt[i] + DP[i-1][j-val[i]]</code></li>
+  <li>Not taking item : <code class="highlighter-rouge">DP[i-1][j]</code></li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+  	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">V</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+  		<span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span>
+  		<span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">&gt;=</span> <span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">wt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">]]);</span>
+
+        <span class="c1">// (need to make sure that val[i] &lt;= j)</span>
+        <span class="c1">// (it is minimum since we want the min weight)</span>
+  	<span class="p">}</span>
+  <span class="p">}</span></code></pre></figure>
+
+<p>The final answer will be the maximum <code class="highlighter-rouge">j</code> in the <code class="highlighter-rouge">DP[N][j]</code> for which we got the <code class="highlighter-rouge">DP[N][j] &lt; W</code>.</p>
+<hr />
+
+<p><strong>F</strong>      <a href="https://atcoder.jp/contests/dp/tasks/dp_f">LCS</a></p>
+
+<p><strong>PROBLEM LINK:</strong> https://atcoder.jp/contests/dp/tasks/dp_f</p>
+
+<p><strong>SOLUTION</strong></p>
+
+<p><em>Identifying the states</em></p>
+
+<p>Finding the longest common subsequence is a very well known problem for dynamic programming. We are given two strings <code class="highlighter-rouge">s</code> and <code class="highlighter-rouge">t</code> and we need to find the longest string that is subsequence to both s and t.
+Ofcourse, we will have an option to either include <code class="highlighter-rouge">s[i]</code> or not and similar case with <code class="highlighter-rouge">t[j]</code>
+Hence the two states will be <code class="highlighter-rouge">i</code> and <code class="highlighter-rouge">j</code>.</p>
+
+<p><em>Meaning of DP state</em></p>
+
+<p>The <code class="highlighter-rouge">DP[i][j]</code> would indicate length of longest subsequence with first <code class="highlighter-rouge">i</code> characters of <code class="highlighter-rouge">s</code> and first <code class="highlighter-rouge">j</code> characters of <code class="highlighter-rouge">t</code>. We first construct the DP array which would signify length of longest subsequence and then we trace back to get the actual string.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">t</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//tracing back the same we constructed the max array</span>
+
+<span class="n">string</span> <span class="n">ans</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>
+ <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">){</span>
+  	<span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">t</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]){</span>
+  		<span class="n">ans</span> <span class="o">+=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+  		<span class="n">i</span><span class="o">--</span><span class="p">;</span>
+  		<span class="n">j</span><span class="o">--</span><span class="p">;</span>
+  	<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="n">i</span><span class="o">--</span><span class="p">;</span>
+  	<span class="k">else</span> <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+  <span class="p">}</span></code></pre></figure>
+
+<hr />
+
+<p><strong>G</strong>      <a href="https://atcoder.jp/contests/dp/tasks/dp_g">LONGEST PATH</a></p>
+
+<p><strong>PROBLEM LINK:</strong> https://atcoder.jp/contests/dp/tasks/dp_g</p>
+
+<p><strong>SOLUTION</strong></p>
+
+<p><em>Identifying the states</em></p>
+
+<p>So we are given a DAG (directed acyclic graph) and we need to find the length of longest directed path in G. Let us understand the problem more with an example.</p>
+
+<p><img src="../images/dp1.png" alt="" /></p>
+
+<p>We can see that the length of longest directed path is 3 in the above example.</p>
+
+<p>In a DAG the first thing that comes to the mind is DFS, and this problem can easily be solved with DFS. 
+Here the only state is <em>node number</em> since we only need to calculate that.</p>
+
+<p><em>Meaning of DP state</em></p>
+
+<p><code class="highlighter-rouge">DP[a]</code> would mean the length of longest directed path which starts at node <code class="highlighter-rouge">a</code>. We will just use normal DFS but keep on updating the DP array accordingly.
+The dfs function will look like this :</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">){</span>
+    <span class="n">visited</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">node</span> <span class="n">in</span> <span class="n">allNeighbours</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">visited</span><span class="p">(</span><span class="n">node</span><span class="p">))</span> <span class="n">dfs</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+        <span class="c1">//since we can reach that node through a; </span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//we take the maxi</span>
+<span class="k">for</span><span class="p">(</span><span class="n">value</span> <span class="n">in</span> <span class="n">dp</span><span class="p">){</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">answer</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<hr />
+
+<p><strong>H</strong>      <a href="https://atcoder.jp/contests/dp/tasks/dp_h">GRID 1</a></p>
+
+<p><strong>PROBLEM LINK:</strong> https://atcoder.jp/contests/dp/tasks/dp_h</p>
+
+<p><strong>SOLUTION</strong></p>
+
+<p><em>Identifying the states</em></p>
+
+<p>In this problem we need to calculate number of paths in going from <code class="highlighter-rouge">(1, 1)</code> to <code class="highlighter-rouge">(H, W)</code> and we can only go if the the square is empty (has a <code class="highlighter-rouge">.</code>) and we cannot pass if there is a wall (<code class="highlighter-rouge">#</code>). Also Taro can go only <strong>Down or Right</strong>.</p>
+
+<p>The states will be clearly <code class="highlighter-rouge">i</code> and <code class="highlighter-rouge">j</code> which denote the length and width of a column.</p>
+
+<p><em>Meaning of DP state</em></p>
+
+<p>Here <code class="highlighter-rouge">DP[i][j]</code> would denote the number of paths from <code class="highlighter-rouge">(1, 1)</code> to <code class="highlighter-rouge">(i, j)</code>.</p>
+
+<p>We can see in the below image how we are making our dp array. to reach every (i, j) the number of options are (i, j-1) + (i-1, j).</p>
+
+<p><img src="../images/dp2.png" alt="" /></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="c1">//dp[1][i] and dp[i][1] will be 1 as long as dp[1][i-1] and dp[i-1][1] are . (empty spaces). </span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;=</span> <span class="n">w</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="n">is</span> <span class="n">blank</span> <span class="n">space</span><span class="p">)</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
+        <span class="k">else</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>The final answer will be ofcourse <code class="highlighter-rouge">DP[n][m]</code> which means the number of ways to reach <code class="highlighter-rouge">n</code> row and <code class="highlighter-rouge">m</code> column.</p>
+
+<hr />
+
+<p>PS: I am still writing this post and it is work in progress 🚧</p>
+
+<!-- 
+**I**  &nbsp;   [COINS](https://atcoder.jp/contests/dp/tasks/dp_i)
+
+
+**PROBLEM LINK:** https://atcoder.jp/contests/dp/tasks/dp_i
+
+**SOLUTION**
+
+**Incomplete So Far**
+
+*Identifying the states* 
+
+We are given N coins, which are tossed. The coins are biased tho. The probability of getting heads when coin `i` is tossed is `p[i]` which would mean of getting tails is `1 - p[i]`. Also N is odd so both heads and tails cant come equal number of times. We need to find the probability of having more heads than tails. 
+Let us see what really matters in the problem: Since we need to find the proability of getting more heads than tails, the number of heads matter and the probability of getting heads or tails matter, and total number of coin tosses matter but since we can get the `P[head] or P[tails]` we only need two states : number of heads & number of coin tosses. 
+
+
+*Meaning of DP state*
+
+`DP[i][j]` would mean the probability of getting `j` heads in `i` coin tosses.
+We can understand more by trying to make the DP table. -->
+
+<!-- 
+<hr/> -->
+
+  </div>
+  <hr>
+  
+    
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname  = 'https-vaibhavahuja-github-io-1';
+    var disqus_identifier = '/codes/atcoder-dp';
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+
+  
+</article>
+
+      <div class="copyright">
+      <p> Powered by <a href="https://jekyllrb.com/">Jekyll</a> </p>
+      </div>
+    </div>
+    
+  </body>
+</html>

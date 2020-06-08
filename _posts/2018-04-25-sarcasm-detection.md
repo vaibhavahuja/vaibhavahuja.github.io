@@ -4,7 +4,7 @@ title:      Sarcastic or not? (1/2)
 date:       2018-04-25 11:21:29
 summary:    understanding the problem.
 categories: nlp
-tags: [Machine Learning]
+tags: [Machine Learning, project]
 comment: true
 ---
 

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Secura - store passwords securely - Vaibhav Ahuja</title>
+  <meta name="description" content="my personal space where i write about stuff that excites me.">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/hash/secura">
+  <link rel="alternate" type="application/rss+xml" title="Vaibhav Ahuja" href="http://localhost:4000/feed.xml">
+</head>
+
+  <body>
+    <div class="page-content">
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Secura - store passwords securely</h1>
+    <p class="post-meta">
+      <time datetime="2020-05-25T05:30:00+05:30" itemprop="datePublished">May 25, 2020</time>
+      
+
+      
+  		
+
+  		
+  		
+
+  		&middot;	<span class="tags" itemprop="tags">
+  				
+  				
+  				<a href="http://localhost:4000/tagged#project">#project</a>
+  			<a href="http://localhost:4000/tagged#javascript">#javascript</a>
+  			<a href="http://localhost:4000/tagged#cryptography">#cryptography</a>
+  			</span>
+
+  	  
+
+    </p>
+  </header>
+  <div class="post-content" itemprop="articleBody">
+    <p>This weekend I decided to study more about hashing and thought of creating my own hashing function, which would obviously, hash. Hashing is different from encryption, with encryption you can decrypt the message into the original form, but hashing should be one way, i.e no matter what the output is, it should be irreversible, which makes the problem even harder. I ended up creating my own hashing algorithm, which I was able to crack myself in around 20 minutes or so. I further studied about how dangerous it can be to roll your own hash (yes <em>roll your hash</em>) if you are not a cryptographic expert so I decided to give up on creating my own hashing algorithm, however I did dig deep on how hashing is used to store passwords.</p>
+
+<p>Well, of course, good hashing algorithms exist which are one way (SHA-512, SHA-256, and MD5) however they are crackable. By crackable I mean, although the hash itself is irreversible the hackers calculate the hash of tons(^tons) of common words, and compare it with the existing hash. The process is repeated for every possible word, until they match some passwords. That is exactly why when we choose a password, we are asked to choose a long (7+ digits) with special characters, since the more complicated the password is, the more time it will take to brute force it. Ofcourse, even after all these complications, hackers are still able to crack the passwords. There are many different attacks which the hackers use to crack them such as :  <a href="https://en.wikipedia.org/wiki/Rainbow_table">Rainbow Table</a>, Dictionary, Brute Force attacks which poses a great security threat to the users.</p>
+
+<p>While creating my node app, I found out that it was difficult for me to choose a hashing algorithm which is secure for storing my passwords, and understanding about cryptography took a lot of time. I believe that it should not be necessary for someone to be a cryptographic expert to hash their passwords securely, hence I created a library : <a href="https://www.npmjs.com/package/secura">Secura</a> which one can use to hash the passwords securely and compare the asynchronous way. This module returns a promise with the hashed password and also compares it.</p>
+
+<p>Below I have described the usage :</p>
+
+<h3 id="usage">Usage</h3>
+
+<p>Install the module :</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span>secura
+</code></pre></div></div>
+
+<p>Usage is very simple and straightforward. You can import the module using :</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">secura</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">secura</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>Generate Password</strong></p>
+
+<p>This converts the user password to a secure hash.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">secura</span><span class="p">.</span><span class="nx">generatePassword</span><span class="p">(</span><span class="nx">password</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">hash</span><span class="o">=&gt;</span><span class="p">{</span>
+          <span class="c1">//store the hash in the database</span>
+      <span class="p">});</span>
+</code></pre></div></div>
+
+<p><strong>Verify Password</strong></p>
+
+<p>This verifies if the password entered by the user matches the hashed password stored in the database.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">secura</span><span class="p">.</span><span class="nx">validatePassword</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">hash</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">isMatch</span><span class="o">=&gt;</span><span class="p">{</span>
+          <span class="c1">//returns true if password matches and false otherwise</span>
+      <span class="p">})</span>
+</code></pre></div></div>
+
+<h3 id="features">Features</h3>
+
+<ul>
+  <li>Simple and straightforward to use. No knowledge of cryptography required to hash passwords and compare.</li>
+  <li>Every hashed password is 61 digits long.</li>
+  <li>Protection from Brute Force &amp; Dictionary Attacks.</li>
+  <li>Protection from <a href="https://en.wikipedia.org/wiki/Rainbow_table">Rainbow Table</a> Attacks.</li>
+  <li>Randomly generated salt for every password.</li>
+  <li>Extra field is not required for storing salt in the database.</li>
+  <li>Uses <a href="https://en.wikipedia.org/wiki/PBKDF2">PBKDF2</a> to compute hash.</li>
+</ul>
+
+<p>You can contribute to this library by sending a pull request or opening an issue at : <a href="https://github.com/vaibhavahuja/secura/">repo link</a></p>
+
+<p>Thanks for reading. Hoping you will find this library useful.</p>
+
+  </div>
+  <hr>
+  
+    
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname  = 'https-vaibhavahuja-github-io-1';
+    var disqus_identifier = '/hash/secura';
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+
+  
+</article>
+
+      <div class="copyright">
+      <p> Powered by <a href="https://jekyllrb.com/">Jekyll</a> </p>
+      </div>
+    </div>
+    
+  </body>
+</html>
