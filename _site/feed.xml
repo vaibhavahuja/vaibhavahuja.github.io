@@ -5,9 +5,102 @@
     <description>my personal space where i write about stuff that excites me.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 09 Jun 2020 01:47:22 +0530</pubDate>
-    <lastBuildDate>Tue, 09 Jun 2020 01:47:22 +0530</lastBuildDate>
+    <pubDate>Tue, 14 Jul 2020 19:00:16 +0530</pubDate>
+    <lastBuildDate>Tue, 14 Jul 2020 19:00:16 +0530</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>Range Queries</title>
+        <description>&lt;p&gt;This post is just for revising range queries. Have highlighted the topics and problems. Might write solutions (my approach) for these problems as well for future reference.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;to do : create collapsible for solutions + also to put the same in DP post&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;table-of-contents-segment-tree&quot;&gt;Table of Contents (segment tree)&lt;/h4&gt;
+&lt;p&gt;Link: &lt;a href=&quot;https://cp-algorithms.com/data_structures/segment_tree.html&quot;&gt;cp-algorithms - Segment tree&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Simplest form of a Segment Tree ✔️
+    &lt;ul&gt;
+      &lt;li&gt;Structure of the Segment Tree ✔️&lt;/li&gt;
+      &lt;li&gt;Construction ✔️&lt;/li&gt;
+      &lt;li&gt;Sum queries ✔️&lt;/li&gt;
+      &lt;li&gt;Update queries ✔️&lt;/li&gt;
+      &lt;li&gt;Implementation ✔️&lt;/li&gt;
+      &lt;li&gt;Memory efficient implementation ✔️&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Advanced versions of Segment Trees
+    &lt;ul&gt;
+      &lt;li&gt;More complex queries ✔️&lt;/li&gt;
+      &lt;li&gt;Saving the entire subarrays in each vertex ✔️&lt;/li&gt;
+      &lt;li&gt;Range updates (Lazy Propagation) ✔️&lt;/li&gt;
+      &lt;li&gt;Generalization to higher dimensions 📝&lt;/li&gt;
+      &lt;li&gt;Preserving the history of its values (Persistent Segment Tree)&lt;/li&gt;
+      &lt;li&gt;Implicit segment tree&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;table-of-contents-fenwick-tree-or-bit&quot;&gt;Table of Contents (fenwick tree or BIT)&lt;/h4&gt;
+&lt;p&gt;Link: &lt;a href=&quot;https://cp-algorithms.com/data_structures/fenwick.html&quot;&gt;cp-algorithms - Fenwick tree&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Description
+    &lt;ul&gt;
+      &lt;li&gt;Overview ✔️&lt;/li&gt;
+      &lt;li&gt;Definition of g(i) ✔️&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Implementation
+    &lt;ul&gt;
+      &lt;li&gt;Finding sum in one-dimensional array ✔️&lt;/li&gt;
+      &lt;li&gt;Finding minimum of [0,r] in one-dimensional array ✔️&lt;/li&gt;
+      &lt;li&gt;Finding sum in two-dimensional array ✔️&lt;/li&gt;
+      &lt;li&gt;One-based indexing approach ✔️&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Range operations
+    &lt;ol&gt;
+      &lt;li&gt;Point Update and Range Query ✔️&lt;/li&gt;
+      &lt;li&gt;Range Update and Point Query 📝&lt;/li&gt;
+      &lt;li&gt;Range Updates and Range Queries 📝&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;csesfi-problemset-range-queries&quot;&gt;CSES.fi problemSet (Range Queries)&lt;/h6&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1646&quot;&gt;Range Sum Queries I ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1646&quot;&gt;Range Sum Queries I ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1647&quot;&gt;Range Minimum Queries I ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1648&quot;&gt;Range Sum Queries II ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1649&quot;&gt;Range Minimum Queries II ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1650&quot;&gt;Range Xor Queries ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1651&quot;&gt;Range Update Queries ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1652&quot;&gt;Forest Queries ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1143&quot;&gt;Hotel Queries ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1749&quot;&gt;List Removals ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1144&quot;&gt;Salary Queries&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1190&quot;&gt;Subarray Sum Queries&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1734&quot;&gt;Distinct Values Queries&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1739&quot;&gt;Forest Queries II&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1735&quot;&gt;Range Updates and Sums&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1736&quot;&gt;Polynomial Queries&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1737&quot;&gt;Range Queries and Copies&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Mon, 13 Jul 2020 05:30:00 +0530</pubDate>
+        <link>http://localhost:4000/algo/rangeQueries</link>
+        <guid isPermaLink="true">http://localhost:4000/algo/rangeQueries</guid>
+        
+        <category>algo</category>
+        
+        <category>progress</category>
+        
+        
+        <category>algo</category>
+        
+      </item>
     
       <item>
         <title>Secura - store passwords securely</title>
@@ -1337,7 +1430,7 @@ to see how this works add a delay in between the showRow(i); something like This
         
         <category>IoT</category>
         
-        <category>project</category>
+        <category>algo</category>
         
         
         <category>stm8s</category>
