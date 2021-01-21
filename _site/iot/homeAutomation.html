@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Controlling home lamp using internet - Vaibhav Ahuja</title>
+  <meta name="description" content="my personal space where i write about stuff that excites me.">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/iot/homeAutomation">
+  <link rel="alternate" type="application/rss+xml" title="Vaibhav Ahuja" href="http://localhost:4000/feed.xml">
+</head>
+
+  <body>
+    <div class="page-content">
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Controlling home lamp using internet</h1>
+    <p class="post-meta">
+      <time datetime="2021-01-01T05:30:00+05:30" itemprop="datePublished">Jan 01, 2021</time>
+      
+
+      
+  		
+
+  		
+  		
+
+  		&middot;	<span class="tags" itemprop="tags">
+  				<a href="http://localhost:4000/tagged#iot">#iot</a>
+  			</span>
+
+  	  
+
+    </p>
+  </header>
+  <div class="post-content" itemprop="articleBody">
+    <p>As I was browsing through Amazon, searching for things to buy which I do not need I came across this lamp which could be controlled through the internet. It was quite expensive so I thought of building my own. The way the lamp worked was that, it came with a QR code on top of it, and when scanned with the phone <em>(which is connected with a wi-fi)</em>, the lamp gets connected and if both the devices are connected to the same wifi, we could control the lamp. That however is an issue since I wish to control my lamp from anywhere and not just from my room.</p>
+
+<p>I searched for options to do that for my existing table lamp, and I came across a <a href="https://www.amazon.in/dp/B07V39T8F2/ref=sspa_dk_detail_2?psc=1&amp;pd_rd_i=B07V39T8F2&amp;pd_rd_w=ksLDx&amp;pf_rd_p=30249bab-abdf-42ed-928f-d8929403a9aa&amp;pd_rd_wg=3Yquo&amp;pf_rd_r=QZMZ3PDK3KPPQGQ5MN3B&amp;pd_rd_r=4132d55b-85f2-4e2b-b64e-dd918ec6cd21&amp;spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEzSFRVQktEQVE0QkNaJmVuY3J5cHRlZElkPUEwOTk3NDUzNkdJWUpBV1AzOE4zJmVuY3J5cHRlZEFkSWQ9QTA2MjA4Mjc1VE4zT1U2MUgxNTImd2lkZ2V0TmFtZT1zcF9kZXRhaWwmYWN0aW9uPWNsaWNrUmVkaXJlY3QmZG9Ob3RMb2dDbGljaz10cnVl">smart plug</a> which could literally make any of the appliances “smart”. This would have costed around ₹2000, and I decided to create my own “smart” plug.</p>
+
+<p>The idea was simple, I just needed a web server where I would store the state of the switch, something that would poll my server all the time and would turn the lamp on/off according to the state. I thought of using Arduino and some wifi module, but I came across <a href="https://components101.com/sites/default/files/component_datasheet/ESP8266-NodeMCU-Datasheet.pdf">ESP8266-NodeMCU</a>, which is again a microcontroller but it comes fitted with embedded WiFi capabilities, with the lowest costs. These chips are developed in China, and you can get one for as low as ₹200. It has an operating voltage of 3.0-3.6V and the package size was pretty small, so it could be fitted in my existing switch boards. This comes with 17 GPIO pins, and even one was enough for my POC. The GPIO pins give out the signal which can be low or high depending on the code. If I could just poll the web server, and get the state, and send out the signal through the GPIO pin, the lamp could be turned on or off. Now ofcourse, the GPIO pin would give a high signal of 3V DC, and the appliances run on 230 V AC. I used a relay for this purpose. A Relay is basically an electromechanical device that can be used to make or break an electrical connection. It consists of a flexible moving mechanical part which can be controlled electronically through an electromagnet, basically, a relay is just like a mechanical switch but you can control it with an electronic signal instead of manually turning it on or off. So it served the purpose.
+I sketched out the architecture, before actually starting with the coding part of what I was about to built and it looked something like this.</p>
+
+<p><em><img src="/images/homeautodiag.png?raw=true" alt="architecture" /></em></p>
+
+<p>Now, that everything was in place, I ordered a nodeMCU ESP8266, a relay, some jumper wires, and that is it.
+I used the arduino IDE itself for programming the nodeMCU. Luckily, tons of libraries exist for running nodeMCU using the arduino IDE. Parallely I created an API with two endpoints. The <code class="highlighter-rouge">GET</code> request would be used by the microcontroller to get the state of the switch, and the <code class="highlighter-rouge">PATCH</code> request, will toggle the state -&gt;  <code class="highlighter-rouge">state = 1 - state</code>. I had connected a free MongoDB database with just one entry, and hosted the API on a free (<em>making it low cost :P</em>) server by Heroku. 
+I also gave a neat UI which would send a patch reuest for toggling the state, and hosted it on github pages. <a href="https://vaibhavahuja.github.io/homeautoui/">Here is the UI</a>. Tapping on the button would turn the lamp in my room on/off.</p>
+
+<p>Below is the code for the setup method.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++">  <span class="n">pinMode</span><span class="p">(</span><span class="n">D7</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+  <span class="n">WiFi</span><span class="p">.</span><span class="n">mode</span><span class="p">(</span><span class="n">WIFI_OFF</span><span class="p">);</span>        <span class="c1">//Prevents reconnection issue (taking too long to connect)</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+  <span class="n">WiFi</span><span class="p">.</span><span class="n">mode</span><span class="p">(</span><span class="n">WIFI_STA</span><span class="p">);</span>        
+  <span class="n">WiFi</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">ssid</span><span class="p">,</span> <span class="n">password</span><span class="p">);</span>   
+
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"Connecting"</span><span class="p">);</span>
+  <span class="c1">// Waiting for connection</span>
+  <span class="k">while</span> <span class="p">(</span><span class="n">WiFi</span><span class="p">.</span><span class="n">status</span><span class="p">()</span> <span class="o">!=</span> <span class="n">WL_CONNECTED</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"."</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">//If connection successful show IP address in serial monitor</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">""</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"Connected to "</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">ssid</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"IP address: "</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">WiFi</span><span class="p">.</span><span class="n">localIP</span><span class="p">());</span>  <span class="c1">//IP address assigned to your ESP</span></code></pre></figure>
+
+<p>Now that the wifi is connected and the pins are in place, coming to the loop method.</p>
+
+<p>The below code sends a <code class="highlighter-rouge">GET</code> request to the server and stores the output in the line variable.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="n">httpsClient</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="s">"GET "</span><span class="p">)</span> <span class="o">+</span> <span class="n">Link</span> <span class="o">+</span> <span class="s">" HTTP/1.1</span><span class="se">\r\n</span><span class="s">"</span> <span class="o">+</span>
+               <span class="s">"Host: "</span> <span class="o">+</span> <span class="n">host</span> <span class="o">+</span> <span class="s">"</span><span class="se">\r\n</span><span class="s">"</span> <span class="o">+</span>               
+               <span class="s">"Connection: close</span><span class="se">\r\n\r\n</span><span class="s">"</span><span class="p">);</span>
+
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"request sent"</span><span class="p">);</span>
+                  
+  <span class="k">while</span> <span class="p">(</span><span class="n">httpsClient</span><span class="p">.</span><span class="n">connected</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">String</span> <span class="n">line</span> <span class="o">=</span> <span class="n">httpsClient</span><span class="p">.</span><span class="n">readStringUntil</span><span class="p">(</span><span class="sc">'\n'</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">line</span> <span class="o">==</span> <span class="s">"</span><span class="se">\r</span><span class="s">"</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"headers received"</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span></code></pre></figure>
+
+<p>There was no need to actually use a json parser since the server would just return a single line with the status. Finally, on checking the output received, a low signal was sent to the Relay to turn on the lamp and a high signal to turn off the lamp.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="n">String</span> <span class="n">line</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">(</span><span class="n">httpsClient</span><span class="p">.</span><span class="n">available</span><span class="p">()){</span>        
+    <span class="n">line</span> <span class="o">=</span> <span class="n">httpsClient</span><span class="p">.</span><span class="n">readStringUntil</span><span class="p">(</span><span class="sc">'\n'</span><span class="p">);</span> 
+    <span class="k">if</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">==</span> <span class="sc">'1'</span><span class="p">){</span>
+      <span class="n">digitalWrite</span><span class="p">(</span><span class="n">D7</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>  
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+      <span class="n">digitalWrite</span><span class="p">(</span><span class="n">D7</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span> 
+    <span class="p">}</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">10</span><span class="p">]);</span> 
+  <span class="p">}</span></code></pre></figure>
+
+<p><a href="https://github.com/vaibhavahuja/homeAuto">You can view the code for the server here</a></p>
+
+<p>So I was able to complete this home auto project within a fraction of what I would get online.</p>
+
+<p>Thanks for reading!</p>
+
+  </div>
+  <hr>
+  
+    
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname  = 'https-vaibhavahuja-github-io-1';
+    var disqus_identifier = '/iot/homeAutomation';
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+
+  
+</article>
+
+      <div class="copyright">
+      <p> Powered by <a href="https://jekyllrb.com/">Jekyll</a> </p>
+      </div>
+    </div>
+    
+  </body>
+</html>

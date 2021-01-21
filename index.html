@@ -18,6 +18,10 @@ layout: default
 				{% if post.tags contains 'algo' %}
 					<b style="color:#b71540"> algo/ </b>
 				{% endif %}
+
+				{% if post.tags contains 'iot' %}
+					<b style="color:#b100de"> iot/ </b>
+				{% endif %}
 				<a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}"> {{ post.title }} 
 					{% if post.tags contains 'wip' %}
 						🚧
