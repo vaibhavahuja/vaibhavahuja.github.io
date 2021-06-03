@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Effective Testing Strategy for preventing Community Spread of COVID-19 - Vaibhav Ahuja</title>
+  <meta name="description" content="my personal space where i write about stuff that excites me.">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/project/effectiveTestingCovid">
+  <link rel="alternate" type="application/rss+xml" title="Vaibhav Ahuja" href="http://localhost:4000/feed.xml">
+</head>
+
+  <body>
+    <div class="page-content">
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Effective Testing Strategy for preventing Community Spread of COVID-19</h1>
+    <p class="post-meta">
+      <time datetime="2020-08-10T05:30:00+05:30" itemprop="datePublished">Aug 10, 2020</time>
+      
+
+      
+  		
+
+  		
+  		
+
+  		&middot;	<span class="tags" itemprop="tags">
+  				<a href="http://localhost:4000/tagged#project">#project</a>
+  			</span>
+
+  	  
+
+    </p>
+  </header>
+  <div class="post-content" itemprop="articleBody">
+    <h3 id="problem-statement">Problem Statement</h3>
+
+<p>In India, when the country got exposed to COVID-19, we had very limited testing kits and with such a huge population, whom to test and whom not to became a serious challenge. The testing strategy followed at that time, was based on a person’s travel history, if they were showing symptoms or not and so on. The fact that a healthy asymptomatic human being can be a <strong>carrier for the virus</strong> was ignored, and we were unable to control the Community Spread which led to a huge surge in the number of cases. The question arises on <strong>whom to test and whom not to when the country has limited testing available.</strong></p>
+
+<h3 id="proposed-solution">Proposed Solution</h3>
+
+<p>There are no such apps which talk about effective testing, however there are a few applications which were used by the Government for Contact Tracing, like Aarogya Setu. The way aarogya setu worked was that it used the bluetooth technology in order to find the covid infected people near one person. When two people with their smartphones interact, a secure digital signature is exchanged through which it is determined if a person has contacted someone with COVID or not.
+Our application defines a testing strategy for the government based on the concept of Betweenness Centrality. The shortcomings of the bluetooth based solution were that it ignored the fact that a human being with no symptoms can also be a carrier of the Virus, which we have considered. <em>We made a complete web application, but in this post I will only be talking about how we structured the database, and how we achieved the task. I will also be listing down the queries.</em></p>
+
+<p>We have used Graph Databases for this task, where every person and location will be a node and all the nodes will be connected (according to their interactions). We will also be making connections between two people if they visited a place on the same day. To contain spread, we will be using the concept of articulation points and Centrality Measures. I will be talking in detail about which centrality measure will we use and why.</p>
+
+<p>Graph databases effectively store data relationships; they’re also flexible when expanding a data model and graph really shines in around relationship analysis, where the connections are between people. For our use case, we have used the <a href="https://sandbox.neo4j.com/">neo4j</a> database.</p>
+
+<p>The initial part was to load the data into the graph databases, and initialize the nodes and define the relationships between different nodes.</p>
+
+<p>The first type of node was the Person node, which would define the information about a person. We made separate CSV files, and then loaded the data as follow :</p>
+
+<p>The information about the Person that we stored was -</p>
+
+<ul>
+  <li>SSN</li>
+  <li>NAME</li>
+  <li>ADDRESS</li>
+  <li>SHOWING SYMPTOMS <em>(boolean)</em></li>
+  <li>COVID INFECTED <em>(boolean)</em></li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">load</span> <span class="n">csv</span> <span class="k">with</span> <span class="n">headers</span> <span class="k">from</span> 
+<span class="nv">"https://docs.google.com/spreadsheets/d/e/2PACX-1vTdx9D4Xzrbitz5gDbd-MH7iALAZjYdOpq7Bx6pVAeVEH6_NZC_CQSWC51Tl6ODHkU0WTgSfJshzPUZ/pub?gid=0&amp;single=true&amp;output=csv"</span>
+<span class="k">as</span> <span class="n">per</span>
+<span class="k">create</span> <span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="err">{</span><span class="n">ssn</span><span class="p">:</span><span class="n">per</span><span class="p">.</span><span class="n">SSN</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span><span class="n">per</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span><span class="n">address</span><span class="p">:</span><span class="n">per</span><span class="p">.</span><span class="n">Address</span><span class="p">,</span><span class="n">symptoms</span><span class="p">:</span><span class="n">per</span><span class="p">.</span><span class="n">ShowingSymptoms</span><span class="p">,</span> <span class="n">infected</span><span class="p">:</span><span class="n">per</span><span class="p">.</span><span class="n">CovidInfected</span><span class="err">}</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Below is a sample node.
+<em>We had 150 similar nodes in the database (as per the csv file we used to load)</em></p>
+
+<p><img src="../images/sampleNode.png" alt="" /></p>
+
+<p>Now, to create relationships between people:</p>
+
+<p>The below csv file just contained information about who meets who, and we create an <code class="highlighter-rouge">INTERACTS_WITH</code> Relationship amongst these people.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">load</span> <span class="n">csv</span> <span class="k">with</span> <span class="n">headers</span> <span class="k">from</span> 
+<span class="nv">"https://docs.google.com/spreadsheets/d/e/2PACX-1vTdx9D4Xzrbitz5gDbd-MH7iALAZjYdOpq7Bx6pVAeVEH6_NZC_CQSWC51Tl6ODHkU0WTgSfJshzPUZ/pub?gid=1511060139&amp;single=true&amp;output=csv"</span> <span class="k">as</span> <span class="n">meeting</span>
+<span class="k">match</span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="err">{</span><span class="n">ssn</span><span class="p">:</span><span class="n">meeting</span><span class="p">.</span><span class="n">Person1</span><span class="err">}</span><span class="p">),</span> <span class="p">(</span><span class="n">p2</span><span class="p">:</span><span class="n">Person</span><span class="err">{</span><span class="n">ssn</span><span class="p">:</span><span class="n">meeting</span><span class="p">.</span><span class="n">Person2</span><span class="err">}</span><span class="p">)</span>
+<span class="k">create</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">INTERACTS_WITH</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+<span class="k">create</span> <span class="p">(</span><span class="n">p2</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">INTERACTS_WITH</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We are assigning a cost to every <code class="highlighter-rouge">INTERACTS_WITH</code> relationship, which in the future we might use, as we can increase the cost of relationships with already infected people :</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">match</span> <span class="p">(</span><span class="n">p1</span><span class="p">:</span><span class="n">Person</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">INTERACTS_WITH</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">p2</span><span class="p">:</span><span class="n">Person</span><span class="p">)</span> <span class="k">set</span> <span class="n">i</span><span class="p">.</span><span class="n">cost</span> <span class="o">=</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>Adding some locations to the database :</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">load</span> <span class="n">csv</span> <span class="k">with</span> <span class="n">headers</span> <span class="k">from</span> 
+<span class="nv">"https://docs.google.com/spreadsheets/d/e/2PACX-1vTdx9D4Xzrbitz5gDbd-MH7iALAZjYdOpq7Bx6pVAeVEH6_NZC_CQSWC51Tl6ODHkU0WTgSfJshzPUZ/pub?gid=2096582175&amp;single=true&amp;output=csv"</span>
+<span class="k">as</span> <span class="n">locations</span>
+<span class="k">create</span> <span class="p">(</span><span class="n">l</span><span class="p">:</span><span class="k">Location</span><span class="err">{</span><span class="n">longlat</span><span class="p">:</span><span class="n">locations</span><span class="p">.</span><span class="n">longlat</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">locations</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> <span class="n">city</span><span class="p">:</span><span class="n">locations</span><span class="p">.</span><span class="n">City</span><span class="p">,</span> <span class="k">state</span><span class="p">:</span><span class="n">locations</span><span class="p">.</span><span class="k">State</span><span class="err">}</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>and making a few people go to some location on some date :</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">load</span> <span class="n">csv</span> <span class="k">with</span> <span class="n">headers</span> <span class="k">from</span> 
+<span class="nv">"https://docs.google.com/spreadsheets/d/e/2PACX-1vTdx9D4Xzrbitz5gDbd-MH7iALAZjYdOpq7Bx6pVAeVEH6_NZC_CQSWC51Tl6ODHkU0WTgSfJshzPUZ/pub?gid=1139166921&amp;single=true&amp;output=csv"</span> <span class="k">as</span> <span class="n">visi</span>
+<span class="k">match</span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="p">),</span> <span class="p">(</span><span class="n">l</span><span class="p">:</span><span class="k">Location</span><span class="p">)</span>
+<span class="k">where</span> <span class="n">p</span><span class="p">.</span><span class="n">ssn</span> <span class="o">=</span> <span class="n">visi</span><span class="p">.</span><span class="n">PersonSSN</span> <span class="k">and</span> <span class="n">l</span><span class="p">.</span><span class="n">longlat</span> <span class="o">=</span> <span class="n">visi</span><span class="p">.</span><span class="n">PlaceVisitedID</span>
+<span class="k">create</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">vi</span><span class="p">:</span><span class="n">VISITS</span><span class="err">{</span><span class="nb">date</span><span class="p">:</span><span class="n">visi</span><span class="p">.</span><span class="n">VisitedOn</span><span class="err">}</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We have created the basic relationships and the nodes. One of the feature that we added was to auto create relatonships between two people in case two people visit the same location on the same date. 
+This will be more clear in the below example :</p>
+
+<p>In the below figure, fibonacci visits <code class="highlighter-rouge">Mall1</code> on 30th July and Daniels visits <code class="highlighter-rouge">Mall1</code> on 31st July.</p>
+
+<p>Say, Bill visits <code class="highlighter-rouge">Mall1</code> on 31st July as well, then an <code class="highlighter-rouge">INTERACTS_WITH</code> relationship should be created between daniels and Bill.</p>
+
+<p><img src="../images/visitConn1.png" alt="" /></p>
+
+<p>We do so, because there are high chances that Daniels might have interacted with Bill.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">match</span> <span class="p">(</span><span class="n">p1</span><span class="p">:</span><span class="n">Person</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">v1</span><span class="p">:</span><span class="n">VISITS</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">l1</span><span class="p">:</span><span class="k">Location</span><span class="p">)</span><span class="o">&lt;-</span><span class="p">[</span><span class="n">v2</span><span class="p">:</span><span class="n">VISITS</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">p2</span><span class="p">:</span><span class="n">Person</span><span class="p">)</span>
+<span class="k">where</span> <span class="n">v1</span><span class="p">.</span><span class="nb">date</span> <span class="o">=</span> <span class="n">v2</span><span class="p">.</span><span class="nb">date</span> <span class="k">and</span> <span class="n">id</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">id</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+<span class="k">create</span> <span class="p">(</span><span class="n">p1</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">INTERACTS_WITH</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+<span class="k">create</span> <span class="p">(</span><span class="n">p2</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">INTERACTS_WITH</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now, if we visualize this graph, we can see a new <code class="highlighter-rouge">INTERACTS_WITH</code> relationship has been created between Daniels and Bill :</p>
+
+<p><img src="../images/visitConn2.png" alt="" /></p>
+
+<p>After this, our graph db looks something like this :</p>
+
+<p><img src="../images/covidGraph.png" alt="" /></p>
+
+<p>The orange nodes signify the people, and the blue nodes signify the locations. In this dataset, a lot of locations were unvisited.</p>
+
+<p><img src="../images/covidGraph2.png" alt="" /></p>
+
+<p>Now that the graph is created, with all relationships defined, we come to our solution of Centrality in order to find which People to test first and quarantine.</p>
+
+<p>We have used the concept of Articulation points and Centrality.</p>
+
+<blockquote>
+  <p>Why Articulation points and Centrality?</p>
+</blockquote>
+
+<p>In a graph, a vertex is called an articulation point if removing it and all the edges associated with it results in the increase of the number of connected components
+Every vertex is a Human Being in our network. We wish to find those articulation points which are the most influential. (most connectivity) Here comes the concept of Betweenness Centrality.
+In graph theory and network analysis, indicators of centrality identify the most important vertices within a graph. We can easily find the super spreaders of disease using this.</p>
+
+<h3 id="betweenness-centrality">Betweenness Centrality</h3>
+
+<p><img src="../images/centrality.png" alt="" /></p>
+
+<p>The basic definition is : In graph theory, betweenness centrality is a measure of centrality in a graph based on shortest paths. For every pair of vertices in a connected graph, there exists at least one shortest path between the vertices such that either the number of edges that the path passes through (for unweighted graphs) or the sum of the weights of the edges (for weighted graphs) is minimized. The betweenness centrality for each vertex is the number of these shortest paths that pass through the vertex.</p>
+
+<p>But in simple terms, it represents the degree to which nodes stand between each other. For example, in a telecommunications network, a node with higher betweenness centrality would have more control over the network, because more information will pass through that node. It tells which node in the graph controls the flow of information in the graph.</p>
+
+<p>What we are doing here is, we are taking the betweenness centrality and returning the top 10 nodes (Person Nodes) whom should be tested first.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CALL</span> <span class="n">gds</span><span class="p">.</span><span class="n">alpha</span><span class="p">.</span><span class="n">betweenness</span><span class="p">.</span><span class="n">stream</span><span class="p">(</span><span class="err">{</span>
+	<span class="n">nodeProjection</span><span class="p">:</span> <span class="s1">'Person'</span><span class="p">,</span>
+	  <span class="n">relationshipProjection</span><span class="p">:</span> <span class="err">{</span>
+	    <span class="n">INTERACTS_WITH</span><span class="p">:</span> <span class="err">{</span>
+	      <span class="k">type</span><span class="p">:</span> <span class="s1">'INTERACTS_WITH'</span><span class="p">,</span>
+	      <span class="n">properties</span><span class="p">:</span> <span class="s1">'cost'</span><span class="p">,</span>
+	      <span class="n">orientation</span><span class="p">:</span> <span class="s1">'UNDIRECTED'</span>
+	    <span class="err">}</span>
+	  <span class="err">}</span>
+	<span class="err">}</span><span class="p">)</span>
+<span class="n">YIELD</span> <span class="n">nodeId</span><span class="p">,</span> <span class="n">centrality</span>
+<span class="k">match</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="n">Person</span><span class="p">)</span> <span class="k">where</span> <span class="n">id</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">=</span> <span class="n">nodeId</span> <span class="k">and</span> <span class="n">p</span><span class="p">.</span><span class="n">infected</span><span class="o">=</span><span class="s1">'FALSE'</span> <span class="k">return</span> <span class="n">p</span><span class="p">.</span><span class="n">ssn</span> <span class="k">as</span> <span class="n">ssn</span><span class="p">,</span><span class="n">p</span><span class="p">.</span><span class="n">name</span> <span class="k">as</span> <span class="n">name</span><span class="p">,</span><span class="n">p</span><span class="p">.</span><span class="n">address</span> <span class="k">as</span> <span class="n">address</span><span class="p">,</span><span class="n">centrality</span> <span class="k">order</span> <span class="k">by</span> <span class="n">centrality</span> <span class="k">desc</span> <span class="k">LIMIT</span> <span class="mi">10</span>
+</code></pre></div></div>
+
+<p>The above query will return the information for the first 10 people, whom we should test first.</p>
+
+<p>Using shortest path, we have also calculated which person to stay away from :</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">MATCH</span><span class="p">(</span><span class="k">start</span><span class="p">:</span><span class="n">Person</span><span class="err">{</span><span class="n">ssn</span><span class="p">:</span><span class="nv">"KOAHM4127V"</span><span class="err">}</span><span class="p">),</span> <span class="p">(</span><span class="k">end</span><span class="p">:</span><span class="n">Person</span><span class="err">{</span><span class="n">infected</span><span class="p">:</span><span class="nv">"TRUE"</span><span class="err">}</span><span class="p">)</span>
+<span class="k">CALL</span> <span class="n">gds</span><span class="p">.</span><span class="n">alpha</span><span class="p">.</span><span class="n">shortestPath</span><span class="p">.</span><span class="n">stream</span><span class="p">(</span><span class="err">{</span>
+  <span class="n">nodeProjection</span><span class="p">:</span> <span class="s1">'Person'</span><span class="p">,</span>
+  <span class="n">relationshipProjection</span><span class="p">:</span> <span class="err">{</span>
+    <span class="n">INTERACTS_WITH</span><span class="p">:</span> <span class="err">{</span>
+      <span class="k">type</span><span class="p">:</span> <span class="s1">'INTERACTS_WITH'</span><span class="p">,</span>
+      <span class="n">properties</span><span class="p">:</span> <span class="s1">'cost'</span><span class="p">,</span>
+      <span class="n">orientation</span><span class="p">:</span> <span class="s1">'UNDIRECTED'</span>
+    <span class="err">}</span>
+  <span class="err">}</span><span class="p">,</span>
+  <span class="n">startNode</span><span class="p">:</span> <span class="k">start</span><span class="p">,</span>
+  <span class="n">endNode</span><span class="p">:</span> <span class="k">end</span><span class="p">,</span>
+  <span class="n">relationshipWeightProperty</span><span class="p">:</span> <span class="s1">'cost'</span>
+<span class="err">}</span><span class="p">)</span>
+<span class="n">YIELD</span> <span class="n">nodeId</span><span class="p">,</span> <span class="n">cost</span>
+<span class="k">MATCH</span><span class="p">(</span><span class="n">other</span><span class="p">:</span> <span class="n">Person</span><span class="p">)</span> <span class="k">WHERE</span> <span class="n">id</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">=</span> <span class="n">nodeId</span> <span class="k">and</span> <span class="n">other</span><span class="p">.</span><span class="n">infected</span> <span class="o">=</span> <span class="s1">'TRUE'</span> <span class="k">RETURN</span> <span class="k">distinct</span> <span class="n">other</span><span class="p">.</span><span class="n">name</span> <span class="k">AS</span> <span class="n">name</span><span class="p">,</span> <span class="n">other</span><span class="p">.</span><span class="n">address</span> <span class="k">as</span> <span class="n">address</span><span class="p">,</span><span class="n">cost</span> <span class="k">order</span> <span class="k">by</span> <span class="n">cost</span> <span class="k">asc</span> <span class="k">limit</span> <span class="mi">5</span>
+</code></pre></div></div>
+
+<p>And, we can get the hostpots of a city :</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">MATCH</span><span class="p">(</span><span class="n">l</span><span class="p">:</span><span class="k">Location</span><span class="p">),</span> <span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="err">{</span><span class="n">infected</span><span class="p">:</span><span class="nv">"TRUE"</span><span class="err">}</span><span class="p">)</span>
+<span class="k">RETURN</span> <span class="n">l</span><span class="p">.</span><span class="n">name</span> <span class="k">AS</span> <span class="n">name</span><span class="p">,</span> <span class="k">SIZE</span><span class="p">((</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">VISITS</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">l</span><span class="p">))</span> <span class="k">AS</span> <span class="k">size</span> <span class="k">order</span> <span class="k">by</span> <span class="k">size</span> <span class="k">desc</span> <span class="k">limit</span> <span class="mi">10</span>
+</code></pre></div></div>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>We were able to manipulate the network of people and the locations in order to find the :</p>
+<ol>
+  <li>Most vulnerable people (whom to test) (sorted in order of Betweenness Centrality) -
+Effective Testing Strategy can be achieved using our application as it will result us with the list of Individuals along with their address which are the prime suspect and potential carriers for Communal Spread.</li>
+  <li>Most vulnerable locations (as a heatmap) - Corona Heatmap showing all the Most Infected Locations based on our Graph Data plotted on google maps which should be Sealed immediately, and our application users can ignore these Hotspot.</li>
+  <li>Whom to stay away from (calculated on basis of Dijkstras Shortest Path) (sorted in that order) - Provide List of Infected Patients nearby based on the location of logged in user.</li>
+</ol>
+
+  </div>
+  <hr>
+  
+    
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname  = 'https-vaibhavahuja-github-io-1';
+    var disqus_identifier = '/project/effectiveTestingCovid';
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+
+  
+</article>
+
+      <div class="copyright">
+      <p> Powered by <a href="https://jekyllrb.com/">Jekyll</a> </p>
+      </div>
+    </div>
+    
+  </body>
+</html>

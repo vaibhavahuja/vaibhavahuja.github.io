@@ -5,19 +5,757 @@
     <description>my personal space where i write about stuff that excites me.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 18 Feb 2020 22:59:59 +0530</pubDate>
-    <lastBuildDate>Tue, 18 Feb 2020 22:59:59 +0530</lastBuildDate>
+    <pubDate>Thu, 21 Jan 2021 15:37:55 +0530</pubDate>
+    <lastBuildDate>Thu, 21 Jan 2021 15:37:55 +0530</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
+        <title>Controlling home lamp using internet</title>
+        <description>&lt;p&gt;As I was browsing through Amazon, searching for things to buy which I do not need I came across this lamp which could be controlled through the internet. It was quite expensive so I thought of building my own. The way the lamp worked was that, it came with a QR code on top of it, and when scanned with the phone &lt;em&gt;(which is connected with a wi-fi)&lt;/em&gt;, the lamp gets connected and if both the devices are connected to the same wifi, we could control the lamp. That however is an issue since I wish to control my lamp from anywhere and not just from my room.&lt;/p&gt;
+
+&lt;p&gt;I searched for options to do that for my existing table lamp, and I came across a &lt;a href=&quot;https://www.amazon.in/dp/B07V39T8F2/ref=sspa_dk_detail_2?psc=1&amp;amp;pd_rd_i=B07V39T8F2&amp;amp;pd_rd_w=ksLDx&amp;amp;pf_rd_p=30249bab-abdf-42ed-928f-d8929403a9aa&amp;amp;pd_rd_wg=3Yquo&amp;amp;pf_rd_r=QZMZ3PDK3KPPQGQ5MN3B&amp;amp;pd_rd_r=4132d55b-85f2-4e2b-b64e-dd918ec6cd21&amp;amp;spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEzSFRVQktEQVE0QkNaJmVuY3J5cHRlZElkPUEwOTk3NDUzNkdJWUpBV1AzOE4zJmVuY3J5cHRlZEFkSWQ9QTA2MjA4Mjc1VE4zT1U2MUgxNTImd2lkZ2V0TmFtZT1zcF9kZXRhaWwmYWN0aW9uPWNsaWNrUmVkaXJlY3QmZG9Ob3RMb2dDbGljaz10cnVl&quot;&gt;smart plug&lt;/a&gt; which could literally make any of the appliances “smart”. This would have costed around ₹2000, and I decided to create my own “smart” plug.&lt;/p&gt;
+
+&lt;p&gt;The idea was simple, I just needed a web server where I would store the state of the switch, something that would poll my server all the time and would turn the lamp on/off according to the state. I thought of using Arduino and some wifi module, but I came across &lt;a href=&quot;https://components101.com/sites/default/files/component_datasheet/ESP8266-NodeMCU-Datasheet.pdf&quot;&gt;ESP8266-NodeMCU&lt;/a&gt;, which is again a microcontroller but it comes fitted with embedded WiFi capabilities, with the lowest costs. These chips are developed in China, and you can get one for as low as ₹200. It has an operating voltage of 3.0-3.6V and the package size was pretty small, so it could be fitted in my existing switch boards. This comes with 17 GPIO pins, and even one was enough for my POC. The GPIO pins give out the signal which can be low or high depending on the code. If I could just poll the web server, and get the state, and send out the signal through the GPIO pin, the lamp could be turned on or off. Now ofcourse, the GPIO pin would give a high signal of 3V DC, and the appliances run on 230 V AC. I used a relay for this purpose. A Relay is basically an electromechanical device that can be used to make or break an electrical connection. It consists of a flexible moving mechanical part which can be controlled electronically through an electromagnet, basically, a relay is just like a mechanical switch but you can control it with an electronic signal instead of manually turning it on or off. So it served the purpose.
+I sketched out the architecture, before actually starting with the coding part of what I was about to built and it looked something like this.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;img src=&quot;/images/homeautodiag.png?raw=true&quot; alt=&quot;architecture&quot; /&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, that everything was in place, I ordered a nodeMCU ESP8266, a relay, some jumper wires, and that is it.
+I used the arduino IDE itself for programming the nodeMCU. Luckily, tons of libraries exist for running nodeMCU using the arduino IDE. Parallely I created an API with two endpoints. The &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; request would be used by the microcontroller to get the state of the switch, and the &lt;code class=&quot;highlighter-rouge&quot;&gt;PATCH&lt;/code&gt; request, will toggle the state -&amp;gt;  &lt;code class=&quot;highlighter-rouge&quot;&gt;state = 1 - state&lt;/code&gt;. I had connected a free MongoDB database with just one entry, and hosted the API on a free (&lt;em&gt;making it low cost :P&lt;/em&gt;) server by Heroku. 
+I also gave a neat UI which would send a patch reuest for toggling the state, and hosted it on github pages. &lt;a href=&quot;https://vaibhavahuja.github.io/homeautoui/&quot;&gt;Here is the UI&lt;/a&gt;. Tapping on the button would turn the lamp in my room on/off.&lt;/p&gt;
+
+&lt;p&gt;Below is the code for the setup method.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;  &lt;span class=&quot;n&quot;&gt;pinMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;D7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OUTPUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9600&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;WiFi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WIFI_OFF&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;//Prevents reconnection issue (taking too long to connect)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;WiFi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WIFI_STA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;        
+  &lt;span class=&quot;n&quot;&gt;WiFi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;   
+
+  &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Connecting&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Waiting for connection&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WiFi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WL_CONNECTED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;//If connection successful show IP address in serial monitor&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Connected to &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;IP address: &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WiFi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;localIP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//IP address assigned to your ESP&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now that the wifi is connected and the pins are in place, coming to the loop method.&lt;/p&gt;
+
+&lt;p&gt;The below code sends a &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; request to the server and stores the output in the line variable.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;n&quot;&gt;httpsClient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;GET &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Link&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; HTTP/1.1&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\r\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+               &lt;span class=&quot;s&quot;&gt;&quot;Host: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;host&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\r\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;               
+               &lt;span class=&quot;s&quot;&gt;&quot;Connection: close&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\r\n\r\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;request sent&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                  
+  &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;httpsClient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;connected&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;httpsClient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readStringUntil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'\n'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\r&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;headers received&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;There was no need to actually use a json parser since the server would just return a single line with the status. Finally, on checking the output received, a low signal was sent to the Relay to turn on the lamp and a high signal to turn off the lamp.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;httpsClient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;available&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()){&lt;/span&gt;        
+    &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;httpsClient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readStringUntil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'\n'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;digitalWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;D7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;digitalWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;D7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HIGH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; 
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/vaibhavahuja/homeAuto&quot;&gt;You can view the code for the server here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;So I was able to complete this home auto project within a fraction of what I would get online.&lt;/p&gt;
+
+&lt;p&gt;Thanks for reading!&lt;/p&gt;
+</description>
+        <pubDate>Fri, 01 Jan 2021 05:30:00 +0530</pubDate>
+        <link>http://localhost:4000/iot/homeAutomation</link>
+        <guid isPermaLink="true">http://localhost:4000/iot/homeAutomation</guid>
+        
+        <category>iot</category>
+        
+        
+        <category>iot</category>
+        
+      </item>
+    
+      <item>
+        <title>Effective Testing Strategy for preventing Community Spread of COVID-19</title>
+        <description>&lt;h3 id=&quot;problem-statement&quot;&gt;Problem Statement&lt;/h3&gt;
+
+&lt;p&gt;In India, when the country got exposed to COVID-19, we had very limited testing kits and with such a huge population, whom to test and whom not to became a serious challenge. The testing strategy followed at that time, was based on a person’s travel history, if they were showing symptoms or not and so on. The fact that a healthy asymptomatic human being can be a &lt;strong&gt;carrier for the virus&lt;/strong&gt; was ignored, and we were unable to control the Community Spread which led to a huge surge in the number of cases. The question arises on &lt;strong&gt;whom to test and whom not to when the country has limited testing available.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;proposed-solution&quot;&gt;Proposed Solution&lt;/h3&gt;
+
+&lt;p&gt;There are no such apps which talk about effective testing, however there are a few applications which were used by the Government for Contact Tracing, like Aarogya Setu. The way aarogya setu worked was that it used the bluetooth technology in order to find the covid infected people near one person. When two people with their smartphones interact, a secure digital signature is exchanged through which it is determined if a person has contacted someone with COVID or not.
+Our application defines a testing strategy for the government based on the concept of Betweenness Centrality. The shortcomings of the bluetooth based solution were that it ignored the fact that a human being with no symptoms can also be a carrier of the Virus, which we have considered. &lt;em&gt;We made a complete web application, but in this post I will only be talking about how we structured the database, and how we achieved the task. I will also be listing down the queries.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;We have used Graph Databases for this task, where every person and location will be a node and all the nodes will be connected (according to their interactions). We will also be making connections between two people if they visited a place on the same day. To contain spread, we will be using the concept of articulation points and Centrality Measures. I will be talking in detail about which centrality measure will we use and why.&lt;/p&gt;
+
+&lt;p&gt;Graph databases effectively store data relationships; they’re also flexible when expanding a data model and graph really shines in around relationship analysis, where the connections are between people. For our use case, we have used the &lt;a href=&quot;https://sandbox.neo4j.com/&quot;&gt;neo4j&lt;/a&gt; database.&lt;/p&gt;
+
+&lt;p&gt;The initial part was to load the data into the graph databases, and initialize the nodes and define the relationships between different nodes.&lt;/p&gt;
+
+&lt;p&gt;The first type of node was the Person node, which would define the information about a person. We made separate CSV files, and then loaded the data as follow :&lt;/p&gt;
+
+&lt;p&gt;The information about the Person that we stored was -&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;SSN&lt;/li&gt;
+  &lt;li&gt;NAME&lt;/li&gt;
+  &lt;li&gt;ADDRESS&lt;/li&gt;
+  &lt;li&gt;SHOWING SYMPTOMS &lt;em&gt;(boolean)&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;COVID INFECTED &lt;em&gt;(boolean)&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;load&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;csv&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; 
+&lt;span class=&quot;nv&quot;&gt;&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vTdx9D4Xzrbitz5gDbd-MH7iALAZjYdOpq7Bx6pVAeVEH6_NZC_CQSWC51Tl6ODHkU0WTgSfJshzPUZ/pub?gid=0&amp;amp;single=true&amp;amp;output=csv&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;per&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;per&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SSN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;per&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;per&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symptoms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;per&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ShowingSymptoms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;infected&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;per&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CovidInfected&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Below is a sample node.
+&lt;em&gt;We had 150 similar nodes in the database (as per the csv file we used to load)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/sampleNode.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, to create relationships between people:&lt;/p&gt;
+
+&lt;p&gt;The below csv file just contained information about who meets who, and we create an &lt;code class=&quot;highlighter-rouge&quot;&gt;INTERACTS_WITH&lt;/code&gt; Relationship amongst these people.&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;load&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;csv&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; 
+&lt;span class=&quot;nv&quot;&gt;&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vTdx9D4Xzrbitz5gDbd-MH7iALAZjYdOpq7Bx6pVAeVEH6_NZC_CQSWC51Tl6ODHkU0WTgSfJshzPUZ/pub?gid=1511060139&amp;amp;single=true&amp;amp;output=csv&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;meeting&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;meeting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;meeting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person2&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INTERACTS_WITH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INTERACTS_WITH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We are assigning a cost to every &lt;code class=&quot;highlighter-rouge&quot;&gt;INTERACTS_WITH&lt;/code&gt; relationship, which in the future we might use, as we can increase the cost of relationships with already infected people :&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INTERACTS_WITH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Adding some locations to the database :&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;load&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;csv&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; 
+&lt;span class=&quot;nv&quot;&gt;&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vTdx9D4Xzrbitz5gDbd-MH7iALAZjYdOpq7Bx6pVAeVEH6_NZC_CQSWC51Tl6ODHkU0WTgSfJshzPUZ/pub?gid=2096582175&amp;amp;single=true&amp;amp;output=csv&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Location&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;longlat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;longlat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;City&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;State&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;and making a few people go to some location on some date :&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;load&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;csv&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; 
+&lt;span class=&quot;nv&quot;&gt;&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vTdx9D4Xzrbitz5gDbd-MH7iALAZjYdOpq7Bx6pVAeVEH6_NZC_CQSWC51Tl6ODHkU0WTgSfJshzPUZ/pub?gid=1139166921&amp;amp;single=true&amp;amp;output=csv&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;visi&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Location&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;visi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PersonSSN&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;longlat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;visi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PlaceVisitedID&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VISITS&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;visi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VisitedOn&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We have created the basic relationships and the nodes. One of the feature that we added was to auto create relatonships between two people in case two people visit the same location on the same date. 
+This will be more clear in the below example :&lt;/p&gt;
+
+&lt;p&gt;In the below figure, fibonacci visits &lt;code class=&quot;highlighter-rouge&quot;&gt;Mall1&lt;/code&gt; on 30th July and Daniels visits &lt;code class=&quot;highlighter-rouge&quot;&gt;Mall1&lt;/code&gt; on 31st July.&lt;/p&gt;
+
+&lt;p&gt;Say, Bill visits &lt;code class=&quot;highlighter-rouge&quot;&gt;Mall1&lt;/code&gt; on 31st July as well, then an &lt;code class=&quot;highlighter-rouge&quot;&gt;INTERACTS_WITH&lt;/code&gt; relationship should be created between daniels and Bill.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/visitConn1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We do so, because there are high chances that Daniels might have interacted with Bill.&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VISITS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Location&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VISITS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INTERACTS_WITH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INTERACTS_WITH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, if we visualize this graph, we can see a new &lt;code class=&quot;highlighter-rouge&quot;&gt;INTERACTS_WITH&lt;/code&gt; relationship has been created between Daniels and Bill :&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/visitConn2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After this, our graph db looks something like this :&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/covidGraph.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The orange nodes signify the people, and the blue nodes signify the locations. In this dataset, a lot of locations were unvisited.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/covidGraph2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now that the graph is created, with all relationships defined, we come to our solution of Centrality in order to find which People to test first and quarantine.&lt;/p&gt;
+
+&lt;p&gt;We have used the concept of Articulation points and Centrality.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Why Articulation points and Centrality?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In a graph, a vertex is called an articulation point if removing it and all the edges associated with it results in the increase of the number of connected components
+Every vertex is a Human Being in our network. We wish to find those articulation points which are the most influential. (most connectivity) Here comes the concept of Betweenness Centrality.
+In graph theory and network analysis, indicators of centrality identify the most important vertices within a graph. We can easily find the super spreaders of disease using this.&lt;/p&gt;
+
+&lt;h3 id=&quot;betweenness-centrality&quot;&gt;Betweenness Centrality&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/centrality.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The basic definition is : In graph theory, betweenness centrality is a measure of centrality in a graph based on shortest paths. For every pair of vertices in a connected graph, there exists at least one shortest path between the vertices such that either the number of edges that the path passes through (for unweighted graphs) or the sum of the weights of the edges (for weighted graphs) is minimized. The betweenness centrality for each vertex is the number of these shortest paths that pass through the vertex.&lt;/p&gt;
+
+&lt;p&gt;But in simple terms, it represents the degree to which nodes stand between each other. For example, in a telecommunications network, a node with higher betweenness centrality would have more control over the network, because more information will pass through that node. It tells which node in the graph controls the flow of information in the graph.&lt;/p&gt;
+
+&lt;p&gt;What we are doing here is, we are taking the betweenness centrality and returning the top 10 nodes (Person Nodes) whom should be tested first.&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CALL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;betweenness&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;nodeProjection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Person'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	  &lt;span class=&quot;n&quot;&gt;relationshipProjection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+	    &lt;span class=&quot;n&quot;&gt;INTERACTS_WITH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+	      &lt;span class=&quot;k&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'INTERACTS_WITH'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	      &lt;span class=&quot;n&quot;&gt;properties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'cost'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	      &lt;span class=&quot;n&quot;&gt;orientation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'UNDIRECTED'&lt;/span&gt;
+	    &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+	  &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;YIELD&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nodeId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;centrality&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nodeId&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;infected&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'FALSE'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;centrality&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;centrality&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;LIMIT&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The above query will return the information for the first 10 people, whom we should test first.&lt;/p&gt;
+
+&lt;p&gt;Using shortest path, we have also calculated which person to stay away from :&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;MATCH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&quot;KOAHM4127V&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;infected&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&quot;TRUE&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;CALL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shortestPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;nodeProjection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Person'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;relationshipProjection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;INTERACTS_WITH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'INTERACTS_WITH'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;properties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'cost'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;orientation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'UNDIRECTED'&lt;/span&gt;
+    &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;startNode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;endNode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;relationshipWeightProperty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'cost'&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;YIELD&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nodeId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;MATCH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nodeId&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;infected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'TRUE'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;RETURN&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;distinct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;asc&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;limit&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And, we can get the hostpots of a city :&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;MATCH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Location&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;infected&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&quot;TRUE&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;RETURN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;SIZE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VISITS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;limit&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;We were able to manipulate the network of people and the locations in order to find the :&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Most vulnerable people (whom to test) (sorted in order of Betweenness Centrality) -
+Effective Testing Strategy can be achieved using our application as it will result us with the list of Individuals along with their address which are the prime suspect and potential carriers for Communal Spread.&lt;/li&gt;
+  &lt;li&gt;Most vulnerable locations (as a heatmap) - Corona Heatmap showing all the Most Infected Locations based on our Graph Data plotted on google maps which should be Sealed immediately, and our application users can ignore these Hotspot.&lt;/li&gt;
+  &lt;li&gt;Whom to stay away from (calculated on basis of Dijkstras Shortest Path) (sorted in that order) - Provide List of Infected Patients nearby based on the location of logged in user.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Mon, 10 Aug 2020 05:30:00 +0530</pubDate>
+        <link>http://localhost:4000/project/effectiveTestingCovid</link>
+        <guid isPermaLink="true">http://localhost:4000/project/effectiveTestingCovid</guid>
+        
+        <category>project</category>
+        
+        
+        <category>project</category>
+        
+      </item>
+    
+      <item>
+        <title>Range Queries</title>
+        <description>&lt;p&gt;This post is just for revising range queries. Have highlighted the topics and problems. Might write solutions (my approach) for these problems as well for future reference.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;to do : create collapsible for solutions + also to put the same in DP post&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;table-of-contents-segment-tree&quot;&gt;Table of Contents (segment tree)&lt;/h4&gt;
+&lt;p&gt;Link: &lt;a href=&quot;https://cp-algorithms.com/data_structures/segment_tree.html&quot;&gt;cp-algorithms - Segment tree&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Simplest form of a Segment Tree ✔️
+    &lt;ul&gt;
+      &lt;li&gt;Structure of the Segment Tree ✔️&lt;/li&gt;
+      &lt;li&gt;Construction ✔️&lt;/li&gt;
+      &lt;li&gt;Sum queries ✔️&lt;/li&gt;
+      &lt;li&gt;Update queries ✔️&lt;/li&gt;
+      &lt;li&gt;Implementation ✔️&lt;/li&gt;
+      &lt;li&gt;Memory efficient implementation ✔️&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Advanced versions of Segment Trees
+    &lt;ul&gt;
+      &lt;li&gt;More complex queries ✔️&lt;/li&gt;
+      &lt;li&gt;Saving the entire subarrays in each vertex ✔️&lt;/li&gt;
+      &lt;li&gt;Range updates (Lazy Propagation) ✔️&lt;/li&gt;
+      &lt;li&gt;Generalization to higher dimensions 📝&lt;/li&gt;
+      &lt;li&gt;Preserving the history of its values (Persistent Segment Tree)&lt;/li&gt;
+      &lt;li&gt;Implicit segment tree&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;table-of-contents-fenwick-tree-or-bit&quot;&gt;Table of Contents (fenwick tree or BIT)&lt;/h4&gt;
+&lt;p&gt;Link: &lt;a href=&quot;https://cp-algorithms.com/data_structures/fenwick.html&quot;&gt;cp-algorithms - Fenwick tree&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Description
+    &lt;ul&gt;
+      &lt;li&gt;Overview ✔️&lt;/li&gt;
+      &lt;li&gt;Definition of g(i) ✔️&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Implementation
+    &lt;ul&gt;
+      &lt;li&gt;Finding sum in one-dimensional array ✔️&lt;/li&gt;
+      &lt;li&gt;Finding minimum of [0,r] in one-dimensional array ✔️&lt;/li&gt;
+      &lt;li&gt;Finding sum in two-dimensional array ✔️&lt;/li&gt;
+      &lt;li&gt;One-based indexing approach ✔️&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Range operations
+    &lt;ol&gt;
+      &lt;li&gt;Point Update and Range Query ✔️&lt;/li&gt;
+      &lt;li&gt;Range Update and Point Query 📝&lt;/li&gt;
+      &lt;li&gt;Range Updates and Range Queries 📝&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;csesfi-problemset-range-queries&quot;&gt;CSES.fi problemSet (Range Queries)&lt;/h6&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1646&quot;&gt;Range Sum Queries I ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1646&quot;&gt;Range Sum Queries I ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1647&quot;&gt;Range Minimum Queries I ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1648&quot;&gt;Range Sum Queries II ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1649&quot;&gt;Range Minimum Queries II ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1650&quot;&gt;Range Xor Queries ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1651&quot;&gt;Range Update Queries ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1652&quot;&gt;Forest Queries ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1143&quot;&gt;Hotel Queries ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1749&quot;&gt;List Removals ✔️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1144&quot;&gt;Salary Queries&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1190&quot;&gt;Subarray Sum Queries&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1734&quot;&gt;Distinct Values Queries&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1739&quot;&gt;Forest Queries II&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1735&quot;&gt;Range Updates and Sums&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1736&quot;&gt;Polynomial Queries&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1737&quot;&gt;Range Queries and Copies&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Mon, 13 Jul 2020 05:30:00 +0530</pubDate>
+        <link>http://localhost:4000/algo/rangeQueries</link>
+        <guid isPermaLink="true">http://localhost:4000/algo/rangeQueries</guid>
+        
+        <category>algo</category>
+        
+        <category>progress</category>
+        
+        
+        <category>algo</category>
+        
+      </item>
+    
+      <item>
+        <title>Secura - store passwords securely</title>
+        <description>&lt;p&gt;This weekend I decided to study more about hashing and thought of creating my own hashing function, which would obviously, hash. Hashing is different from encryption, with encryption you can decrypt the message into the original form, but hashing should be one way, i.e no matter what the output is, it should be irreversible, which makes the problem even harder. I ended up creating my own hashing algorithm, which I was able to crack myself in around 20 minutes or so. I further studied about how dangerous it can be to roll your own hash (yes &lt;em&gt;roll your hash&lt;/em&gt;) if you are not a cryptographic expert so I decided to give up on creating my own hashing algorithm, however I did dig deep on how hashing is used to store passwords.&lt;/p&gt;
+
+&lt;p&gt;Well, of course, good hashing algorithms exist which are one way (SHA-512, SHA-256, and MD5) however they are crackable. By crackable I mean, although the hash itself is irreversible the hackers calculate the hash of tons(^tons) of common words, and compare it with the existing hash. The process is repeated for every possible word, until they match some passwords. That is exactly why when we choose a password, we are asked to choose a long (7+ digits) with special characters, since the more complicated the password is, the more time it will take to brute force it. Ofcourse, even after all these complications, hackers are still able to crack the passwords. There are many different attacks which the hackers use to crack them such as :  &lt;a href=&quot;https://en.wikipedia.org/wiki/Rainbow_table&quot;&gt;Rainbow Table&lt;/a&gt;, Dictionary, Brute Force attacks which poses a great security threat to the users.&lt;/p&gt;
+
+&lt;p&gt;While creating my node app, I found out that it was difficult for me to choose a hashing algorithm which is secure for storing my passwords, and understanding about cryptography took a lot of time. I believe that it should not be necessary for someone to be a cryptographic expert to hash their passwords securely, hence I created a library : &lt;a href=&quot;https://www.npmjs.com/package/secura&quot;&gt;Secura&lt;/a&gt; which one can use to hash the passwords securely and compare the asynchronous way. This module returns a promise with the hashed password and also compares it.&lt;/p&gt;
+
+&lt;p&gt;Below I have described the usage :&lt;/p&gt;
+
+&lt;h3 id=&quot;usage&quot;&gt;Usage&lt;/h3&gt;
+
+&lt;p&gt;Install the module :&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;secura
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Usage is very simple and straightforward. You can import the module using :&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;secura&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;secura&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Generate Password&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This converts the user password to a secure hash.&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;secura&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;generatePassword&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;hash&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;c1&quot;&gt;//store the hash in the database&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Verify Password&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This verifies if the password entered by the user matches the hashed password stored in the database.&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;secura&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;validatePassword&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;hash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isMatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;c1&quot;&gt;//returns true if password matches and false otherwise&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;features&quot;&gt;Features&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Simple and straightforward to use. No knowledge of cryptography required to hash passwords and compare.&lt;/li&gt;
+  &lt;li&gt;Every hashed password is 61 digits long.&lt;/li&gt;
+  &lt;li&gt;Protection from Brute Force &amp;amp; Dictionary Attacks.&lt;/li&gt;
+  &lt;li&gt;Protection from &lt;a href=&quot;https://en.wikipedia.org/wiki/Rainbow_table&quot;&gt;Rainbow Table&lt;/a&gt; Attacks.&lt;/li&gt;
+  &lt;li&gt;Randomly generated salt for every password.&lt;/li&gt;
+  &lt;li&gt;Extra field is not required for storing salt in the database.&lt;/li&gt;
+  &lt;li&gt;Uses &lt;a href=&quot;https://en.wikipedia.org/wiki/PBKDF2&quot;&gt;PBKDF2&lt;/a&gt; to compute hash.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can contribute to this library by sending a pull request or opening an issue at : &lt;a href=&quot;https://github.com/vaibhavahuja/secura/&quot;&gt;repo link&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Thanks for reading. Hoping you will find this library useful.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 25 May 2020 05:30:00 +0530</pubDate>
+        <link>http://localhost:4000/hash/secura</link>
+        <guid isPermaLink="true">http://localhost:4000/hash/secura</guid>
+        
+        <category>project</category>
+        
+        <category>javascript</category>
+        
+        <category>cryptography</category>
+        
+        
+        <category>hash</category>
+        
+      </item>
+    
+      <item>
+        <title>Educational DP contest</title>
+        <description>&lt;p&gt;&lt;strong&gt;PS: This is still WIP.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I will be writing down the solutions (and my approach) of the dynamic programming problems I have solved from the &lt;a href=&quot;https://atcoder.jp/contests/dp&quot;&gt;Atcoder Educational DP Contest&lt;/a&gt;. This post will be used a reference whenever I wish to revise Dynamic Programming.
+This contest has 26 problems [A-Z] of varying difficulties. I will be writing the solution for first 12-13 problems and the rest will come in a later post.
+I will be writing about the thought I had while identifying the state, what exactly does the DP state signify (meaning of DP &lt;sub&gt;i, j, …&lt;/sub&gt;) and the DP relation.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;      &lt;a href=&quot;https://atcoder.jp/contests/dp/tasks/dp_a&quot;&gt;FROG 1&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PROBLEM LINK:&lt;/strong&gt; https://atcoder.jp/contests/dp/tasks/dp_a&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;SOLUTION&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Identifying the states&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;We can see that in reaching from one stone to another, only the stone number changes and we can get the height of any stone number (an array of heights is given), so there will be only one state that is : &lt;strong&gt;stone number&lt;/strong&gt;
+cost of &lt;code class=&quot;highlighter-rouge&quot;&gt;|h[i] - h[j]|&lt;/code&gt; is incurred when we jump from i&lt;sup&gt;th&lt;/sup&gt; stone to j&lt;sup&gt;th&lt;/sup&gt; stone&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Meaning of DP state&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Here &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i]&lt;/code&gt; means the minimum cost incurred for the frog to reach i&lt;sup&gt;th&lt;/sup&gt; stone. So since a frog can reach i&lt;sup&gt;th&lt;/sup&gt; stone only from (i-1)&lt;sup&gt;th&lt;/sup&gt; stone and (i-2)&lt;sup&gt;th&lt;/sup&gt; stone the dp relation will be as follow:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The final answer will be &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[n]&lt;/code&gt; which means the minimum cost incurred to reach n&lt;sup&gt;th&lt;/sup&gt; stone. 
+We can also see that since the answer for  &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; is only dependent on &lt;code class=&quot;highlighter-rouge&quot;&gt;(i-1)&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;(i-2)&lt;/code&gt; stone we can do it in constant space.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;B&lt;/strong&gt;      &lt;a href=&quot;https://atcoder.jp/contests/dp/tasks/dp_b&quot;&gt;FROG 2&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PROBLEM LINK:&lt;/strong&gt; https://atcoder.jp/contests/dp/tasks/dp_b&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;SOLUTION&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Identifying the states&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;This problem is similar to previous one however now the frog can jump from any stonein the range &lt;code class=&quot;highlighter-rouge&quot;&gt;[i-1, i-2, i-3,...., i-K]&lt;/code&gt; with the same &lt;code class=&quot;highlighter-rouge&quot;&gt;|h[i]-h[j]|&lt;/code&gt; cost incurred. Again the state will be the &lt;strong&gt;stone number&lt;/strong&gt; since only the stone number matters.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Meaning of DP state&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Here &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i]&lt;/code&gt; means the minimum cost incurred for the frog to reach &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; stone. So since a frog can reach &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; stone from any of these stones : &lt;code class=&quot;highlighter-rouge&quot;&gt;[i-1, i-2, i-3,...., i-K]&lt;/code&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]));&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The final answer will be &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[n]&lt;/code&gt; which means the minimum cost incurred to reach &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt; stone. The time complexity will be &lt;code class=&quot;highlighter-rouge&quot;&gt;O(n^2)&lt;/code&gt; and the space complexity will be &lt;code class=&quot;highlighter-rouge&quot;&gt;O(n)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;C&lt;/strong&gt;      &lt;a href=&quot;https://atcoder.jp/contests/dp/tasks/dp_c&quot;&gt;VACATION&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PROBLEM LINK:&lt;/strong&gt; https://atcoder.jp/contests/dp/tasks/dp_c&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;SOLUTION&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Identifying the states&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Seeing the problem it is clear that the vacation consists of &lt;code class=&quot;highlighter-rouge&quot;&gt;N&lt;/code&gt; days, and we need to find the maximum total points. Also, Taro has some activities out of which he does one on &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; day and does not repeat for two or more consecutive days so the dp states will be &lt;code class=&quot;highlighter-rouge&quot;&gt;days&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;activity performed&lt;/code&gt; (since every activity has different points). Hence we create a DP array of &lt;code class=&quot;highlighter-rouge&quot;&gt;Days * activities&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Meaning of DP state&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i][j]&lt;/code&gt; would mean the maximum number of points on &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; day given that Taro performs &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt; activity. 
+We also need to make sure that Taro does not repeat an activity so the solution will be something like below :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;days&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activities&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pointsofactivity_j_on_i_day&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;all&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activities&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;except&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//we need to make sure that we do not include j as the previous activity. &lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The final answer will be max of &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[N][j]&lt;/code&gt; where N is total number of days and &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt; are all the activities.&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;D&lt;/strong&gt;      &lt;a href=&quot;https://atcoder.jp/contests/dp/tasks/dp_d&quot;&gt;KNAPSACK 1&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PROBLEM LINK:&lt;/strong&gt; https://atcoder.jp/contests/dp/tasks/dp_d&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;SOLUTION&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Identifying the states&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Well it is the classical Knapsack and we can see that Taro has to choose some N items and maximum capacity is W. He has to have the maximum value and he only has two choices, either to pick an item and put it in his bag or not to pick the item. So the DP states will be &lt;code class=&quot;highlighter-rouge&quot;&gt;N&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;W&lt;/code&gt; since it only matters the number of items Taro picks up and the total weight in the knapsack.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Meaning of DP state&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Here &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i][j]&lt;/code&gt; would mean the maximum &lt;strong&gt;value&lt;/strong&gt;* we get after choosing (yes or no) the first &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; items and maximum weight as &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt;. We get two options, either take an item or not to take the item.
+Hence it will be the maximum of:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Taking the item: &lt;code class=&quot;highlighter-rouge&quot;&gt;val[i] + DP[i-1][j-wt[i]]&lt;/code&gt; (weight empty reduces)&lt;/li&gt;
+  &lt;li&gt;Not taking item : &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i-1][j]&lt;/code&gt; (weight empty is still the same)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]);&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// (need to make sure that wt[i] &amp;lt;= j)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The final answer will be &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[N][W]&lt;/code&gt; which means the maximum value with all the N items seen and maximum weight as W.&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;E&lt;/strong&gt;      &lt;a href=&quot;https://atcoder.jp/contests/dp/tasks/dp_e&quot;&gt;KNAPSACK 2&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PROBLEM LINK:&lt;/strong&gt; https://atcoder.jp/contests/dp/tasks/dp_e&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;SOLUTION&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Identifying the states&lt;/em&gt; 
+This problem is just the same as the previous problem with a few changes. The limits have been changed. 
+Now,&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1 ≤ N ≤ 100
+1 ≤ W ≤ 10^9
+1 ≤ w[i] ≤ W 
+1 ≤ v[i] ≤ 10^3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We can see that the value of W we used in the previous problem is &lt;code class=&quot;highlighter-rouge&quot;&gt;1e9&lt;/code&gt; which is too large for us to make it as a DP state, hence we will change the DP state from W to &lt;code class=&quot;highlighter-rouge&quot;&gt;V&lt;/code&gt; where &lt;code class=&quot;highlighter-rouge&quot;&gt;V&lt;/code&gt; means the maximum value (which can be just 1e3).&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Meaning of DP state&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Since we changed the state the meaning of DP state changes as well. 
+Now, &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i][j]&lt;/code&gt; is the minimum weight we can use to make maxValue as &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt; and by using &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; items (again choosing or not choosing is a choice).&lt;/p&gt;
+
+&lt;p&gt;Just like the previous problem, we will either take the item or not take it.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Taking the item: &lt;code class=&quot;highlighter-rouge&quot;&gt;wt[i] + DP[i-1][j-val[i]]&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Not taking item : &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i-1][j]&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+  	&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+  		&lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+  		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]);&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// (need to make sure that val[i] &amp;lt;= j)&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// (it is minimum since we want the min weight)&lt;/span&gt;
+  	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The final answer will be the maximum &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt; in the &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[N][j]&lt;/code&gt; for which we got the &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[N][j] &amp;lt; W&lt;/code&gt;.&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;F&lt;/strong&gt;      &lt;a href=&quot;https://atcoder.jp/contests/dp/tasks/dp_f&quot;&gt;LCS&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PROBLEM LINK:&lt;/strong&gt; https://atcoder.jp/contests/dp/tasks/dp_f&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;SOLUTION&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Identifying the states&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Finding the longest common subsequence is a very well known problem for dynamic programming. We are given two strings &lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;t&lt;/code&gt; and we need to find the longest string that is subsequence to both s and t.
+Ofcourse, we will have an option to either include &lt;code class=&quot;highlighter-rouge&quot;&gt;s[i]&lt;/code&gt; or not and similar case with &lt;code class=&quot;highlighter-rouge&quot;&gt;t[j]&lt;/code&gt;
+Hence the two states will be &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Meaning of DP state&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i][j]&lt;/code&gt; would indicate length of longest subsequence with first &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; characters of &lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt; and first &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt; characters of &lt;code class=&quot;highlighter-rouge&quot;&gt;t&lt;/code&gt;. We first construct the DP array which would signify length of longest subsequence and then we trace back to get the actual string.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//tracing back the same we constructed the max array&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ans&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+  	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]){&lt;/span&gt;
+  		&lt;span class=&quot;n&quot;&gt;ans&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  		&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  		&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  	&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;G&lt;/strong&gt;      &lt;a href=&quot;https://atcoder.jp/contests/dp/tasks/dp_g&quot;&gt;LONGEST PATH&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PROBLEM LINK:&lt;/strong&gt; https://atcoder.jp/contests/dp/tasks/dp_g&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;SOLUTION&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Identifying the states&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;So we are given a DAG (directed acyclic graph) and we need to find the length of longest directed path in G. Let us understand the problem more with an example.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/dp1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We can see that the length of longest directed path is 3 in the above example.&lt;/p&gt;
+
+&lt;p&gt;In a DAG the first thing that comes to the mind is DFS, and this problem can easily be solved with DFS. 
+Here the only state is &lt;em&gt;node number&lt;/em&gt; since we only need to calculate that.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Meaning of DP state&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;DP[a]&lt;/code&gt; would mean the length of longest directed path which starts at node &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt;. We will just use normal DFS but keep on updating the DP array accordingly.
+The dfs function will look like this :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;dfs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;visited&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;allNeighbours&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;visited&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dfs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//since we can reach that node through a; &lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//we take the maxi&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;H&lt;/strong&gt;      &lt;a href=&quot;https://atcoder.jp/contests/dp/tasks/dp_h&quot;&gt;GRID 1&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PROBLEM LINK:&lt;/strong&gt; https://atcoder.jp/contests/dp/tasks/dp_h&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;SOLUTION&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Identifying the states&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;In this problem we need to calculate number of paths in going from &lt;code class=&quot;highlighter-rouge&quot;&gt;(1, 1)&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;(H, W)&lt;/code&gt; and we can only go if the the square is empty (has a &lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt;) and we cannot pass if there is a wall (&lt;code class=&quot;highlighter-rouge&quot;&gt;#&lt;/code&gt;). Also Taro can go only &lt;strong&gt;Down or Right&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The states will be clearly &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt; which denote the length and width of a column.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Meaning of DP state&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Here &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i][j]&lt;/code&gt; would denote the number of paths from &lt;code class=&quot;highlighter-rouge&quot;&gt;(1, 1)&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;(i, j)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;We can see in the below image how we are making our dp array. to reach every (i, j) the number of options are (i, j-1) + (i-1, j).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/dp2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//dp[1][i] and dp[i][1] will be 1 as long as dp[1][i-1] and dp[i-1][1] are . (empty spaces). &lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blank&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;space&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The final answer will be ofcourse &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[n][m]&lt;/code&gt; which means the number of ways to reach &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt; row and &lt;code class=&quot;highlighter-rouge&quot;&gt;m&lt;/code&gt; column.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;PS: I am still writing this post and it is work in progress 🚧&lt;/p&gt;
+
+&lt;!-- 
+**I**  &amp;nbsp;   [COINS](https://atcoder.jp/contests/dp/tasks/dp_i)
+
+
+**PROBLEM LINK:** https://atcoder.jp/contests/dp/tasks/dp_i
+
+**SOLUTION**
+
+**Incomplete So Far**
+
+*Identifying the states* 
+
+We are given N coins, which are tossed. The coins are biased tho. The probability of getting heads when coin `i` is tossed is `p[i]` which would mean of getting tails is `1 - p[i]`. Also N is odd so both heads and tails cant come equal number of times. We need to find the probability of having more heads than tails. 
+Let us see what really matters in the problem: Since we need to find the proability of getting more heads than tails, the number of heads matter and the probability of getting heads or tails matter, and total number of coin tosses matter but since we can get the `P[head] or P[tails]` we only need two states : number of heads &amp; number of coin tosses. 
+
+
+*Meaning of DP state*
+
+`DP[i][j]` would mean the probability of getting `j` heads in `i` coin tosses.
+We can understand more by trying to make the DP table. --&gt;
+
+&lt;!-- 
+&lt;hr/&gt; --&gt;
+</description>
+        <pubDate>Thu, 07 May 2020 05:30:00 +0530</pubDate>
+        <link>http://localhost:4000/codes/atcoder-dp</link>
+        <guid isPermaLink="true">http://localhost:4000/codes/atcoder-dp</guid>
+        
+        <category>dp</category>
+        
+        <category>codes</category>
+        
+        <category>wip</category>
+        
+        <category>algo</category>
+        
+        
+        <category>codes</category>
+        
+      </item>
+    
+      <item>
         <title>List of div2C Problems</title>
-        <description>&lt;p&gt;Below is a list of problems I will be solving during this February - March’20. It consists of 100 problems, all of which are Div2C, of codeforces. I will try to write the explanation of each problem, based on my understanding, and how I approached the solution. Hoping to solve 3 problems everyday and stay consistent. I will be updating my progress below. I am starting this on - 13 February 2020.&lt;/p&gt;
+        <description>&lt;p&gt;Below is a list of problems I will be solving during this February - April’20. It consists of 100 problems, all of which are Div2C, of codeforces. I will try to write the explanation of each problem, based on my understanding, and how I approached the solution. I am starting this on - 13 February 2020.&lt;/p&gt;
 
 &lt;table&gt;
 	&lt;tr&gt;
 		&lt;th style=&quot;width:10%;&quot;&gt;ID&lt;/th&gt;
 		&lt;th style=&quot;width:45%;&quot;&gt;Problem Name&lt;/th&gt;
-		&lt;th style=&quot;width:15%;&quot;&gt;Difficulty Level&lt;/th&gt;
+		&lt;th style=&quot;width:15%; &quot;&gt;Difficulty Level&lt;/th&gt;
 		&lt;th style=&quot;width:30%;&quot;&gt;Status&lt;/th&gt;
 	&lt;/tr&gt;
 	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
@@ -44,11 +782,11 @@
 		&lt;td&gt;4&lt;/td&gt;
 		&lt;td&gt;Accepted | 14th Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: #ddafb6;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;5&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/455/A&quot; target=&quot;_blank&quot;&gt;Boredom&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;To try on weekend(DP) &lt;/td&gt;
+		&lt;td&gt; to do &lt;/td&gt;
 	&lt;/tr&gt;
 	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;6&lt;/td&gt;
@@ -62,7 +800,7 @@
 		&lt;td&gt;4&lt;/td&gt;
 		&lt;td&gt;Accepted | 18th Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: #ddafb6;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;8&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/431/C&quot; target=&quot;_blank&quot;&gt;k-Tree&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
@@ -74,383 +812,383 @@
 		&lt;td&gt;4&lt;/td&gt;
 		&lt;td&gt;Accepted | 18th Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;10&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/486/C&quot; target=&quot;_blank&quot;&gt;Palindrome Transformation&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 18th Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;11&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/363/C&quot; target=&quot;_blank&quot;&gt;Fixing Typos&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 21st Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;12&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/490/C&quot; target=&quot;_blank&quot;&gt;Hacking Cypher&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;2&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 21st Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;13&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/463/C&quot; target=&quot;_blank&quot;&gt;Gargari and Bishops&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;5&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;to do&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;14&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/152/C&quot; target=&quot;_blank&quot;&gt;Pocket Book&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 21st Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;15&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/109/A&quot; target=&quot;_blank&quot;&gt;Lucky Sum of Digits&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;3&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 21st Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;16&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/382/C&quot; target=&quot;_blank&quot;&gt;Arithmetic Progression&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 24th Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;17&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/388/A&quot; target=&quot;_blank&quot;&gt;Fox and Box Accumulation&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;3&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 24th Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;18&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/9/C&quot; target=&quot;_blank&quot;&gt;Hexadecimal's Numbers&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;2&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 24th Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;19&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/339/C&quot; target=&quot;_blank&quot;&gt;Xenia and Weights&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;to do&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;20&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/350/C&quot; target=&quot;_blank&quot;&gt;Bombs&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 26th Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;21&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/459/C&quot; target=&quot;_blank&quot;&gt;Pashmak and Buses&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;5&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;to do&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;22&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/220/A&quot; target=&quot;_blank&quot;&gt;Little Elephant and Problem&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 25th Feb'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;23&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/377/A&quot; target=&quot;_blank&quot;&gt;Maze&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 4th Mar'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;24&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/217/A&quot; target=&quot;_blank&quot;&gt;Ice Skating&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;3&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 4th Mar'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;25&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/371/C&quot; target=&quot;_blank&quot;&gt;Hamburgers&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 5th Mar'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;26&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/385/C&quot; target=&quot;_blank&quot;&gt;Bear and Prime Numbers&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;5&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Getting TLE idk why | 8th Mar'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;27&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/137/C&quot; target=&quot;_blank&quot;&gt;History&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 8th Mar'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;28&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/427/C&quot; target=&quot;_blank&quot;&gt;Checkposts&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 8th Mar'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;29&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/414/A&quot; target=&quot;_blank&quot;&gt;Mashmokh and Numbers&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;3&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 10th Mar'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;30&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/279/C&quot; target=&quot;_blank&quot;&gt;Ladder&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;DP - will do later&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;31&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/264/A&quot; target=&quot;_blank&quot;&gt;Escape from Stones&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;3&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 10th Mar'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;32&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/149/C&quot; target=&quot;_blank&quot;&gt;Division into Teams&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 11th Mar'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;33&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/225/C&quot; target=&quot;_blank&quot;&gt;Barcode&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;High time, really need to start dp.&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;34&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/18/C&quot; target=&quot;_blank&quot;&gt;Stripe&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;3&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 11th Mar'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;35&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/348/A&quot; target=&quot;_blank&quot;&gt;Mafia&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 12th Mar'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;36&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/283/A&quot; target=&quot;_blank&quot;&gt;Cows and Sequence&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt; getting WA; to do | 12th Mar'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;37&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/231/C&quot; target=&quot;_blank&quot;&gt;To Add or Not to Add&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 18th Mar'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;38&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/429/A&quot; target=&quot;_blank&quot;&gt;Xor-tree&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;3&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;to do&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;39&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/235/A&quot; target=&quot;_blank&quot;&gt;LCM Challenge&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted | 18th Mar'20&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;40&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/343/A&quot; target=&quot;_blank&quot;&gt;Rational Resistance&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;41&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/251/A&quot; target=&quot;_blank&quot;&gt;Points on Line&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;3&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;42&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/464/A&quot; target=&quot;_blank&quot;&gt;No to Palindromes!&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;to do\&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;43&lt;/td&gt;
-		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/424/C&quot; target=&quot;_blank&quot;&gt;Magic Formulas&lt;/a&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/424/C&quot; target=&quot;_blank&quot;&gt;To do&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;to do&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;44&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/300/C&quot; target=&quot;_blank&quot;&gt;Beautiful Numbers&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;45&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/337/C&quot; target=&quot;_blank&quot;&gt;Quiz&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;46&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/135/A&quot; target=&quot;_blank&quot;&gt;Replacement&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;3&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;47&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/354/A&quot; target=&quot;_blank&quot;&gt;Vasya and Robot&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;to do&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;48&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/474/C&quot; target=&quot;_blank&quot;&gt;Captain Marmot&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;49&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/150/A&quot; target=&quot;_blank&quot;&gt;Win or Freeze&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;50&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/364/A&quot; target=&quot;_blank&quot;&gt;Matrix&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;to do&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;51&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/53/C&quot; target=&quot;_blank&quot;&gt;Little Frog&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;2&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;52&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/121/A&quot; target=&quot;_blank&quot;&gt;Lucky Sum&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;3&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;53&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/487/A&quot; target=&quot;_blank&quot;&gt;Fight the Monster&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;54&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/407/A&quot; target=&quot;_blank&quot;&gt;Triangle&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;55&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/257/C&quot; target=&quot;_blank&quot;&gt;View Angle&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;56&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/242/C&quot; target=&quot;_blank&quot;&gt;King's Path&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;57&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/71/C&quot; target=&quot;_blank&quot;&gt;Round Table Knights&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;58&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/329/A&quot; target=&quot;_blank&quot;&gt;Purification&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;59&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/261/A&quot; target=&quot;_blank&quot;&gt;Maxim and Discounts&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;3&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;60&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/311/A&quot; target=&quot;_blank&quot;&gt;The Closest Pair&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;3&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;61&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/375/A&quot; target=&quot;_blank&quot;&gt;Divisible by Seven&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;62&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/154/A&quot; target=&quot;_blank&quot;&gt;Hometask&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;63&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/204/A&quot; target=&quot;_blank&quot;&gt;Little Elephant and Interval&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;64&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/107/A&quot; target=&quot;_blank&quot;&gt;Dorm Water Supply&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;3&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;to do&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;65&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/294/C&quot; target=&quot;_blank&quot;&gt;Shaass and Lights&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;5&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;to do&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;66&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/359/C&quot; target=&quot;_blank&quot;&gt;Prime Number&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;5&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;67&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/243/A&quot; target=&quot;_blank&quot;&gt;The Brand New Function&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;to do&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;68&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/198/A&quot; target=&quot;_blank&quot;&gt;About Bacteria&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;69&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/319/A&quot; target=&quot;_blank&quot;&gt;Malek Dance Club&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;to do&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #FCF4A3;&quot;&gt;
 		&lt;td&gt;70&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/358/C&quot; target=&quot;_blank&quot;&gt;Dima and Containers&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;5&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;to do :/&lt;/td&gt;
 	&lt;/tr&gt;
-	&lt;tr style=&quot;background-color: white;&quot;&gt;
+	&lt;tr style=&quot;background-color: #d5e9dd;&quot;&gt;
 		&lt;td&gt;71&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/87/A&quot; target=&quot;_blank&quot;&gt;Trains&lt;/a&gt;&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
+		&lt;td&gt;Accepted&lt;/td&gt;
 	&lt;/tr&gt;
 	&lt;tr style=&quot;background-color: white;&quot;&gt;
 		&lt;td&gt;72&lt;/td&gt;
 		&lt;td&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/255/C&quot; target=&quot;_blank&quot;&gt;Almost Arithmetical Progression&lt;/a&gt;&lt;/td&gt;
-		&lt;td&gt;NA&lt;/td&gt;
 		&lt;td&gt;4&lt;/td&gt;
+		&lt;td&gt;NA&lt;/td&gt;
 	&lt;/tr&gt;
 	&lt;tr style=&quot;background-color: white;&quot;&gt;
 		&lt;td&gt;73&lt;/td&gt;
@@ -963,7 +1701,7 @@ to see how this works add a delay in between the showRow(i); something like This
         <link>http://localhost:4000/stm8s/the-chinese-LED-display</link>
         <guid isPermaLink="true">http://localhost:4000/stm8s/the-chinese-LED-display</guid>
         
-        <category>IoT</category>
+        <category>iot</category>
         
         
         <category>stm8s</category>
@@ -1007,6 +1745,8 @@ For example, as soon as you read the above statement about Benzema, you could de
         <guid isPermaLink="true">http://localhost:4000/nlp/sarcasm-detection</guid>
         
         <category>Machine Learning</category>
+        
+        <category>project</category>
         
         
         <category>nlp</category>

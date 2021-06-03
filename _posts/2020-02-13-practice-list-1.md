@@ -9,16 +9,17 @@ comment: true
 
 green: "#d5e9dd"
 red: "#ddafb6"
+yellow: "#FCF4A3"
 ---
 
-Below is a list of problems I will be solving during this February - March'20. It consists of 100 problems, all of which are Div2C, of codeforces. I will try to write the explanation of each problem, based on my understanding, and how I approached the solution. Hoping to solve 3 problems everyday and stay consistent. I will be updating my progress below. I am starting this on - {{page.date | date_to_long_string}}.
+Below is a list of problems I will be solving during this February - April'20. It consists of 100 problems, all of which are Div2C, of codeforces. I will try to write the explanation of each problem, based on my understanding, and how I approached the solution. I am starting this on - {{page.date | date_to_long_string}}. 
 
 
 <table>
 	<tr>
 		<th style="width:10%;">ID</th>
 		<th style="width:45%;">Problem Name</th>
-		<th style="width:15%;">Difficulty Level</th>
+		<th style="width:15%; ">Difficulty Level</th>
 		<th style="width:30%;">Status</th>
 	</tr>
 	<tr style="background-color: {{page.green}};">
@@ -45,11 +46,11 @@ Below is a list of problems I will be solving during this February - March'20. I
 		<td>4</td>
 		<td>Accepted | 14th Feb'20</td>
 	</tr>
-	<tr style="background-color: {{page.red}};">
+	<tr style="background-color: {{page.yellow}};">
 		<td>5</td>
 		<td><a href="http://codeforces.com/problemset/problem/455/A" target="_blank">Boredom</a></td>
 		<td>4</td>
-		<td>To try on weekend(DP) </td>
+		<td> to do </td>
 	</tr>
 	<tr style="background-color: {{page.green}};">
 		<td>6</td>
@@ -63,7 +64,7 @@ Below is a list of problems I will be solving during this February - March'20. I
 		<td>4</td>
 		<td>Accepted | 18th Feb'20</td>
 	</tr>
-	<tr style="background-color: {{page.red}};">
+	<tr style="background-color: {{page.yellow}};">
 		<td>8</td>
 		<td><a href="http://codeforces.com/problemset/problem/431/C" target="_blank">k-Tree</a></td>
 		<td>4</td>
@@ -75,383 +76,383 @@ Below is a list of problems I will be solving during this February - March'20. I
 		<td>4</td>
 		<td>Accepted | 18th Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>10</td>
 		<td><a href="http://codeforces.com/problemset/problem/486/C" target="_blank">Palindrome Transformation</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 18th Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>11</td>
 		<td><a href="http://codeforces.com/problemset/problem/363/C" target="_blank">Fixing Typos</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 21st Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>12</td>
 		<td><a href="http://codeforces.com/problemset/problem/490/C" target="_blank">Hacking Cypher</a></td>
 		<td>2</td>
-		<td>NA</td>
+		<td>Accepted | 21st Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>13</td>
 		<td><a href="http://codeforces.com/problemset/problem/463/C" target="_blank">Gargari and Bishops</a></td>
 		<td>5</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>14</td>
 		<td><a href="http://codeforces.com/problemset/problem/152/C" target="_blank">Pocket Book</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 21st Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>15</td>
 		<td><a href="http://codeforces.com/problemset/problem/109/A" target="_blank">Lucky Sum of Digits</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted | 21st Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>16</td>
 		<td><a href="http://codeforces.com/problemset/problem/382/C" target="_blank">Arithmetic Progression</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 24th Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>17</td>
 		<td><a href="http://codeforces.com/problemset/problem/388/A" target="_blank">Fox and Box Accumulation</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted | 24th Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>18</td>
 		<td><a href="http://codeforces.com/problemset/problem/9/C" target="_blank">Hexadecimal's Numbers</a></td>
 		<td>2</td>
-		<td>NA</td>
+		<td>Accepted | 24th Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>19</td>
 		<td><a href="http://codeforces.com/problemset/problem/339/C" target="_blank">Xenia and Weights</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>20</td>
 		<td><a href="http://codeforces.com/problemset/problem/350/C" target="_blank">Bombs</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 26th Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>21</td>
 		<td><a href="http://codeforces.com/problemset/problem/459/C" target="_blank">Pashmak and Buses</a></td>
 		<td>5</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>22</td>
 		<td><a href="http://codeforces.com/problemset/problem/220/A" target="_blank">Little Elephant and Problem</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 25th Feb'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>23</td>
 		<td><a href="http://codeforces.com/problemset/problem/377/A" target="_blank">Maze</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 4th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>24</td>
 		<td><a href="http://codeforces.com/problemset/problem/217/A" target="_blank">Ice Skating</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted | 4th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>25</td>
 		<td><a href="http://codeforces.com/problemset/problem/371/C" target="_blank">Hamburgers</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 5th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>26</td>
 		<td><a href="http://codeforces.com/problemset/problem/385/C" target="_blank">Bear and Prime Numbers</a></td>
 		<td>5</td>
-		<td>NA</td>
+		<td>Getting TLE idk why | 8th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>27</td>
 		<td><a href="http://codeforces.com/problemset/problem/137/C" target="_blank">History</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 8th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>28</td>
 		<td><a href="http://codeforces.com/problemset/problem/427/C" target="_blank">Checkposts</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 8th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>29</td>
 		<td><a href="http://codeforces.com/problemset/problem/414/A" target="_blank">Mashmokh and Numbers</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted | 10th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>30</td>
 		<td><a href="http://codeforces.com/problemset/problem/279/C" target="_blank">Ladder</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>DP - will do later</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>31</td>
 		<td><a href="http://codeforces.com/problemset/problem/264/A" target="_blank">Escape from Stones</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted | 10th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>32</td>
 		<td><a href="http://codeforces.com/problemset/problem/149/C" target="_blank">Division into Teams</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 11th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>33</td>
 		<td><a href="http://codeforces.com/problemset/problem/225/C" target="_blank">Barcode</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>High time, really need to start dp.</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>34</td>
 		<td><a href="http://codeforces.com/problemset/problem/18/C" target="_blank">Stripe</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted | 11th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>35</td>
 		<td><a href="http://codeforces.com/problemset/problem/348/A" target="_blank">Mafia</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 12th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>36</td>
 		<td><a href="http://codeforces.com/problemset/problem/283/A" target="_blank">Cows and Sequence</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td> getting WA; to do | 12th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>37</td>
 		<td><a href="http://codeforces.com/problemset/problem/231/C" target="_blank">To Add or Not to Add</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 18th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>38</td>
 		<td><a href="http://codeforces.com/problemset/problem/429/A" target="_blank">Xor-tree</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>39</td>
 		<td><a href="http://codeforces.com/problemset/problem/235/A" target="_blank">LCM Challenge</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted | 18th Mar'20</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>40</td>
 		<td><a href="http://codeforces.com/problemset/problem/343/A" target="_blank">Rational Resistance</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>41</td>
 		<td><a href="http://codeforces.com/problemset/problem/251/A" target="_blank">Points on Line</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>42</td>
 		<td><a href="http://codeforces.com/problemset/problem/464/A" target="_blank">No to Palindromes!</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>to do\</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>43</td>
-		<td><a href="http://codeforces.com/problemset/problem/424/C" target="_blank">Magic Formulas</a></td>
+		<td><a href="http://codeforces.com/problemset/problem/424/C" target="_blank">To do</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>44</td>
 		<td><a href="http://codeforces.com/problemset/problem/300/C" target="_blank">Beautiful Numbers</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>45</td>
 		<td><a href="http://codeforces.com/problemset/problem/337/C" target="_blank">Quiz</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>46</td>
 		<td><a href="http://codeforces.com/problemset/problem/135/A" target="_blank">Replacement</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>47</td>
 		<td><a href="http://codeforces.com/problemset/problem/354/A" target="_blank">Vasya and Robot</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>48</td>
 		<td><a href="http://codeforces.com/problemset/problem/474/C" target="_blank">Captain Marmot</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>49</td>
 		<td><a href="http://codeforces.com/problemset/problem/150/A" target="_blank">Win or Freeze</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>50</td>
 		<td><a href="http://codeforces.com/problemset/problem/364/A" target="_blank">Matrix</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>51</td>
 		<td><a href="http://codeforces.com/problemset/problem/53/C" target="_blank">Little Frog</a></td>
 		<td>2</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>52</td>
 		<td><a href="http://codeforces.com/problemset/problem/121/A" target="_blank">Lucky Sum</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>53</td>
 		<td><a href="http://codeforces.com/problemset/problem/487/A" target="_blank">Fight the Monster</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>54</td>
 		<td><a href="http://codeforces.com/problemset/problem/407/A" target="_blank">Triangle</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>55</td>
 		<td><a href="http://codeforces.com/problemset/problem/257/C" target="_blank">View Angle</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>56</td>
 		<td><a href="http://codeforces.com/problemset/problem/242/C" target="_blank">King's Path</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>57</td>
 		<td><a href="http://codeforces.com/problemset/problem/71/C" target="_blank">Round Table Knights</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>58</td>
 		<td><a href="http://codeforces.com/problemset/problem/329/A" target="_blank">Purification</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>59</td>
 		<td><a href="http://codeforces.com/problemset/problem/261/A" target="_blank">Maxim and Discounts</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>60</td>
 		<td><a href="http://codeforces.com/problemset/problem/311/A" target="_blank">The Closest Pair</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>61</td>
 		<td><a href="http://codeforces.com/problemset/problem/375/A" target="_blank">Divisible by Seven</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>62</td>
 		<td><a href="http://codeforces.com/problemset/problem/154/A" target="_blank">Hometask</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>63</td>
 		<td><a href="http://codeforces.com/problemset/problem/204/A" target="_blank">Little Elephant and Interval</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>64</td>
 		<td><a href="http://codeforces.com/problemset/problem/107/A" target="_blank">Dorm Water Supply</a></td>
 		<td>3</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>65</td>
 		<td><a href="http://codeforces.com/problemset/problem/294/C" target="_blank">Shaass and Lights</a></td>
 		<td>5</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>66</td>
 		<td><a href="http://codeforces.com/problemset/problem/359/C" target="_blank">Prime Number</a></td>
 		<td>5</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>67</td>
 		<td><a href="http://codeforces.com/problemset/problem/243/A" target="_blank">The Brand New Function</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>68</td>
 		<td><a href="http://codeforces.com/problemset/problem/198/A" target="_blank">About Bacteria</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>69</td>
 		<td><a href="http://codeforces.com/problemset/problem/319/A" target="_blank">Malek Dance Club</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>to do</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.yellow}};">
 		<td>70</td>
 		<td><a href="http://codeforces.com/problemset/problem/358/C" target="_blank">Dima and Containers</a></td>
 		<td>5</td>
-		<td>NA</td>
+		<td>to do :/</td>
 	</tr>
-	<tr style="background-color: white;">
+	<tr style="background-color: {{page.green}};">
 		<td>71</td>
 		<td><a href="http://codeforces.com/problemset/problem/87/A" target="_blank">Trains</a></td>
 		<td>4</td>
-		<td>NA</td>
+		<td>Accepted</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>72</td>
 		<td><a href="http://codeforces.com/problemset/problem/255/C" target="_blank">Almost Arithmetical Progression</a></td>
-		<td>NA</td>
 		<td>4</td>
+		<td>NA</td>
 	</tr>
 	<tr style="background-color: white;">
 		<td>73</td>

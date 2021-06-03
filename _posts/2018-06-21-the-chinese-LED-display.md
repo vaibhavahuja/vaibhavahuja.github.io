@@ -4,7 +4,7 @@ title:      The P10 Display.
 date:       2018-06-21 12:31:19
 summary:    understanding how to drive any/every pixel of this low cost chinese display using the STM8s microcontroller.
 categories: stm8s
-tags: [IoT]
+tags: [iot]
 comment: true
 
 ---

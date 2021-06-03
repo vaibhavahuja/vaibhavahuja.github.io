@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Range Queries - Vaibhav Ahuja</title>
+  <meta name="description" content="my personal space where i write about stuff that excites me.">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/algo/rangeQueries">
+  <link rel="alternate" type="application/rss+xml" title="Vaibhav Ahuja" href="http://localhost:4000/feed.xml">
+</head>
+
+  <body>
+    <div class="page-content">
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Range Queries</h1>
+    <p class="post-meta">
+      <time datetime="2020-07-13T05:30:00+05:30" itemprop="datePublished">Jul 13, 2020</time>
+      
+
+      
+  		
+
+  		
+  		
+
+  		&middot;	<span class="tags" itemprop="tags">
+  				
+  				<a href="http://localhost:4000/tagged#algo">#algo</a>
+  			<a href="http://localhost:4000/tagged#progress">#progress</a>
+  			</span>
+
+  	  
+
+    </p>
+  </header>
+  <div class="post-content" itemprop="articleBody">
+    <p>This post is just for revising range queries. Have highlighted the topics and problems. Might write solutions (my approach) for these problems as well for future reference.</p>
+
+<p><em>to do : create collapsible for solutions + also to put the same in DP post</em></p>
+
+<h4 id="table-of-contents-segment-tree">Table of Contents (segment tree)</h4>
+<p>Link: <a href="https://cp-algorithms.com/data_structures/segment_tree.html">cp-algorithms - Segment tree</a></p>
+
+<ul>
+  <li>Simplest form of a Segment Tree ✔️
+    <ul>
+      <li>Structure of the Segment Tree ✔️</li>
+      <li>Construction ✔️</li>
+      <li>Sum queries ✔️</li>
+      <li>Update queries ✔️</li>
+      <li>Implementation ✔️</li>
+      <li>Memory efficient implementation ✔️</li>
+    </ul>
+  </li>
+  <li>Advanced versions of Segment Trees
+    <ul>
+      <li>More complex queries ✔️</li>
+      <li>Saving the entire subarrays in each vertex ✔️</li>
+      <li>Range updates (Lazy Propagation) ✔️</li>
+      <li>Generalization to higher dimensions 📝</li>
+      <li>Preserving the history of its values (Persistent Segment Tree)</li>
+      <li>Implicit segment tree</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="table-of-contents-fenwick-tree-or-bit">Table of Contents (fenwick tree or BIT)</h4>
+<p>Link: <a href="https://cp-algorithms.com/data_structures/fenwick.html">cp-algorithms - Fenwick tree</a></p>
+<ul>
+  <li>Description
+    <ul>
+      <li>Overview ✔️</li>
+      <li>Definition of g(i) ✔️</li>
+    </ul>
+  </li>
+  <li>Implementation
+    <ul>
+      <li>Finding sum in one-dimensional array ✔️</li>
+      <li>Finding minimum of [0,r] in one-dimensional array ✔️</li>
+      <li>Finding sum in two-dimensional array ✔️</li>
+      <li>One-based indexing approach ✔️</li>
+    </ul>
+  </li>
+  <li>Range operations
+    <ol>
+      <li>Point Update and Range Query ✔️</li>
+      <li>Range Update and Point Query 📝</li>
+      <li>Range Updates and Range Queries 📝</li>
+    </ol>
+  </li>
+</ul>
+
+<h6 id="csesfi-problemset-range-queries">CSES.fi problemSet (Range Queries)</h6>
+
+<ol>
+  <li><a href="https://cses.fi/problemset/task/1646">Range Sum Queries I ✔️</a></li>
+  <li><a href="https://cses.fi/problemset/task/1646">Range Sum Queries I ✔️</a></li>
+  <li><a href="https://cses.fi/problemset/task/1647">Range Minimum Queries I ✔️</a></li>
+  <li><a href="https://cses.fi/problemset/task/1648">Range Sum Queries II ✔️</a></li>
+  <li><a href="https://cses.fi/problemset/task/1649">Range Minimum Queries II ✔️</a></li>
+  <li><a href="https://cses.fi/problemset/task/1650">Range Xor Queries ✔️</a></li>
+  <li><a href="https://cses.fi/problemset/task/1651">Range Update Queries ✔️</a></li>
+  <li><a href="https://cses.fi/problemset/task/1652">Forest Queries ✔️</a></li>
+  <li><a href="https://cses.fi/problemset/task/1143">Hotel Queries ✔️</a></li>
+  <li><a href="https://cses.fi/problemset/task/1749">List Removals ✔️</a></li>
+  <li><a href="https://cses.fi/problemset/task/1144">Salary Queries</a></li>
+  <li><a href="https://cses.fi/problemset/task/1190">Subarray Sum Queries</a></li>
+  <li><a href="https://cses.fi/problemset/task/1734">Distinct Values Queries</a></li>
+  <li><a href="https://cses.fi/problemset/task/1739">Forest Queries II</a></li>
+  <li><a href="https://cses.fi/problemset/task/1735">Range Updates and Sums</a></li>
+  <li><a href="https://cses.fi/problemset/task/1736">Polynomial Queries</a></li>
+  <li><a href="https://cses.fi/problemset/task/1737">Range Queries and Copies</a></li>
+</ol>
+
+  </div>
+  <hr>
+  
+    
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname  = 'https-vaibhavahuja-github-io-1';
+    var disqus_identifier = '/algo/rangeQueries';
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+
+  
+</article>
+
+      <div class="copyright">
+      <p> Powered by <a href="https://jekyllrb.com/">Jekyll</a> </p>
+      </div>
+    </div>
+    
+  </body>
+</html>
