@@ -48,7 +48,7 @@ You should get a program and go slowly by slowly that's the way to build your mu
 
 That's the way you can cultivate your self discipline.
 
-> Only the disciplined ones are free in life, if you are in discipline you are a slave to your moods you are a slave to your passions
+> Only the disciplined ones are free in life, if you are indisciplined you are a slave to your moods you are a slave to your passions
 
 
 The best time to plan a tree was 25 years ago, that was the best time to plant the tree. today is the best time for you to plan a tree of self-discipline
