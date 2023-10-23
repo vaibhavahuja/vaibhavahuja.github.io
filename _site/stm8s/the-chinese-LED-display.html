@@ -9,6 +9,15 @@
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
   <link rel="canonical" href="http://localhost:4000/stm8s/the-chinese-LED-display">
   <link rel="alternate" type="application/rss+xml" title="Vaibhav Ahuja" href="http://localhost:4000/feed.xml">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2WNHZ5BJ2N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2WNHZ5BJ2N');
+</script>
 </head>
 
   <body>
@@ -158,7 +167,7 @@ controller.</em>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kt">void</span> <span class="nf">Delay</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">nCount</span><span class="p">)</span>
+<span class="kt">void</span> <span class="n">Delay</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">nCount</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="c1">// Decrement nCount value</span>
     <span class="k">while</span> <span class="p">(</span><span class="n">nCount</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
@@ -293,5 +302,17 @@ to see how this works add a delay in between the showRow(i); something like This
       </div>
     </div>
     
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'G-2WNHZ5BJ2N', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
   </body>
 </html>

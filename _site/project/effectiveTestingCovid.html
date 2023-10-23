@@ -9,6 +9,15 @@
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
   <link rel="canonical" href="http://localhost:4000/project/effectiveTestingCovid">
   <link rel="alternate" type="application/rss+xml" title="Vaibhav Ahuja" href="http://localhost:4000/feed.xml">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2WNHZ5BJ2N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2WNHZ5BJ2N');
+</script>
 </head>
 
   <body>
@@ -65,7 +74,7 @@ Our application defines a testing strategy for the government based on the conce
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">load</span> <span class="n">csv</span> <span class="k">with</span> <span class="n">headers</span> <span class="k">from</span> 
 <span class="nv">"https://docs.google.com/spreadsheets/d/e/2PACX-1vTdx9D4Xzrbitz5gDbd-MH7iALAZjYdOpq7Bx6pVAeVEH6_NZC_CQSWC51Tl6ODHkU0WTgSfJshzPUZ/pub?gid=0&amp;single=true&amp;output=csv"</span>
 <span class="k">as</span> <span class="n">per</span>
-<span class="k">create</span> <span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="err">{</span><span class="n">ssn</span><span class="p">:</span><span class="n">per</span><span class="p">.</span><span class="n">SSN</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span><span class="n">per</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span><span class="n">address</span><span class="p">:</span><span class="n">per</span><span class="p">.</span><span class="n">Address</span><span class="p">,</span><span class="n">symptoms</span><span class="p">:</span><span class="n">per</span><span class="p">.</span><span class="n">ShowingSymptoms</span><span class="p">,</span> <span class="n">infected</span><span class="p">:</span><span class="n">per</span><span class="p">.</span><span class="n">CovidInfected</span><span class="err">}</span><span class="p">)</span>
+<span class="k">create</span> <span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="p">{</span><span class="n">ssn</span><span class="p">:</span><span class="n">per</span><span class="p">.</span><span class="n">SSN</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span><span class="n">per</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span><span class="n">address</span><span class="p">:</span><span class="n">per</span><span class="p">.</span><span class="n">Address</span><span class="p">,</span><span class="n">symptoms</span><span class="p">:</span><span class="n">per</span><span class="p">.</span><span class="n">ShowingSymptoms</span><span class="p">,</span> <span class="n">infected</span><span class="p">:</span><span class="n">per</span><span class="p">.</span><span class="n">CovidInfected</span><span class="p">})</span>
 </code></pre></div></div>
 <p>Below is a sample node.
 <em>We had 150 similar nodes in the database (as per the csv file we used to load)</em></p>
@@ -74,16 +83,16 @@ Our application defines a testing strategy for the government based on the conce
 
 <p>Now, to create relationships between people:</p>
 
-<p>The below csv file just contained information about who meets who, and we create an <code class="highlighter-rouge">INTERACTS_WITH</code> Relationship amongst these people.</p>
+<p>The below csv file just contained information about who meets who, and we create an <code class="language-plaintext highlighter-rouge">INTERACTS_WITH</code> Relationship amongst these people.</p>
 
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">load</span> <span class="n">csv</span> <span class="k">with</span> <span class="n">headers</span> <span class="k">from</span> 
 <span class="nv">"https://docs.google.com/spreadsheets/d/e/2PACX-1vTdx9D4Xzrbitz5gDbd-MH7iALAZjYdOpq7Bx6pVAeVEH6_NZC_CQSWC51Tl6ODHkU0WTgSfJshzPUZ/pub?gid=1511060139&amp;single=true&amp;output=csv"</span> <span class="k">as</span> <span class="n">meeting</span>
-<span class="k">match</span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="err">{</span><span class="n">ssn</span><span class="p">:</span><span class="n">meeting</span><span class="p">.</span><span class="n">Person1</span><span class="err">}</span><span class="p">),</span> <span class="p">(</span><span class="n">p2</span><span class="p">:</span><span class="n">Person</span><span class="err">{</span><span class="n">ssn</span><span class="p">:</span><span class="n">meeting</span><span class="p">.</span><span class="n">Person2</span><span class="err">}</span><span class="p">)</span>
+<span class="k">match</span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="p">{</span><span class="n">ssn</span><span class="p">:</span><span class="n">meeting</span><span class="p">.</span><span class="n">Person1</span><span class="p">}),</span> <span class="p">(</span><span class="n">p2</span><span class="p">:</span><span class="n">Person</span><span class="p">{</span><span class="n">ssn</span><span class="p">:</span><span class="n">meeting</span><span class="p">.</span><span class="n">Person2</span><span class="p">})</span>
 <span class="k">create</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">INTERACTS_WITH</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
 <span class="k">create</span> <span class="p">(</span><span class="n">p2</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">INTERACTS_WITH</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>We are assigning a cost to every <code class="highlighter-rouge">INTERACTS_WITH</code> relationship, which in the future we might use, as we can increase the cost of relationships with already infected people :</p>
+<p>We are assigning a cost to every <code class="language-plaintext highlighter-rouge">INTERACTS_WITH</code> relationship, which in the future we might use, as we can increase the cost of relationships with already infected people :</p>
 
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">match</span> <span class="p">(</span><span class="n">p1</span><span class="p">:</span><span class="n">Person</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">INTERACTS_WITH</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">p2</span><span class="p">:</span><span class="n">Person</span><span class="p">)</span> <span class="k">set</span> <span class="n">i</span><span class="p">.</span><span class="n">cost</span> <span class="o">=</span> <span class="mi">1</span>
 </code></pre></div></div>
@@ -93,7 +102,7 @@ Our application defines a testing strategy for the government based on the conce
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">load</span> <span class="n">csv</span> <span class="k">with</span> <span class="n">headers</span> <span class="k">from</span> 
 <span class="nv">"https://docs.google.com/spreadsheets/d/e/2PACX-1vTdx9D4Xzrbitz5gDbd-MH7iALAZjYdOpq7Bx6pVAeVEH6_NZC_CQSWC51Tl6ODHkU0WTgSfJshzPUZ/pub?gid=2096582175&amp;single=true&amp;output=csv"</span>
 <span class="k">as</span> <span class="n">locations</span>
-<span class="k">create</span> <span class="p">(</span><span class="n">l</span><span class="p">:</span><span class="k">Location</span><span class="err">{</span><span class="n">longlat</span><span class="p">:</span><span class="n">locations</span><span class="p">.</span><span class="n">longlat</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">locations</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> <span class="n">city</span><span class="p">:</span><span class="n">locations</span><span class="p">.</span><span class="n">City</span><span class="p">,</span> <span class="k">state</span><span class="p">:</span><span class="n">locations</span><span class="p">.</span><span class="k">State</span><span class="err">}</span><span class="p">)</span>
+<span class="k">create</span> <span class="p">(</span><span class="n">l</span><span class="p">:</span><span class="k">Location</span><span class="p">{</span><span class="n">longlat</span><span class="p">:</span><span class="n">locations</span><span class="p">.</span><span class="n">longlat</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">locations</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> <span class="n">city</span><span class="p">:</span><span class="n">locations</span><span class="p">.</span><span class="n">City</span><span class="p">,</span> <span class="k">state</span><span class="p">:</span><span class="n">locations</span><span class="p">.</span><span class="k">State</span><span class="p">})</span>
 </code></pre></div></div>
 
 <p>and making a few people go to some location on some date :</p>
@@ -102,15 +111,15 @@ Our application defines a testing strategy for the government based on the conce
 <span class="nv">"https://docs.google.com/spreadsheets/d/e/2PACX-1vTdx9D4Xzrbitz5gDbd-MH7iALAZjYdOpq7Bx6pVAeVEH6_NZC_CQSWC51Tl6ODHkU0WTgSfJshzPUZ/pub?gid=1139166921&amp;single=true&amp;output=csv"</span> <span class="k">as</span> <span class="n">visi</span>
 <span class="k">match</span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="p">),</span> <span class="p">(</span><span class="n">l</span><span class="p">:</span><span class="k">Location</span><span class="p">)</span>
 <span class="k">where</span> <span class="n">p</span><span class="p">.</span><span class="n">ssn</span> <span class="o">=</span> <span class="n">visi</span><span class="p">.</span><span class="n">PersonSSN</span> <span class="k">and</span> <span class="n">l</span><span class="p">.</span><span class="n">longlat</span> <span class="o">=</span> <span class="n">visi</span><span class="p">.</span><span class="n">PlaceVisitedID</span>
-<span class="k">create</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">vi</span><span class="p">:</span><span class="n">VISITS</span><span class="err">{</span><span class="nb">date</span><span class="p">:</span><span class="n">visi</span><span class="p">.</span><span class="n">VisitedOn</span><span class="err">}</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="k">create</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">vi</span><span class="p">:</span><span class="n">VISITS</span><span class="p">{</span><span class="nb">date</span><span class="p">:</span><span class="n">visi</span><span class="p">.</span><span class="n">VisitedOn</span><span class="p">}]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>We have created the basic relationships and the nodes. One of the feature that we added was to auto create relatonships between two people in case two people visit the same location on the same date. 
 This will be more clear in the below example :</p>
 
-<p>In the below figure, fibonacci visits <code class="highlighter-rouge">Mall1</code> on 30th July and Daniels visits <code class="highlighter-rouge">Mall1</code> on 31st July.</p>
+<p>In the below figure, fibonacci visits <code class="language-plaintext highlighter-rouge">Mall1</code> on 30th July and Daniels visits <code class="language-plaintext highlighter-rouge">Mall1</code> on 31st July.</p>
 
-<p>Say, Bill visits <code class="highlighter-rouge">Mall1</code> on 31st July as well, then an <code class="highlighter-rouge">INTERACTS_WITH</code> relationship should be created between daniels and Bill.</p>
+<p>Say, Bill visits <code class="language-plaintext highlighter-rouge">Mall1</code> on 31st July as well, then an <code class="language-plaintext highlighter-rouge">INTERACTS_WITH</code> relationship should be created between daniels and Bill.</p>
 
 <p><img src="../images/visitConn1.png" alt="" /></p>
 
@@ -122,7 +131,7 @@ This will be more clear in the below example :</p>
 <span class="k">create</span> <span class="p">(</span><span class="n">p2</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">INTERACTS_WITH</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>Now, if we visualize this graph, we can see a new <code class="highlighter-rouge">INTERACTS_WITH</code> relationship has been created between Daniels and Bill :</p>
+<p>Now, if we visualize this graph, we can see a new <code class="language-plaintext highlighter-rouge">INTERACTS_WITH</code> relationship has been created between Daniels and Bill :</p>
 
 <p><img src="../images/visitConn2.png" alt="" /></p>
 
@@ -156,16 +165,16 @@ In graph theory and network analysis, indicators of centrality identify the most
 
 <p>What we are doing here is, we are taking the betweenness centrality and returning the top 10 nodes (Person Nodes) whom should be tested first.</p>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CALL</span> <span class="n">gds</span><span class="p">.</span><span class="n">alpha</span><span class="p">.</span><span class="n">betweenness</span><span class="p">.</span><span class="n">stream</span><span class="p">(</span><span class="err">{</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CALL</span> <span class="n">gds</span><span class="p">.</span><span class="n">alpha</span><span class="p">.</span><span class="n">betweenness</span><span class="p">.</span><span class="n">stream</span><span class="p">({</span>
 	<span class="n">nodeProjection</span><span class="p">:</span> <span class="s1">'Person'</span><span class="p">,</span>
-	  <span class="n">relationshipProjection</span><span class="p">:</span> <span class="err">{</span>
-	    <span class="n">INTERACTS_WITH</span><span class="p">:</span> <span class="err">{</span>
+	  <span class="n">relationshipProjection</span><span class="p">:</span> <span class="p">{</span>
+	    <span class="n">INTERACTS_WITH</span><span class="p">:</span> <span class="p">{</span>
 	      <span class="k">type</span><span class="p">:</span> <span class="s1">'INTERACTS_WITH'</span><span class="p">,</span>
 	      <span class="n">properties</span><span class="p">:</span> <span class="s1">'cost'</span><span class="p">,</span>
 	      <span class="n">orientation</span><span class="p">:</span> <span class="s1">'UNDIRECTED'</span>
-	    <span class="err">}</span>
-	  <span class="err">}</span>
-	<span class="err">}</span><span class="p">)</span>
+	    <span class="p">}</span>
+	  <span class="p">}</span>
+	<span class="p">})</span>
 <span class="n">YIELD</span> <span class="n">nodeId</span><span class="p">,</span> <span class="n">centrality</span>
 <span class="k">match</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="n">Person</span><span class="p">)</span> <span class="k">where</span> <span class="n">id</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">=</span> <span class="n">nodeId</span> <span class="k">and</span> <span class="n">p</span><span class="p">.</span><span class="n">infected</span><span class="o">=</span><span class="s1">'FALSE'</span> <span class="k">return</span> <span class="n">p</span><span class="p">.</span><span class="n">ssn</span> <span class="k">as</span> <span class="n">ssn</span><span class="p">,</span><span class="n">p</span><span class="p">.</span><span class="n">name</span> <span class="k">as</span> <span class="n">name</span><span class="p">,</span><span class="n">p</span><span class="p">.</span><span class="n">address</span> <span class="k">as</span> <span class="n">address</span><span class="p">,</span><span class="n">centrality</span> <span class="k">order</span> <span class="k">by</span> <span class="n">centrality</span> <span class="k">desc</span> <span class="k">LIMIT</span> <span class="mi">10</span>
 </code></pre></div></div>
@@ -174,27 +183,27 @@ In graph theory and network analysis, indicators of centrality identify the most
 
 <p>Using shortest path, we have also calculated which person to stay away from :</p>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">MATCH</span><span class="p">(</span><span class="k">start</span><span class="p">:</span><span class="n">Person</span><span class="err">{</span><span class="n">ssn</span><span class="p">:</span><span class="nv">"KOAHM4127V"</span><span class="err">}</span><span class="p">),</span> <span class="p">(</span><span class="k">end</span><span class="p">:</span><span class="n">Person</span><span class="err">{</span><span class="n">infected</span><span class="p">:</span><span class="nv">"TRUE"</span><span class="err">}</span><span class="p">)</span>
-<span class="k">CALL</span> <span class="n">gds</span><span class="p">.</span><span class="n">alpha</span><span class="p">.</span><span class="n">shortestPath</span><span class="p">.</span><span class="n">stream</span><span class="p">(</span><span class="err">{</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">MATCH</span><span class="p">(</span><span class="k">start</span><span class="p">:</span><span class="n">Person</span><span class="p">{</span><span class="n">ssn</span><span class="p">:</span><span class="nv">"KOAHM4127V"</span><span class="p">}),</span> <span class="p">(</span><span class="k">end</span><span class="p">:</span><span class="n">Person</span><span class="p">{</span><span class="n">infected</span><span class="p">:</span><span class="nv">"TRUE"</span><span class="p">})</span>
+<span class="k">CALL</span> <span class="n">gds</span><span class="p">.</span><span class="n">alpha</span><span class="p">.</span><span class="n">shortestPath</span><span class="p">.</span><span class="n">stream</span><span class="p">({</span>
   <span class="n">nodeProjection</span><span class="p">:</span> <span class="s1">'Person'</span><span class="p">,</span>
-  <span class="n">relationshipProjection</span><span class="p">:</span> <span class="err">{</span>
-    <span class="n">INTERACTS_WITH</span><span class="p">:</span> <span class="err">{</span>
+  <span class="n">relationshipProjection</span><span class="p">:</span> <span class="p">{</span>
+    <span class="n">INTERACTS_WITH</span><span class="p">:</span> <span class="p">{</span>
       <span class="k">type</span><span class="p">:</span> <span class="s1">'INTERACTS_WITH'</span><span class="p">,</span>
       <span class="n">properties</span><span class="p">:</span> <span class="s1">'cost'</span><span class="p">,</span>
       <span class="n">orientation</span><span class="p">:</span> <span class="s1">'UNDIRECTED'</span>
-    <span class="err">}</span>
-  <span class="err">}</span><span class="p">,</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
   <span class="n">startNode</span><span class="p">:</span> <span class="k">start</span><span class="p">,</span>
   <span class="n">endNode</span><span class="p">:</span> <span class="k">end</span><span class="p">,</span>
   <span class="n">relationshipWeightProperty</span><span class="p">:</span> <span class="s1">'cost'</span>
-<span class="err">}</span><span class="p">)</span>
+<span class="p">})</span>
 <span class="n">YIELD</span> <span class="n">nodeId</span><span class="p">,</span> <span class="n">cost</span>
 <span class="k">MATCH</span><span class="p">(</span><span class="n">other</span><span class="p">:</span> <span class="n">Person</span><span class="p">)</span> <span class="k">WHERE</span> <span class="n">id</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">=</span> <span class="n">nodeId</span> <span class="k">and</span> <span class="n">other</span><span class="p">.</span><span class="n">infected</span> <span class="o">=</span> <span class="s1">'TRUE'</span> <span class="k">RETURN</span> <span class="k">distinct</span> <span class="n">other</span><span class="p">.</span><span class="n">name</span> <span class="k">AS</span> <span class="n">name</span><span class="p">,</span> <span class="n">other</span><span class="p">.</span><span class="n">address</span> <span class="k">as</span> <span class="n">address</span><span class="p">,</span><span class="n">cost</span> <span class="k">order</span> <span class="k">by</span> <span class="n">cost</span> <span class="k">asc</span> <span class="k">limit</span> <span class="mi">5</span>
 </code></pre></div></div>
 
 <p>And, we can get the hostpots of a city :</p>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">MATCH</span><span class="p">(</span><span class="n">l</span><span class="p">:</span><span class="k">Location</span><span class="p">),</span> <span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="err">{</span><span class="n">infected</span><span class="p">:</span><span class="nv">"TRUE"</span><span class="err">}</span><span class="p">)</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">MATCH</span><span class="p">(</span><span class="n">l</span><span class="p">:</span><span class="k">Location</span><span class="p">),</span> <span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="p">{</span><span class="n">infected</span><span class="p">:</span><span class="nv">"TRUE"</span><span class="p">})</span>
 <span class="k">RETURN</span> <span class="n">l</span><span class="p">.</span><span class="n">name</span> <span class="k">AS</span> <span class="n">name</span><span class="p">,</span> <span class="k">SIZE</span><span class="p">((</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">VISITS</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">l</span><span class="p">))</span> <span class="k">AS</span> <span class="k">size</span> <span class="k">order</span> <span class="k">by</span> <span class="k">size</span> <span class="k">desc</span> <span class="k">limit</span> <span class="mi">10</span>
 </code></pre></div></div>
 
@@ -232,5 +241,17 @@ Effective Testing Strategy can be achieved using our application as it will resu
       </div>
     </div>
     
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'G-2WNHZ5BJ2N', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
   </body>
 </html>

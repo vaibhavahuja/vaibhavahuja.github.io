@@ -5,9 +5,129 @@
     <description>my personal space where i write about stuff that excites me.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 21 Jan 2021 15:37:55 +0530</pubDate>
-    <lastBuildDate>Thu, 21 Jan 2021 15:37:55 +0530</lastBuildDate>
-    <generator>Jekyll v3.8.6</generator>
+    <pubDate>Mon, 23 Oct 2023 19:49:56 +0530</pubDate>
+    <lastBuildDate>Mon, 23 Oct 2023 19:49:56 +0530</lastBuildDate>
+    <generator>Jekyll v3.9.3</generator>
+    
+      <item>
+        <title>Discipline. Perseverence. Eliud.</title>
+        <description>&lt;p&gt;I have always been a big fan of Eliud Kipchoge. He is the goat 🐐 when it comes to long distance running. I followed his journey of running a marathon under 2 hours, by Nike, and just the guts of him attempting something like that is crazy. Pushing human limits to an extent which is hard to imagine, is just commendable. In his intro video, the orator described him as a chess grandmaster, so calm and so composed, you can never tell what is going on in his head. He is a top notch world class athlete, a multi millionaire, one of the most accomplished long distance runner. However, a look in his camp shows how humble he is.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/eliud.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“I believe in a calm, simple, low profile life”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is what Eliud has to say&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“You live simple, you train hard, you live an honest life then you are free”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This man, Eliud talks about discipline.
+According to Eliud, there are few factors to be successful.
+One is Self-Discipline
+Second is very well prepraration
+Third is you should be well organised
+Fourth is you should think positive
+Fifth is actually working with people&lt;/p&gt;
+
+&lt;p&gt;Starting with self-discipline,self-discipline starts with you. start to examine yourself.
+So self-discipline means is doing what’s right rather than doing what you feel like doing.&lt;/p&gt;
+
+&lt;p&gt;It can save your feelings, get you on par on the course when you try to think otherwise.&lt;/p&gt;
+
+&lt;p&gt;Then when you are self-disciplined you can easily come back and think positively it tells you to actually do the right thing in the moment for long-term benefits.&lt;/p&gt;
+
+&lt;p&gt;How can you cultivate this self discipline?&lt;/p&gt;
+
+&lt;p&gt;One is that you should stick to your priorities.&lt;/p&gt;
+
+&lt;p&gt;Second is that don’t make excuses. when you have decided to do something, do it.&lt;/p&gt;
+
+&lt;p&gt;Thirdly, learn to say no.&lt;/p&gt;
+
+&lt;p&gt;Fourth, is that you make discipline your lifestyle.&lt;/p&gt;
+
+&lt;p&gt;Discipline is like building the muscle
+It’s like going to the gym, you cannot go to the gym today and build your muscle.
+You should get a program and go slowly by slowly that’s the way to build your muscle.&lt;/p&gt;
+
+&lt;p&gt;That’s the way you can cultivate your self discipline.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Only the disciplined ones are free in life, if you are indisciplined you are a slave to your moods you are a slave to your passions&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The best time to plan a tree was 25 years ago, that was the best time to plant the tree. today is the best time for you to plan a tree of self-discipline&lt;/p&gt;
+
+&lt;p&gt;Eliud is a leader to be honest. I feel I have a lot to learn, and just being disciplined can help me greatly in life. Hoping to revisit this post soon.&lt;/p&gt;
+
+&lt;p&gt;Eliud did run a sub 2 marathon btw, he ran 26.2 miles in 1 hour, 59 minutes, and 40 seconds. commendable. 👏🏼💨&lt;/p&gt;
+</description>
+        <pubDate>Wed, 12 Jan 2022 16:51:29 +0530</pubDate>
+        <link>http://localhost:4000/eliud-about-discipline</link>
+        <guid isPermaLink="true">http://localhost:4000/eliud-about-discipline</guid>
+        
+        <category>motivation</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Restoring trust in food through Blockchain</title>
+        <description>&lt;p&gt;If I go to my nearest grocery store to purchase vegetables or fruits, the only proof of it being fresh are the claims made by the seller/vendor. They even put messages over the racks which tell the consumer that every vegetable they have is free from any harmful chemicals, and are 💯% fresh. The problem I noticed with this is that these claims are almost never true, and establishing trust amongst the consumer becomes an issue. The end consumer has to rely on how fresh and juicy the fruit looks, but again all that glitters is not gold.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/foodBlockchain4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;On discussion with some local farmers around Delhi-NCR, it was found that 70% of the produce that they grow, use very harmful chemicals and water being used for growing the crops literally comes from the drain. When they try exporting the produce, the produce never passes the stringent quality checks and are rejected due to very low nutritional values. That produce is dumped to the mandis and end up in our plates. Due to such malpractices of using harmful fertilisers and poor quality water in growing the crops, the farmers are able to fill the plates of the consumer, but at what cost? &lt;em&gt;Just to mention&lt;/em&gt;, the crops that they grow for their personal use is actually very different in terms of nutritional value from the ones they dump in the market. Some farmers even have some part of their land reserved for crops to be consumed by their family.&lt;/p&gt;
+
+&lt;p&gt;Removing all the malpractices in the food supply chain is something that is not really achievable, but what is achievable is to provide the end consumer &lt;em&gt;transparency&lt;/em&gt;. Allowing them to trace where their food comes from, and what all goes into their plates. By making the consumer more informed, they can make better decisions on what to eat and not to eat. In this post, I will be talking about how we can use blockchain to create trust amongst the consumer and the farmers, and how consumers can just trust the network and not what the vendor or the message on the racks say.&lt;/p&gt;
+
+&lt;p&gt;Through this project, we wish to create a network through which these malpractices could be reduced. If we capture the journey of the food, from seed to plate and show it to the end consumer, it can eventually help the consumer make well informed decisions about what they wish to buy. We could have used a central database for this, which would be updated whenever the farmer does a task. But again, how would that be different from the vendor telling the consumers that the produce is 100% fresh. We needed something that is immutable. Here comes blockchain into picture. I am pretty sure you must be familiar with what blockchain is, if not you can read the underlying concepts &lt;a href=&quot;https://vaibhavahuja.github.io/blockchain/understanding-bitcoin&quot;&gt;here&lt;/a&gt;. In short, blockchain is a digital ledger of transactions which is duplicated and distributed across the entire network, thus making it immutable. This means, that once something is written on the network, no one can change it, not even us! Bitcoin and Ethereum are the two most famous and biggest blockchain networks available. Ethereum provides us with the option of developing Decentralized Applications (dapps) on the network, however they are public networks. Public network, means that anyone in this world can see all the transactions which are made on the network and all the interactions are anonymous, which is something we would not want in our network. Identifying who makes a transaction and when is a key factor of implementing the solution. Also, the process of adding new blocks to the network is through mining. Mining is a process where a large number of machines race to solve a computationally expensive mathematical problem in order to get a reward. This consensus algorithm (Proof of work) is great when there is no trust amongst the different stakeholders of the network (which is true in a public network), but in our case, the stakeholders do have some trust amongst each other, and we wish to have faster times of getting a transaction validated.&lt;/p&gt;
+
+&lt;p&gt;Keeping the above points in picture, using Hyperledger Fabric was the best choice. Hyperledger Fabric is an open source enterprise-grade permissioned distributed ledger technology (DLT) platform. The best thing about Hyperledger is that it is open source and very well documentated.&lt;/p&gt;
+
+&lt;p&gt;The heart of blockchain network is the ledger. The ledger is the sequenced, tamper-resistant record of all state transitions. State transitions are a result of transactions submitted by participating parties. Each transaction results in a set of asset key-value pairs that are committed to the ledger as creates, updates, or deletes. In the hyperledger fabric, the ledger comprises of a blockchain to store the immutable, sequenced record in blocks, as well as a state database to maintain current state. For capturing the journey of the food, we deal with states and transactions. There are conceptual objects of value, modeled as states, whose lifecycle transitions are described by transactions.&lt;/p&gt;
+
+&lt;p&gt;We can represent the life cycle of our crop/produce using a state transition diagram:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/foodBlockchain1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We can see how the produce object transitions between “farm”, “processingUnit”, “storage” states using the transactions as described.&lt;/p&gt;
+
+&lt;p&gt;The structure of the food object which will be stored in the state object looks like this :&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/foodBlockchain2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This state was designed keeping in picture what a transaction can update. We had set policies which allowed only a certain organisation to update a part of the state database, (i.e log transactions only which they are allowed). For example, someone who is working in logistics, won’t be able to create an &lt;em&gt;agriculture&lt;/em&gt; transaction.&lt;/p&gt;
+
+&lt;p&gt;We aimed to capture as much as we could. The only way to capture the information was through forms, which we had provided to the farmers in their smartphones. All the farmer had to do was fill the form and click on submit, and rest was handled in the backend. The transactions get validated, and go through the transaction flow (not discussed in this post), and get logged in the blockchain network. This required some training which was given to the farmers, thus comes with an overhead cost, but helped in tracking anything that goes in the production of the crops. We tried to monitor the tiniest details related to the production of the crop, such as when was the farm irrigated, and when were the weeds removed, and which all fertilisers were used. Again, a team of agricultural experts were available making sure that the best practices were followed during the complete crop lifecycle.&lt;/p&gt;
+
+&lt;p&gt;Making the farmers make the entries/transactions in the network was a manual and tedious task, which could be prone of errors. This required constant monitoring and checks by the team, and if the farmers log the data at the correct time and date. Human effort could have been minimized by the use of IoT devices which capture information about the soil and irrigation, or maybe some camera and a Machine Learning model, which track the produce and store information in the blockchain network.&lt;/p&gt;
+
+&lt;p&gt;We captured information to the last mile, in the blockchain network, thus making everything real time. Tracking the produce became much easier and the quality was maintained, since the complete process was transparent.&lt;/p&gt;
+
+&lt;p&gt;For the consumer to see the journey of their food, we had scraped information from the blockchain network and listed out in a story form which can be seen below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/foodBlockchain3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Blockchain as of now is a nascent technology, and for the adoption of this technology at large scale will take years.&lt;/p&gt;
+
+&lt;p&gt;Hoping you liked the post. Do let me know what you think about it!&lt;/p&gt;
+</description>
+        <pubDate>Thu, 03 Jun 2021 16:51:29 +0530</pubDate>
+        <link>http://localhost:4000/blockchain/transparency-in-food-supply-chain</link>
+        <guid isPermaLink="true">http://localhost:4000/blockchain/transparency-in-food-supply-chain</guid>
+        
+        <category>hyperledger</category>
+        
+        <category>project</category>
+        
+        
+        <category>blockchain</category>
+        
+      </item>
     
       <item>
         <title>Controlling home lamp using internet</title>
@@ -21,7 +141,7 @@ I sketched out the architecture, before actually starting with the coding part o
 &lt;p&gt;&lt;em&gt;&lt;img src=&quot;/images/homeautodiag.png?raw=true&quot; alt=&quot;architecture&quot; /&gt;&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Now, that everything was in place, I ordered a nodeMCU ESP8266, a relay, some jumper wires, and that is it.
-I used the arduino IDE itself for programming the nodeMCU. Luckily, tons of libraries exist for running nodeMCU using the arduino IDE. Parallely I created an API with two endpoints. The &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; request would be used by the microcontroller to get the state of the switch, and the &lt;code class=&quot;highlighter-rouge&quot;&gt;PATCH&lt;/code&gt; request, will toggle the state -&amp;gt;  &lt;code class=&quot;highlighter-rouge&quot;&gt;state = 1 - state&lt;/code&gt;. I had connected a free MongoDB database with just one entry, and hosted the API on a free (&lt;em&gt;making it low cost :P&lt;/em&gt;) server by Heroku. 
+I used the arduino IDE itself for programming the nodeMCU. Luckily, tons of libraries exist for running nodeMCU using the arduino IDE. Parallely I created an API with two endpoints. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GET&lt;/code&gt; request would be used by the microcontroller to get the state of the switch, and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PATCH&lt;/code&gt; request, will toggle the state -&amp;gt;  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;state = 1 - state&lt;/code&gt;. I had connected a free MongoDB database with just one entry, and hosted the API on a free (&lt;em&gt;making it low cost :P&lt;/em&gt;) server by Heroku. 
 I also gave a neat UI which would send a patch reuest for toggling the state, and hosted it on github pages. &lt;a href=&quot;https://vaibhavahuja.github.io/homeautoui/&quot;&gt;Here is the UI&lt;/a&gt;. Tapping on the button would turn the lamp in my room on/off.&lt;/p&gt;
 
 &lt;p&gt;Below is the code for the setup method.&lt;/p&gt;
@@ -50,7 +170,7 @@ I also gave a neat UI which would send a patch reuest for toggling the state, an
 
 &lt;p&gt;Now that the wifi is connected and the pins are in place, coming to the loop method.&lt;/p&gt;
 
-&lt;p&gt;The below code sends a &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; request to the server and stores the output in the line variable.&lt;/p&gt;
+&lt;p&gt;The below code sends a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GET&lt;/code&gt; request to the server and stores the output in the line variable.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;n&quot;&gt;httpsClient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;GET &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Link&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; HTTP/1.1&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\r\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
                &lt;span class=&quot;s&quot;&gt;&quot;Host: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;host&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\r\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;               
@@ -128,7 +248,7 @@ Our application defines a testing strategy for the government based on the conce
 &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;load&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;csv&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; 
 &lt;span class=&quot;nv&quot;&gt;&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vTdx9D4Xzrbitz5gDbd-MH7iALAZjYdOpq7Bx6pVAeVEH6_NZC_CQSWC51Tl6ODHkU0WTgSfJshzPUZ/pub?gid=0&amp;amp;single=true&amp;amp;output=csv&quot;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;per&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;per&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SSN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;per&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;per&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symptoms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;per&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ShowingSymptoms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;infected&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;per&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CovidInfected&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;per&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SSN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;per&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;per&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symptoms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;per&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ShowingSymptoms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;infected&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;per&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CovidInfected&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Below is a sample node.
 &lt;em&gt;We had 150 similar nodes in the database (as per the csv file we used to load)&lt;/em&gt;&lt;/p&gt;
@@ -137,16 +257,16 @@ Our application defines a testing strategy for the government based on the conce
 
 &lt;p&gt;Now, to create relationships between people:&lt;/p&gt;
 
-&lt;p&gt;The below csv file just contained information about who meets who, and we create an &lt;code class=&quot;highlighter-rouge&quot;&gt;INTERACTS_WITH&lt;/code&gt; Relationship amongst these people.&lt;/p&gt;
+&lt;p&gt;The below csv file just contained information about who meets who, and we create an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;INTERACTS_WITH&lt;/code&gt; Relationship amongst these people.&lt;/p&gt;
 
 &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;load&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;csv&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; 
 &lt;span class=&quot;nv&quot;&gt;&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vTdx9D4Xzrbitz5gDbd-MH7iALAZjYdOpq7Bx6pVAeVEH6_NZC_CQSWC51Tl6ODHkU0WTgSfJshzPUZ/pub?gid=1511060139&amp;amp;single=true&amp;amp;output=csv&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;meeting&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;meeting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;meeting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person2&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;meeting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;meeting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INTERACTS_WITH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INTERACTS_WITH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;We are assigning a cost to every &lt;code class=&quot;highlighter-rouge&quot;&gt;INTERACTS_WITH&lt;/code&gt; relationship, which in the future we might use, as we can increase the cost of relationships with already infected people :&lt;/p&gt;
+&lt;p&gt;We are assigning a cost to every &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;INTERACTS_WITH&lt;/code&gt; relationship, which in the future we might use, as we can increase the cost of relationships with already infected people :&lt;/p&gt;
 
 &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INTERACTS_WITH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -156,7 +276,7 @@ Our application defines a testing strategy for the government based on the conce
 &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;load&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;csv&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; 
 &lt;span class=&quot;nv&quot;&gt;&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vTdx9D4Xzrbitz5gDbd-MH7iALAZjYdOpq7Bx6pVAeVEH6_NZC_CQSWC51Tl6ODHkU0WTgSfJshzPUZ/pub?gid=2096582175&amp;amp;single=true&amp;amp;output=csv&quot;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Location&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;longlat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;longlat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;City&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;State&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Location&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;longlat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;longlat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;City&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;State&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;and making a few people go to some location on some date :&lt;/p&gt;
@@ -165,15 +285,15 @@ Our application defines a testing strategy for the government based on the conce
 &lt;span class=&quot;nv&quot;&gt;&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vTdx9D4Xzrbitz5gDbd-MH7iALAZjYdOpq7Bx6pVAeVEH6_NZC_CQSWC51Tl6ODHkU0WTgSfJshzPUZ/pub?gid=1139166921&amp;amp;single=true&amp;amp;output=csv&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;visi&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Location&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;visi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PersonSSN&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;longlat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;visi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PlaceVisitedID&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VISITS&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;visi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VisitedOn&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VISITS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;visi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VisitedOn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;We have created the basic relationships and the nodes. One of the feature that we added was to auto create relatonships between two people in case two people visit the same location on the same date. 
 This will be more clear in the below example :&lt;/p&gt;
 
-&lt;p&gt;In the below figure, fibonacci visits &lt;code class=&quot;highlighter-rouge&quot;&gt;Mall1&lt;/code&gt; on 30th July and Daniels visits &lt;code class=&quot;highlighter-rouge&quot;&gt;Mall1&lt;/code&gt; on 31st July.&lt;/p&gt;
+&lt;p&gt;In the below figure, fibonacci visits &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mall1&lt;/code&gt; on 30th July and Daniels visits &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mall1&lt;/code&gt; on 31st July.&lt;/p&gt;
 
-&lt;p&gt;Say, Bill visits &lt;code class=&quot;highlighter-rouge&quot;&gt;Mall1&lt;/code&gt; on 31st July as well, then an &lt;code class=&quot;highlighter-rouge&quot;&gt;INTERACTS_WITH&lt;/code&gt; relationship should be created between daniels and Bill.&lt;/p&gt;
+&lt;p&gt;Say, Bill visits &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mall1&lt;/code&gt; on 31st July as well, then an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;INTERACTS_WITH&lt;/code&gt; relationship should be created between daniels and Bill.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../images/visitConn1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -185,7 +305,7 @@ This will be more clear in the below example :&lt;/p&gt;
 &lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INTERACTS_WITH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Now, if we visualize this graph, we can see a new &lt;code class=&quot;highlighter-rouge&quot;&gt;INTERACTS_WITH&lt;/code&gt; relationship has been created between Daniels and Bill :&lt;/p&gt;
+&lt;p&gt;Now, if we visualize this graph, we can see a new &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;INTERACTS_WITH&lt;/code&gt; relationship has been created between Daniels and Bill :&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../images/visitConn2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -219,16 +339,16 @@ In graph theory and network analysis, indicators of centrality identify the most
 
 &lt;p&gt;What we are doing here is, we are taking the betweenness centrality and returning the top 10 nodes (Person Nodes) whom should be tested first.&lt;/p&gt;
 
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CALL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;betweenness&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CALL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;betweenness&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
 	&lt;span class=&quot;n&quot;&gt;nodeProjection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Person'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	  &lt;span class=&quot;n&quot;&gt;relationshipProjection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
-	    &lt;span class=&quot;n&quot;&gt;INTERACTS_WITH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+	  &lt;span class=&quot;n&quot;&gt;relationshipProjection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	    &lt;span class=&quot;n&quot;&gt;INTERACTS_WITH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 	      &lt;span class=&quot;k&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'INTERACTS_WITH'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
 	      &lt;span class=&quot;n&quot;&gt;properties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'cost'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
 	      &lt;span class=&quot;n&quot;&gt;orientation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'UNDIRECTED'&lt;/span&gt;
-	    &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
-	  &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;YIELD&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nodeId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;centrality&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nodeId&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;infected&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'FALSE'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;centrality&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;centrality&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;LIMIT&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -237,27 +357,27 @@ In graph theory and network analysis, indicators of centrality identify the most
 
 &lt;p&gt;Using shortest path, we have also calculated which person to stay away from :&lt;/p&gt;
 
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;MATCH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&quot;KOAHM4127V&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;infected&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&quot;TRUE&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;CALL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shortestPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;MATCH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&quot;KOAHM4127V&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;infected&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&quot;TRUE&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;CALL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shortestPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;nodeProjection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Person'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;relationshipProjection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;INTERACTS_WITH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;relationshipProjection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;INTERACTS_WITH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
       &lt;span class=&quot;k&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'INTERACTS_WITH'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
       &lt;span class=&quot;n&quot;&gt;properties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'cost'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
       &lt;span class=&quot;n&quot;&gt;orientation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'UNDIRECTED'&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;startNode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;endNode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;relationshipWeightProperty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'cost'&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;YIELD&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nodeId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;MATCH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nodeId&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;infected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'TRUE'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;RETURN&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;distinct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;asc&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;limit&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;And, we can get the hostpots of a city :&lt;/p&gt;
 
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;MATCH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Location&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;infected&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&quot;TRUE&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;MATCH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Location&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;infected&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&quot;TRUE&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;RETURN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;SIZE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VISITS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;limit&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -465,16 +585,16 @@ I will be writing about the thought I had while identifying the state, what exac
 &lt;p&gt;&lt;em&gt;Identifying the states&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;We can see that in reaching from one stone to another, only the stone number changes and we can get the height of any stone number (an array of heights is given), so there will be only one state that is : &lt;strong&gt;stone number&lt;/strong&gt;
-cost of &lt;code class=&quot;highlighter-rouge&quot;&gt;|h[i] - h[j]|&lt;/code&gt; is incurred when we jump from i&lt;sup&gt;th&lt;/sup&gt; stone to j&lt;sup&gt;th&lt;/sup&gt; stone&lt;/p&gt;
+cost of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|h[i] - h[j]|&lt;/code&gt; is incurred when we jump from i&lt;sup&gt;th&lt;/sup&gt; stone to j&lt;sup&gt;th&lt;/sup&gt; stone&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Meaning of DP state&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Here &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i]&lt;/code&gt; means the minimum cost incurred for the frog to reach i&lt;sup&gt;th&lt;/sup&gt; stone. So since a frog can reach i&lt;sup&gt;th&lt;/sup&gt; stone only from (i-1)&lt;sup&gt;th&lt;/sup&gt; stone and (i-2)&lt;sup&gt;th&lt;/sup&gt; stone the dp relation will be as follow:&lt;/p&gt;
+&lt;p&gt;Here &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DP[i]&lt;/code&gt; means the minimum cost incurred for the frog to reach i&lt;sup&gt;th&lt;/sup&gt; stone. So since a frog can reach i&lt;sup&gt;th&lt;/sup&gt; stone only from (i-1)&lt;sup&gt;th&lt;/sup&gt; stone and (i-2)&lt;sup&gt;th&lt;/sup&gt; stone the dp relation will be as follow:&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;The final answer will be &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[n]&lt;/code&gt; which means the minimum cost incurred to reach n&lt;sup&gt;th&lt;/sup&gt; stone. 
-We can also see that since the answer for  &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; is only dependent on &lt;code class=&quot;highlighter-rouge&quot;&gt;(i-1)&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;(i-2)&lt;/code&gt; stone we can do it in constant space.&lt;/p&gt;
+&lt;p&gt;The final answer will be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DP[n]&lt;/code&gt; which means the minimum cost incurred to reach n&lt;sup&gt;th&lt;/sup&gt; stone. 
+We can also see that since the answer for  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;i&lt;/code&gt; is only dependent on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(i-1)&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(i-2)&lt;/code&gt; stone we can do it in constant space.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -486,17 +606,17 @@ We can also see that since the answer for  &lt;code class=&quot;highlighter-roug
 
 &lt;p&gt;&lt;em&gt;Identifying the states&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;This problem is similar to previous one however now the frog can jump from any stonein the range &lt;code class=&quot;highlighter-rouge&quot;&gt;[i-1, i-2, i-3,...., i-K]&lt;/code&gt; with the same &lt;code class=&quot;highlighter-rouge&quot;&gt;|h[i]-h[j]|&lt;/code&gt; cost incurred. Again the state will be the &lt;strong&gt;stone number&lt;/strong&gt; since only the stone number matters.&lt;/p&gt;
+&lt;p&gt;This problem is similar to previous one however now the frog can jump from any stonein the range &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[i-1, i-2, i-3,...., i-K]&lt;/code&gt; with the same &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|h[i]-h[j]|&lt;/code&gt; cost incurred. Again the state will be the &lt;strong&gt;stone number&lt;/strong&gt; since only the stone number matters.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Meaning of DP state&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Here &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i]&lt;/code&gt; means the minimum cost incurred for the frog to reach &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; stone. So since a frog can reach &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; stone from any of these stones : &lt;code class=&quot;highlighter-rouge&quot;&gt;[i-1, i-2, i-3,...., i-K]&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Here &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DP[i]&lt;/code&gt; means the minimum cost incurred for the frog to reach &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;i&lt;/code&gt; stone. So since a frog can reach &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;i&lt;/code&gt; stone from any of these stones : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[i-1, i-2, i-3,...., i-K]&lt;/code&gt;.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]));&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;The final answer will be &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[n]&lt;/code&gt; which means the minimum cost incurred to reach &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt; stone. The time complexity will be &lt;code class=&quot;highlighter-rouge&quot;&gt;O(n^2)&lt;/code&gt; and the space complexity will be &lt;code class=&quot;highlighter-rouge&quot;&gt;O(n)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The final answer will be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DP[n]&lt;/code&gt; which means the minimum cost incurred to reach &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n&lt;/code&gt; stone. The time complexity will be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;O(n^2)&lt;/code&gt; and the space complexity will be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;O(n)&lt;/code&gt;.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -508,11 +628,11 @@ We can also see that since the answer for  &lt;code class=&quot;highlighter-roug
 
 &lt;p&gt;&lt;em&gt;Identifying the states&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Seeing the problem it is clear that the vacation consists of &lt;code class=&quot;highlighter-rouge&quot;&gt;N&lt;/code&gt; days, and we need to find the maximum total points. Also, Taro has some activities out of which he does one on &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; day and does not repeat for two or more consecutive days so the dp states will be &lt;code class=&quot;highlighter-rouge&quot;&gt;days&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;activity performed&lt;/code&gt; (since every activity has different points). Hence we create a DP array of &lt;code class=&quot;highlighter-rouge&quot;&gt;Days * activities&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Seeing the problem it is clear that the vacation consists of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;N&lt;/code&gt; days, and we need to find the maximum total points. Also, Taro has some activities out of which he does one on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;i&lt;/code&gt; day and does not repeat for two or more consecutive days so the dp states will be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;days&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;activity performed&lt;/code&gt; (since every activity has different points). Hence we create a DP array of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Days * activities&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Meaning of DP state&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i][j]&lt;/code&gt; would mean the maximum number of points on &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; day given that Taro performs &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt; activity. 
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DP[i][j]&lt;/code&gt; would mean the maximum number of points on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;i&lt;/code&gt; day given that Taro performs &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;j&lt;/code&gt; activity. 
 We also need to make sure that Taro does not repeat an activity so the solution will be something like below :&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;days&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
@@ -522,7 +642,7 @@ We also need to make sure that Taro does not repeat an activity so the solution 
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;The final answer will be max of &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[N][j]&lt;/code&gt; where N is total number of days and &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt; are all the activities.&lt;/p&gt;
+&lt;p&gt;The final answer will be max of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DP[N][j]&lt;/code&gt; where N is total number of days and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;j&lt;/code&gt; are all the activities.&lt;/p&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;&lt;strong&gt;D&lt;/strong&gt;      &lt;a href=&quot;https://atcoder.jp/contests/dp/tasks/dp_d&quot;&gt;KNAPSACK 1&lt;/a&gt;&lt;/p&gt;
@@ -533,15 +653,15 @@ We also need to make sure that Taro does not repeat an activity so the solution 
 
 &lt;p&gt;&lt;em&gt;Identifying the states&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Well it is the classical Knapsack and we can see that Taro has to choose some N items and maximum capacity is W. He has to have the maximum value and he only has two choices, either to pick an item and put it in his bag or not to pick the item. So the DP states will be &lt;code class=&quot;highlighter-rouge&quot;&gt;N&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;W&lt;/code&gt; since it only matters the number of items Taro picks up and the total weight in the knapsack.&lt;/p&gt;
+&lt;p&gt;Well it is the classical Knapsack and we can see that Taro has to choose some N items and maximum capacity is W. He has to have the maximum value and he only has two choices, either to pick an item and put it in his bag or not to pick the item. So the DP states will be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;N&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;W&lt;/code&gt; since it only matters the number of items Taro picks up and the total weight in the knapsack.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Meaning of DP state&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Here &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i][j]&lt;/code&gt; would mean the maximum &lt;strong&gt;value&lt;/strong&gt;* we get after choosing (yes or no) the first &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; items and maximum weight as &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt;. We get two options, either take an item or not to take the item.
+&lt;p&gt;Here &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DP[i][j]&lt;/code&gt; would mean the maximum &lt;strong&gt;value&lt;/strong&gt;* we get after choosing (yes or no) the first &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;i&lt;/code&gt; items and maximum weight as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;j&lt;/code&gt;. We get two options, either take an item or not to take the item.
 Hence it will be the maximum of:&lt;/p&gt;
 &lt;ol&gt;
-  &lt;li&gt;Taking the item: &lt;code class=&quot;highlighter-rouge&quot;&gt;val[i] + DP[i-1][j-wt[i]]&lt;/code&gt; (weight empty reduces)&lt;/li&gt;
-  &lt;li&gt;Not taking item : &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i-1][j]&lt;/code&gt; (weight empty is still the same)&lt;/li&gt;
+  &lt;li&gt;Taking the item: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;val[i] + DP[i-1][j-wt[i]]&lt;/code&gt; (weight empty reduces)&lt;/li&gt;
+  &lt;li&gt;Not taking item : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DP[i-1][j]&lt;/code&gt; (weight empty is still the same)&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
@@ -552,7 +672,7 @@ Hence it will be the maximum of:&lt;/p&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;The final answer will be &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[N][W]&lt;/code&gt; which means the maximum value with all the N items seen and maximum weight as W.&lt;/p&gt;
+&lt;p&gt;The final answer will be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DP[N][W]&lt;/code&gt; which means the maximum value with all the N items seen and maximum weight as W.&lt;/p&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;&lt;strong&gt;E&lt;/strong&gt;      &lt;a href=&quot;https://atcoder.jp/contests/dp/tasks/dp_e&quot;&gt;KNAPSACK 2&lt;/a&gt;&lt;/p&gt;
@@ -564,24 +684,24 @@ Hence it will be the maximum of:&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Identifying the states&lt;/em&gt; 
 This problem is just the same as the previous problem with a few changes. The limits have been changed. 
 Now,&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1 ≤ N ≤ 100
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1 ≤ N ≤ 100
 1 ≤ W ≤ 10^9
 1 ≤ w[i] ≤ W 
 1 ≤ v[i] ≤ 10^3
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;We can see that the value of W we used in the previous problem is &lt;code class=&quot;highlighter-rouge&quot;&gt;1e9&lt;/code&gt; which is too large for us to make it as a DP state, hence we will change the DP state from W to &lt;code class=&quot;highlighter-rouge&quot;&gt;V&lt;/code&gt; where &lt;code class=&quot;highlighter-rouge&quot;&gt;V&lt;/code&gt; means the maximum value (which can be just 1e3).&lt;/p&gt;
+&lt;p&gt;We can see that the value of W we used in the previous problem is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1e9&lt;/code&gt; which is too large for us to make it as a DP state, hence we will change the DP state from W to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;V&lt;/code&gt; where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;V&lt;/code&gt; means the maximum value (which can be just 1e3).&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Meaning of DP state&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Since we changed the state the meaning of DP state changes as well. 
-Now, &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i][j]&lt;/code&gt; is the minimum weight we can use to make maxValue as &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt; and by using &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; items (again choosing or not choosing is a choice).&lt;/p&gt;
+Now, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DP[i][j]&lt;/code&gt; is the minimum weight we can use to make maxValue as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;j&lt;/code&gt; and by using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;i&lt;/code&gt; items (again choosing or not choosing is a choice).&lt;/p&gt;
 
 &lt;p&gt;Just like the previous problem, we will either take the item or not take it.&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Taking the item: &lt;code class=&quot;highlighter-rouge&quot;&gt;wt[i] + DP[i-1][j-val[i]]&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Not taking item : &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i-1][j]&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Taking the item: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wt[i] + DP[i-1][j-val[i]]&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Not taking item : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DP[i-1][j]&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
@@ -594,7 +714,7 @@ Now, &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i][j]&lt;/code&gt; is th
   	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;The final answer will be the maximum &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt; in the &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[N][j]&lt;/code&gt; for which we got the &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[N][j] &amp;lt; W&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The final answer will be the maximum &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;j&lt;/code&gt; in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DP[N][j]&lt;/code&gt; for which we got the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DP[N][j] &amp;lt; W&lt;/code&gt;.&lt;/p&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;&lt;strong&gt;F&lt;/strong&gt;      &lt;a href=&quot;https://atcoder.jp/contests/dp/tasks/dp_f&quot;&gt;LCS&lt;/a&gt;&lt;/p&gt;
@@ -605,13 +725,13 @@ Now, &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i][j]&lt;/code&gt; is th
 
 &lt;p&gt;&lt;em&gt;Identifying the states&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Finding the longest common subsequence is a very well known problem for dynamic programming. We are given two strings &lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;t&lt;/code&gt; and we need to find the longest string that is subsequence to both s and t.
-Ofcourse, we will have an option to either include &lt;code class=&quot;highlighter-rouge&quot;&gt;s[i]&lt;/code&gt; or not and similar case with &lt;code class=&quot;highlighter-rouge&quot;&gt;t[j]&lt;/code&gt;
-Hence the two states will be &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Finding the longest common subsequence is a very well known problem for dynamic programming. We are given two strings &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;t&lt;/code&gt; and we need to find the longest string that is subsequence to both s and t.
+Ofcourse, we will have an option to either include &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s[i]&lt;/code&gt; or not and similar case with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;t[j]&lt;/code&gt;
+Hence the two states will be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;i&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;j&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Meaning of DP state&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i][j]&lt;/code&gt; would indicate length of longest subsequence with first &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; characters of &lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt; and first &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt; characters of &lt;code class=&quot;highlighter-rouge&quot;&gt;t&lt;/code&gt;. We first construct the DP array which would signify length of longest subsequence and then we trace back to get the actual string.&lt;/p&gt;
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DP[i][j]&lt;/code&gt; would indicate length of longest subsequence with first &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;i&lt;/code&gt; characters of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s&lt;/code&gt; and first &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;j&lt;/code&gt; characters of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;t&lt;/code&gt;. We first construct the DP array which would signify length of longest subsequence and then we trace back to get the actual string.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
@@ -653,7 +773,7 @@ Here the only state is &lt;em&gt;node number&lt;/em&gt; since we only need to ca
 
 &lt;p&gt;&lt;em&gt;Meaning of DP state&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;DP[a]&lt;/code&gt; would mean the length of longest directed path which starts at node &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt;. We will just use normal DFS but keep on updating the DP array accordingly.
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DP[a]&lt;/code&gt; would mean the length of longest directed path which starts at node &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a&lt;/code&gt;. We will just use normal DFS but keep on updating the DP array accordingly.
 The dfs function will look like this :&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;dfs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
@@ -680,13 +800,13 @@ The dfs function will look like this :&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Identifying the states&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;In this problem we need to calculate number of paths in going from &lt;code class=&quot;highlighter-rouge&quot;&gt;(1, 1)&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;(H, W)&lt;/code&gt; and we can only go if the the square is empty (has a &lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt;) and we cannot pass if there is a wall (&lt;code class=&quot;highlighter-rouge&quot;&gt;#&lt;/code&gt;). Also Taro can go only &lt;strong&gt;Down or Right&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;In this problem we need to calculate number of paths in going from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(1, 1)&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(H, W)&lt;/code&gt; and we can only go if the the square is empty (has a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.&lt;/code&gt;) and we cannot pass if there is a wall (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#&lt;/code&gt;). Also Taro can go only &lt;strong&gt;Down or Right&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;The states will be clearly &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt; which denote the length and width of a column.&lt;/p&gt;
+&lt;p&gt;The states will be clearly &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;i&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;j&lt;/code&gt; which denote the length and width of a column.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Meaning of DP state&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Here &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[i][j]&lt;/code&gt; would denote the number of paths from &lt;code class=&quot;highlighter-rouge&quot;&gt;(1, 1)&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;(i, j)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Here &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DP[i][j]&lt;/code&gt; would denote the number of paths from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(1, 1)&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(i, j)&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;We can see in the below image how we are making our dp array. to reach every (i, j) the number of options are (i, j-1) + (i-1, j).&lt;/p&gt;
 
@@ -700,7 +820,7 @@ The dfs function will look like this :&lt;/p&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;The final answer will be ofcourse &lt;code class=&quot;highlighter-rouge&quot;&gt;DP[n][m]&lt;/code&gt; which means the number of ways to reach &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt; row and &lt;code class=&quot;highlighter-rouge&quot;&gt;m&lt;/code&gt; column.&lt;/p&gt;
+&lt;p&gt;The final answer will be ofcourse &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DP[n][m]&lt;/code&gt; which means the number of ways to reach &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n&lt;/code&gt; row and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m&lt;/code&gt; column.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -1387,14 +1507,14 @@ The reason, why I am focussing on the history of currency, is because I want you
 
 &lt;p&gt;By centralized, what I mean is that everytime there is an authority that is responsible for issuing the currency. Someone who says that, Yes, I am accountable for this currency and this currency is valid. Be it a king, who imprints the coin with its royal seal, or the government. The transactions have always been based on &lt;strong&gt;Trust&lt;/strong&gt;. If I pay ₹100 to X, the bank issuing the currency is responsible to pay that ₹100 to X. Hence the currency so far being used is based on Trust, and is Centralized. Due to this we are always bound to law, cannot be innovative and creative with our money, always under control and at a risk of interference. Also, the banks would charge some amount for transactions as &lt;em&gt;transaction fee&lt;/em&gt;. The point to be noted is that, crypto currency is not flawless, so it just provides as an alternative currency as of now. Due to all this, a currency was needed which was not based on trust, and is not centralized.&lt;/p&gt;
 &lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Cryptocurrency is a decentralized trustless verification system + Math.&lt;/code&gt;&lt;/p&gt;
+  &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cryptocurrency is a decentralized trustless verification system + Math.&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Now, one thing I would like to mention here is that just like normal currency, you need not know how cryptocurrency is made or how it works to use it. Diving into the technical details, let us understand everything with an example.&lt;/p&gt;
 
 &lt;p&gt;Say there are 4 friends A, B, C and D who hang out pretty often, and hence they need a system to keep track of money. What they do is, they keep a ledger and add all the transactions in it. At the end of the month they take all the transactions and then total it up and settle it and pay accordingly.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* ledger *
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* ledger *
 A gives B 200 rupees
 B gives C 500 rupees
 C gives A 1000 rupees
@@ -1402,7 +1522,7 @@ D gives B 300 rupees
 ..............and so on
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The catch here is that the ledger is accessible to all four of them, i.e anyone can add or delete the transactions. D might just add that, &lt;code class=&quot;highlighter-rouge&quot;&gt;C gives D 500 rupees&lt;/code&gt;, as there is no one stopping D. He can keep on adding fraudulent transactions until someone catches him, and resolve this. So, what we need is a system to verify that the correct person is writing the ledger. The solution to this is &lt;em&gt;Digital Signatures&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The catch here is that the ledger is accessible to all four of them, i.e anyone can add or delete the transactions. D might just add that, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C gives D 500 rupees&lt;/code&gt;, as there is no one stopping D. He can keep on adding fraudulent transactions until someone catches him, and resolve this. So, what we need is a system to verify that the correct person is writing the ledger. The solution to this is &lt;em&gt;Digital Signatures&lt;/em&gt;.&lt;/p&gt;
 
 &lt;p&gt;Before I start with explaining what Digital Signatures are, I would like to mention Cryptographic Hashing. Hashing is a method that converts any form of data in a unique string of text. Typically the output of every hash function is a fixed length of string. Now what cryptographic hash functions are, are hash functions which cannot be reversed. 
 So cryptographic hash functions will take any input, no matter how big or small, and output a fixed length of string which is irreversible. It is practically impossible to determine what input caused that hash except hit and trial. Now coming to digital signatures, these are used to verify the identity of the person signing a message. Through digital signatures we can be sure that the person signing the message is actually the person writing the message. It mainly consists of &lt;em&gt;private key and public key.&lt;/em&gt; Private key can be thought of your PIN card and public key as your A/C number. You keep the private key with yourself, but can give everyone your public key. Now to make a transaction, you write a message and encrypt that with your private key. And you send the hash message to the receiver. The receiver would see the hashed message, and verify if it was sent by you using the public key. The cryptographic hash function used is mainly SHA-256. The bit string generated is 256 digits long, i.e there can be 2&lt;sup&gt;256&lt;/sup&gt; combinations. 2 &lt;sup&gt;256&lt;/sup&gt; is an extremely large large number.&lt;/p&gt;
@@ -1411,7 +1531,7 @@ So cryptographic hash functions will take any input, no matter how big or small,
 
 &lt;p&gt;The functions would look something like this:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dig_sign(message, private key) -&amp;gt; signature
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dig_sign(message, private key) -&amp;gt; signature
 
 verify(message, signature, public key) -&amp;gt; true/false
 
@@ -1423,7 +1543,7 @@ verify(message, signature, public key) -&amp;gt; true/false
 
 &lt;p&gt;One thing which you might have noticed, is that this system of ledger that I just explained is centralized as well, which I had focussed on earlier. We have found a way to secure the transactions but there is only one ledger, and everyone is making transactions in their own ledger. As I had mentioned earlier, the cryptocurrency is decentralized. To make this currency decentralized, we will give one copy of the ledger to all four friends (A B C and D). Now this ledger becomes a decentralized currency.&lt;/p&gt;
 
-&lt;p&gt;So now, all have personal copies of the ledger, and now adding the transaction has become a different process. Like they can still add the transaction in their personal ledger, but it wont match with the ledger of someone else. Say, B adds &lt;code class=&quot;highlighter-rouge&quot;&gt;B gave ₹5000 to C&lt;/code&gt; to his ledger, but that information wont be added on the ledger of A or C or D. To have all the ledgers on the same track, one must broadcast their ledger so that everyone in the network updates their ledgers with the most recent transactions. So, B would update its ledger, and then broadcast his ledger so that everyone verifies the transaction and update their ledgers as well. Hence through this example, we have made a trustless decentralized verification system.&lt;/p&gt;
+&lt;p&gt;So now, all have personal copies of the ledger, and now adding the transaction has become a different process. Like they can still add the transaction in their personal ledger, but it wont match with the ledger of someone else. Say, B adds &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;B gave ₹5000 to C&lt;/code&gt; to his ledger, but that information wont be added on the ledger of A or C or D. To have all the ledgers on the same track, one must broadcast their ledger so that everyone in the network updates their ledgers with the most recent transactions. So, B would update its ledger, and then broadcast his ledger so that everyone verifies the transaction and update their ledgers as well. Hence through this example, we have made a trustless decentralized verification system.&lt;/p&gt;
 
 &lt;p&gt;A big problem with this system is that, what if D broadcasts that he has sent 500 rupees to A, and at the same time, it broadcasts that he has sent 500 rupees to B. This is how D can double spend his money. This problem has been address in the original &lt;a href=&quot;https://bitcoin.org/bitcoin.pdf&quot;&gt;Bitcoin Paper&lt;/a&gt;.&lt;/p&gt;
 
@@ -1431,7 +1551,7 @@ verify(message, signature, public key) -&amp;gt; true/false
 
 &lt;p&gt;&lt;img src=&quot;/images/bitcoin1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;The proof of work involves scanning for a value that when hashed, such as with SHA-256 the hash begins with a number of &lt;code class=&quot;highlighter-rouge&quot;&gt;n zero bits&lt;/code&gt;. 
+&lt;p&gt;The proof of work involves scanning for a value that when hashed, such as with SHA-256 the hash begins with a number of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n zero bits&lt;/code&gt;. 
 For our network, we implement the proof of work by incrementing a nonce in the block until a value is found that gives the blocks hash the required zero bits. Finding this number is called &lt;em&gt;mining&lt;/em&gt;, and the people who do this are called &lt;em&gt;miners&lt;/em&gt;. The paper also said to trust that chain with the most number of nodes, hence while updating their ledger, they also keep track of all other chains, and then eliminate the smaller chains as miners start working on the longest chain. 
 Proof-of-work is essentially one-CPU-one-vote. The majority decision is represented by the longest chain, which has the greatest proof-of-work effort invested in it. If a majority of CPU power is controlled by honest nodes, the honest chain will grow the fastest and outpace any competing chains. To modify a past block, an attacker would have to redo the proof-of-work of the block and all blocks after it and then catch up with and surpass the work of the honest nodes the number of zeros vary a lot. What the miner gets in return is a block reward. With every block added to the network, the total amount of money increases in the economy, as there is no one issuing the block reward. Hence through this proof of work, it is nearly impossible to create fraudulent transactions. This miniature lottery is such that there is one winner every 10 minutes (in case of  bitcoin). This time may change for other cryptocurrencies.&lt;/p&gt;
 
@@ -1586,7 +1706,7 @@ controller.&lt;/em&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;uint32_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;uint32_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;c1&quot;&gt;// Decrement nCount value&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -1705,51 +1825,6 @@ to see how this works add a delay in between the showRow(i); something like This
         
         
         <category>stm8s</category>
-        
-      </item>
-    
-      <item>
-        <title>Sarcastic or not? (1/2)</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;Benzema is the best player ever.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;This is 100% pure sarcasm. Okay, there is no such thing as &lt;em&gt;100% pure sarcasm&lt;/em&gt; but what there is are sarcastic and non sarcastic sentences.
-For example, as soon as you read the above statement about Benzema, you could decipher that this is a statement which is definitely not true and is somewhat ironic in a mocking way. Someone who watches football, and has game sense would know that this sentence was a satirical remark. Someone who does not watch football, might think of this statement as &lt;span style=&quot;color: #1eb300;&quot;&gt; True. &lt;/span&gt; Hence we can say, that sarcasm is relative and highly depends on the context.&lt;/p&gt;
-
-&lt;p&gt;Try to understand the complexity of this problem, we as humans, find it really difficult to understand sarcasm, like we can only understand sarcasm once we have an idea about what is the context it is being used in, and the body language, the tone of the voice. If we closely observe someone saying a sarcastic sentence, the pitch of the voice varies. When English speakers remark sarcasm with the word  &lt;em&gt;“Thanks!”&lt;/em&gt;, they often use a nasal tone. The nasal tone shows a connection between sarcasm and extreme disgust. It is like the speaker does not only want to remove the word from the mouth but also from the nose! So so many factors contributing to sarcasm makes it really really difficult to understand sarcasm for us, as humans, let alone computers.&lt;/p&gt;
-
-&lt;p&gt;I took the NLP class this semester at college, which dealt with understanding how Natural Language Processing works and reading and understanding research papers which was something that I was not used to, as bookish knowledge and Youtube was the only source of knowledge so far. TBH it was the most interesting class in this semester compared to my otherwise boring core Electrical Engineering subjects &lt;em&gt;literally very boring, I slept through most of my lectures &lt;del&gt; or maybe it is because of the faculty &lt;/del&gt;&lt;/em&gt; Coming back to the point, I decided to make a project using the Natural Language Processing techniques learnt in this class and the ML algorithms to &lt;span class=&quot;bg-dark-gray white&quot; style=&quot;padding:2 px;&quot;&gt; Detect Sarcasm in Tweets. &lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;I basically aimed to create something to solve the complex problem of detecting sarcasm in the tweets. Machines are typically programmed to read the text as it is. It understands anything based strictly on what it is. So, detecting sarcasm was a difficult task. The reason why I chose twitter was because of the abundance of data available for the training of the supervised model. The main motivation behind understanding sarcasm using machines was in order to have a better understanding of one’s data. So that the product reviewing system which scrape the websites can collect better data to analyze their product impact, and so that one can actually understand what the other person is trying to say. As there is no vocabulary defined for sarcasm, it becomes a difficult task, that is something more complicated than a simple classification technique like a &lt;em&gt;Spam Detection ALgorithm&lt;/em&gt; which would simply learn the vocabulary associated with the spam emails and filter them from the rest.&lt;/p&gt;
-
-&lt;p&gt;Sarcasm has been a widely studied topic in linguistics. Due to the advancement in technology and availability of data across the world, Sarcasm Detection has witnessed some great interest from the sentiment analysis community and become an active research area. Basically, what we are trying to achieve can be summed down as follow:&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;Aiming to implement a model that can detect Sarcasm in Tweets, using NLP and ML techniques.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;methodology&quot;&gt;Methodology&lt;/h3&gt;
-
-&lt;p&gt;The main idea behind understanding sarcasm was that the first part of a sarcastic sentence would have more Positive sentiment as compared to the second part which would be inclined towards more Negative Sentiment. Or we can say that, if (+)ve Sentiment  and (-)ve Sentiment words appear in close proximity, the sentence might be sarcastic.&lt;/p&gt;
-
-&lt;p&gt;Taking an example: &lt;span style=&quot;padding:2 px; color: #595959&quot;&gt; Benzema is the best. &lt;/span&gt; We see that BENZEMA is a negative sentiment&lt;small&gt;(trust me)&lt;/small&gt; and “is the best” positive. Okay, not the best of the examples; so a better example will be something like this &lt;span style=&quot;padding:2 px; color: #595959;&quot;&gt; I am so happy that I failed again. &lt;/span&gt;. If we analyze the statement: positive sentiment will be &lt;em&gt;“happy”&lt;/em&gt; and the word with negative sentiment will be &lt;em&gt;“failed”&lt;/em&gt;. They are in close proximity and hence we might say that this is a sarcastic sentence. We choose this as one of the features &lt;small&gt; (to be discussed later) &lt;/small&gt; and let the classifier decide. This sentiment based approach is the key part of the method. The complete methodology can be somewhat visualized as below:&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;&lt;img src=&quot;https://i.imgur.com/wlByWoL.png&quot; alt=&quot;method&quot; /&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;I will be explaining the implementation part using the above image in detail in the next part &lt;small&gt; will come really soon &lt;/small&gt;. Thanks for reading this.&lt;/p&gt;
-
-&lt;p&gt;Have a good day. :)&lt;/p&gt;
-</description>
-        <pubDate>Wed, 25 Apr 2018 16:51:29 +0530</pubDate>
-        <link>http://localhost:4000/nlp/sarcasm-detection</link>
-        <guid isPermaLink="true">http://localhost:4000/nlp/sarcasm-detection</guid>
-        
-        <category>Machine Learning</category>
-        
-        <category>project</category>
-        
-        
-        <category>nlp</category>
         
       </item>
     

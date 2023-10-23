@@ -9,6 +9,15 @@
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
   <link rel="canonical" href="http://localhost:4000/iot/homeAutomation">
   <link rel="alternate" type="application/rss+xml" title="Vaibhav Ahuja" href="http://localhost:4000/feed.xml">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2WNHZ5BJ2N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2WNHZ5BJ2N');
+</script>
 </head>
 
   <body>
@@ -45,7 +54,7 @@ I sketched out the architecture, before actually starting with the coding part o
 <p><em><img src="/images/homeautodiag.png?raw=true" alt="architecture" /></em></p>
 
 <p>Now, that everything was in place, I ordered a nodeMCU ESP8266, a relay, some jumper wires, and that is it.
-I used the arduino IDE itself for programming the nodeMCU. Luckily, tons of libraries exist for running nodeMCU using the arduino IDE. Parallely I created an API with two endpoints. The <code class="highlighter-rouge">GET</code> request would be used by the microcontroller to get the state of the switch, and the <code class="highlighter-rouge">PATCH</code> request, will toggle the state -&gt;  <code class="highlighter-rouge">state = 1 - state</code>. I had connected a free MongoDB database with just one entry, and hosted the API on a free (<em>making it low cost :P</em>) server by Heroku. 
+I used the arduino IDE itself for programming the nodeMCU. Luckily, tons of libraries exist for running nodeMCU using the arduino IDE. Parallely I created an API with two endpoints. The <code class="language-plaintext highlighter-rouge">GET</code> request would be used by the microcontroller to get the state of the switch, and the <code class="language-plaintext highlighter-rouge">PATCH</code> request, will toggle the state -&gt;  <code class="language-plaintext highlighter-rouge">state = 1 - state</code>. I had connected a free MongoDB database with just one entry, and hosted the API on a free (<em>making it low cost :P</em>) server by Heroku. 
 I also gave a neat UI which would send a patch reuest for toggling the state, and hosted it on github pages. <a href="https://vaibhavahuja.github.io/homeautoui/">Here is the UI</a>. Tapping on the button would turn the lamp in my room on/off.</p>
 
 <p>Below is the code for the setup method.</p>
@@ -74,7 +83,7 @@ I also gave a neat UI which would send a patch reuest for toggling the state, an
 
 <p>Now that the wifi is connected and the pins are in place, coming to the loop method.</p>
 
-<p>The below code sends a <code class="highlighter-rouge">GET</code> request to the server and stores the output in the line variable.</p>
+<p>The below code sends a <code class="language-plaintext highlighter-rouge">GET</code> request to the server and stores the output in the line variable.</p>
 
 <figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="n">httpsClient</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="s">"GET "</span><span class="p">)</span> <span class="o">+</span> <span class="n">Link</span> <span class="o">+</span> <span class="s">" HTTP/1.1</span><span class="se">\r\n</span><span class="s">"</span> <span class="o">+</span>
                <span class="s">"Host: "</span> <span class="o">+</span> <span class="n">host</span> <span class="o">+</span> <span class="s">"</span><span class="se">\r\n</span><span class="s">"</span> <span class="o">+</span>               
@@ -133,5 +142,17 @@ I also gave a neat UI which would send a patch reuest for toggling the state, an
       </div>
     </div>
     
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'G-2WNHZ5BJ2N', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
   </body>
 </html>
