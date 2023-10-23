@@ -9,6 +9,15 @@
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
   <link rel="canonical" href="http://localhost:4000/codes/atcoder-dp">
   <link rel="alternate" type="application/rss+xml" title="Vaibhav Ahuja" href="http://localhost:4000/feed.xml">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2WNHZ5BJ2N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2WNHZ5BJ2N');
+</script>
 </head>
 
   <body>
@@ -56,16 +65,16 @@ I will be writing about the thought I had while identifying the state, what exac
 <p><em>Identifying the states</em></p>
 
 <p>We can see that in reaching from one stone to another, only the stone number changes and we can get the height of any stone number (an array of heights is given), so there will be only one state that is : <strong>stone number</strong>
-cost of <code class="highlighter-rouge">|h[i] - h[j]|</code> is incurred when we jump from i<sup>th</sup> stone to j<sup>th</sup> stone</p>
+cost of <code class="language-plaintext highlighter-rouge">|h[i] - h[j]|</code> is incurred when we jump from i<sup>th</sup> stone to j<sup>th</sup> stone</p>
 
 <p><em>Meaning of DP state</em></p>
 
-<p>Here <code class="highlighter-rouge">DP[i]</code> means the minimum cost incurred for the frog to reach i<sup>th</sup> stone. So since a frog can reach i<sup>th</sup> stone only from (i-1)<sup>th</sup> stone and (i-2)<sup>th</sup> stone the dp relation will be as follow:</p>
+<p>Here <code class="language-plaintext highlighter-rouge">DP[i]</code> means the minimum cost incurred for the frog to reach i<sup>th</sup> stone. So since a frog can reach i<sup>th</sup> stone only from (i-1)<sup>th</sup> stone and (i-2)<sup>th</sup> stone the dp relation will be as follow:</p>
 
 <figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">((</span><span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">abs</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])),</span> <span class="p">(</span><span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">abs</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">]))</span></code></pre></figure>
 
-<p>The final answer will be <code class="highlighter-rouge">DP[n]</code> which means the minimum cost incurred to reach n<sup>th</sup> stone. 
-We can also see that since the answer for  <code class="highlighter-rouge">i</code> is only dependent on <code class="highlighter-rouge">(i-1)</code> and <code class="highlighter-rouge">(i-2)</code> stone we can do it in constant space.</p>
+<p>The final answer will be <code class="language-plaintext highlighter-rouge">DP[n]</code> which means the minimum cost incurred to reach n<sup>th</sup> stone. 
+We can also see that since the answer for  <code class="language-plaintext highlighter-rouge">i</code> is only dependent on <code class="language-plaintext highlighter-rouge">(i-1)</code> and <code class="language-plaintext highlighter-rouge">(i-2)</code> stone we can do it in constant space.</p>
 
 <hr />
 
@@ -77,17 +86,17 @@ We can also see that since the answer for  <code class="highlighter-rouge">i</co
 
 <p><em>Identifying the states</em></p>
 
-<p>This problem is similar to previous one however now the frog can jump from any stonein the range <code class="highlighter-rouge">[i-1, i-2, i-3,...., i-K]</code> with the same <code class="highlighter-rouge">|h[i]-h[j]|</code> cost incurred. Again the state will be the <strong>stone number</strong> since only the stone number matters.</p>
+<p>This problem is similar to previous one however now the frog can jump from any stonein the range <code class="language-plaintext highlighter-rouge">[i-1, i-2, i-3,...., i-K]</code> with the same <code class="language-plaintext highlighter-rouge">|h[i]-h[j]|</code> cost incurred. Again the state will be the <strong>stone number</strong> since only the stone number matters.</p>
 
 <p><em>Meaning of DP state</em></p>
 
-<p>Here <code class="highlighter-rouge">DP[i]</code> means the minimum cost incurred for the frog to reach <code class="highlighter-rouge">i</code> stone. So since a frog can reach <code class="highlighter-rouge">i</code> stone from any of these stones : <code class="highlighter-rouge">[i-1, i-2, i-3,...., i-K]</code>.</p>
+<p>Here <code class="language-plaintext highlighter-rouge">DP[i]</code> means the minimum cost incurred for the frog to reach <code class="language-plaintext highlighter-rouge">i</code> stone. So since a frog can reach <code class="language-plaintext highlighter-rouge">i</code> stone from any of these stones : <code class="language-plaintext highlighter-rouge">[i-1, i-2, i-3,...., i-K]</code>.</p>
 
 <figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="n">K</span><span class="p">);</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
     <span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="p">(</span><span class="n">DP</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">abs</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">h</span><span class="p">[</span><span class="n">j</span><span class="p">]));</span>
 <span class="p">}</span></code></pre></figure>
 
-<p>The final answer will be <code class="highlighter-rouge">DP[n]</code> which means the minimum cost incurred to reach <code class="highlighter-rouge">n</code> stone. The time complexity will be <code class="highlighter-rouge">O(n^2)</code> and the space complexity will be <code class="highlighter-rouge">O(n)</code>.</p>
+<p>The final answer will be <code class="language-plaintext highlighter-rouge">DP[n]</code> which means the minimum cost incurred to reach <code class="language-plaintext highlighter-rouge">n</code> stone. The time complexity will be <code class="language-plaintext highlighter-rouge">O(n^2)</code> and the space complexity will be <code class="language-plaintext highlighter-rouge">O(n)</code>.</p>
 
 <hr />
 
@@ -99,11 +108,11 @@ We can also see that since the answer for  <code class="highlighter-rouge">i</co
 
 <p><em>Identifying the states</em></p>
 
-<p>Seeing the problem it is clear that the vacation consists of <code class="highlighter-rouge">N</code> days, and we need to find the maximum total points. Also, Taro has some activities out of which he does one on <code class="highlighter-rouge">i</code> day and does not repeat for two or more consecutive days so the dp states will be <code class="highlighter-rouge">days</code> and <code class="highlighter-rouge">activity performed</code> (since every activity has different points). Hence we create a DP array of <code class="highlighter-rouge">Days * activities</code>.</p>
+<p>Seeing the problem it is clear that the vacation consists of <code class="language-plaintext highlighter-rouge">N</code> days, and we need to find the maximum total points. Also, Taro has some activities out of which he does one on <code class="language-plaintext highlighter-rouge">i</code> day and does not repeat for two or more consecutive days so the dp states will be <code class="language-plaintext highlighter-rouge">days</code> and <code class="language-plaintext highlighter-rouge">activity performed</code> (since every activity has different points). Hence we create a DP array of <code class="language-plaintext highlighter-rouge">Days * activities</code>.</p>
 
 <p><em>Meaning of DP state</em></p>
 
-<p><code class="highlighter-rouge">DP[i][j]</code> would mean the maximum number of points on <code class="highlighter-rouge">i</code> day given that Taro performs <code class="highlighter-rouge">j</code> activity. 
+<p><code class="language-plaintext highlighter-rouge">DP[i][j]</code> would mean the maximum number of points on <code class="language-plaintext highlighter-rouge">i</code> day given that Taro performs <code class="language-plaintext highlighter-rouge">j</code> activity. 
 We also need to make sure that Taro does not repeat an activity so the solution will be something like below :</p>
 
 <figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">days</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
@@ -113,7 +122,7 @@ We also need to make sure that Taro does not repeat an activity so the solution 
     <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
-<p>The final answer will be max of <code class="highlighter-rouge">DP[N][j]</code> where N is total number of days and <code class="highlighter-rouge">j</code> are all the activities.</p>
+<p>The final answer will be max of <code class="language-plaintext highlighter-rouge">DP[N][j]</code> where N is total number of days and <code class="language-plaintext highlighter-rouge">j</code> are all the activities.</p>
 <hr />
 
 <p><strong>D</strong>      <a href="https://atcoder.jp/contests/dp/tasks/dp_d">KNAPSACK 1</a></p>
@@ -124,15 +133,15 @@ We also need to make sure that Taro does not repeat an activity so the solution 
 
 <p><em>Identifying the states</em></p>
 
-<p>Well it is the classical Knapsack and we can see that Taro has to choose some N items and maximum capacity is W. He has to have the maximum value and he only has two choices, either to pick an item and put it in his bag or not to pick the item. So the DP states will be <code class="highlighter-rouge">N</code> and <code class="highlighter-rouge">W</code> since it only matters the number of items Taro picks up and the total weight in the knapsack.</p>
+<p>Well it is the classical Knapsack and we can see that Taro has to choose some N items and maximum capacity is W. He has to have the maximum value and he only has two choices, either to pick an item and put it in his bag or not to pick the item. So the DP states will be <code class="language-plaintext highlighter-rouge">N</code> and <code class="language-plaintext highlighter-rouge">W</code> since it only matters the number of items Taro picks up and the total weight in the knapsack.</p>
 
 <p><em>Meaning of DP state</em></p>
 
-<p>Here <code class="highlighter-rouge">DP[i][j]</code> would mean the maximum <strong>value</strong>* we get after choosing (yes or no) the first <code class="highlighter-rouge">i</code> items and maximum weight as <code class="highlighter-rouge">j</code>. We get two options, either take an item or not to take the item.
+<p>Here <code class="language-plaintext highlighter-rouge">DP[i][j]</code> would mean the maximum <strong>value</strong>* we get after choosing (yes or no) the first <code class="language-plaintext highlighter-rouge">i</code> items and maximum weight as <code class="language-plaintext highlighter-rouge">j</code>. We get two options, either take an item or not to take the item.
 Hence it will be the maximum of:</p>
 <ol>
-  <li>Taking the item: <code class="highlighter-rouge">val[i] + DP[i-1][j-wt[i]]</code> (weight empty reduces)</li>
-  <li>Not taking item : <code class="highlighter-rouge">DP[i-1][j]</code> (weight empty is still the same)</li>
+  <li>Taking the item: <code class="language-plaintext highlighter-rouge">val[i] + DP[i-1][j-wt[i]]</code> (weight empty reduces)</li>
+  <li>Not taking item : <code class="language-plaintext highlighter-rouge">DP[i-1][j]</code> (weight empty is still the same)</li>
 </ol>
 
 <figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
@@ -143,7 +152,7 @@ Hence it will be the maximum of:</p>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
-<p>The final answer will be <code class="highlighter-rouge">DP[N][W]</code> which means the maximum value with all the N items seen and maximum weight as W.</p>
+<p>The final answer will be <code class="language-plaintext highlighter-rouge">DP[N][W]</code> which means the maximum value with all the N items seen and maximum weight as W.</p>
 <hr />
 
 <p><strong>E</strong>      <a href="https://atcoder.jp/contests/dp/tasks/dp_e">KNAPSACK 2</a></p>
@@ -155,24 +164,24 @@ Hence it will be the maximum of:</p>
 <p><em>Identifying the states</em> 
 This problem is just the same as the previous problem with a few changes. The limits have been changed. 
 Now,</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 ≤ N ≤ 100
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 ≤ N ≤ 100
 1 ≤ W ≤ 10^9
 1 ≤ w[i] ≤ W 
 1 ≤ v[i] ≤ 10^3
 </code></pre></div></div>
 
-<p>We can see that the value of W we used in the previous problem is <code class="highlighter-rouge">1e9</code> which is too large for us to make it as a DP state, hence we will change the DP state from W to <code class="highlighter-rouge">V</code> where <code class="highlighter-rouge">V</code> means the maximum value (which can be just 1e3).</p>
+<p>We can see that the value of W we used in the previous problem is <code class="language-plaintext highlighter-rouge">1e9</code> which is too large for us to make it as a DP state, hence we will change the DP state from W to <code class="language-plaintext highlighter-rouge">V</code> where <code class="language-plaintext highlighter-rouge">V</code> means the maximum value (which can be just 1e3).</p>
 
 <p><em>Meaning of DP state</em></p>
 
 <p>Since we changed the state the meaning of DP state changes as well. 
-Now, <code class="highlighter-rouge">DP[i][j]</code> is the minimum weight we can use to make maxValue as <code class="highlighter-rouge">j</code> and by using <code class="highlighter-rouge">i</code> items (again choosing or not choosing is a choice).</p>
+Now, <code class="language-plaintext highlighter-rouge">DP[i][j]</code> is the minimum weight we can use to make maxValue as <code class="language-plaintext highlighter-rouge">j</code> and by using <code class="language-plaintext highlighter-rouge">i</code> items (again choosing or not choosing is a choice).</p>
 
 <p>Just like the previous problem, we will either take the item or not take it.</p>
 
 <ol>
-  <li>Taking the item: <code class="highlighter-rouge">wt[i] + DP[i-1][j-val[i]]</code></li>
-  <li>Not taking item : <code class="highlighter-rouge">DP[i-1][j]</code></li>
+  <li>Taking the item: <code class="language-plaintext highlighter-rouge">wt[i] + DP[i-1][j-val[i]]</code></li>
+  <li>Not taking item : <code class="language-plaintext highlighter-rouge">DP[i-1][j]</code></li>
 </ol>
 
 <figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
@@ -185,7 +194,7 @@ Now, <code class="highlighter-rouge">DP[i][j]</code> is the minimum weight we ca
   	<span class="p">}</span>
   <span class="p">}</span></code></pre></figure>
 
-<p>The final answer will be the maximum <code class="highlighter-rouge">j</code> in the <code class="highlighter-rouge">DP[N][j]</code> for which we got the <code class="highlighter-rouge">DP[N][j] &lt; W</code>.</p>
+<p>The final answer will be the maximum <code class="language-plaintext highlighter-rouge">j</code> in the <code class="language-plaintext highlighter-rouge">DP[N][j]</code> for which we got the <code class="language-plaintext highlighter-rouge">DP[N][j] &lt; W</code>.</p>
 <hr />
 
 <p><strong>F</strong>      <a href="https://atcoder.jp/contests/dp/tasks/dp_f">LCS</a></p>
@@ -196,13 +205,13 @@ Now, <code class="highlighter-rouge">DP[i][j]</code> is the minimum weight we ca
 
 <p><em>Identifying the states</em></p>
 
-<p>Finding the longest common subsequence is a very well known problem for dynamic programming. We are given two strings <code class="highlighter-rouge">s</code> and <code class="highlighter-rouge">t</code> and we need to find the longest string that is subsequence to both s and t.
-Ofcourse, we will have an option to either include <code class="highlighter-rouge">s[i]</code> or not and similar case with <code class="highlighter-rouge">t[j]</code>
-Hence the two states will be <code class="highlighter-rouge">i</code> and <code class="highlighter-rouge">j</code>.</p>
+<p>Finding the longest common subsequence is a very well known problem for dynamic programming. We are given two strings <code class="language-plaintext highlighter-rouge">s</code> and <code class="language-plaintext highlighter-rouge">t</code> and we need to find the longest string that is subsequence to both s and t.
+Ofcourse, we will have an option to either include <code class="language-plaintext highlighter-rouge">s[i]</code> or not and similar case with <code class="language-plaintext highlighter-rouge">t[j]</code>
+Hence the two states will be <code class="language-plaintext highlighter-rouge">i</code> and <code class="language-plaintext highlighter-rouge">j</code>.</p>
 
 <p><em>Meaning of DP state</em></p>
 
-<p>The <code class="highlighter-rouge">DP[i][j]</code> would indicate length of longest subsequence with first <code class="highlighter-rouge">i</code> characters of <code class="highlighter-rouge">s</code> and first <code class="highlighter-rouge">j</code> characters of <code class="highlighter-rouge">t</code>. We first construct the DP array which would signify length of longest subsequence and then we trace back to get the actual string.</p>
+<p>The <code class="language-plaintext highlighter-rouge">DP[i][j]</code> would indicate length of longest subsequence with first <code class="language-plaintext highlighter-rouge">i</code> characters of <code class="language-plaintext highlighter-rouge">s</code> and first <code class="language-plaintext highlighter-rouge">j</code> characters of <code class="language-plaintext highlighter-rouge">t</code>. We first construct the DP array which would signify length of longest subsequence and then we trace back to get the actual string.</p>
 
 <figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
@@ -244,7 +253,7 @@ Here the only state is <em>node number</em> since we only need to calculate that
 
 <p><em>Meaning of DP state</em></p>
 
-<p><code class="highlighter-rouge">DP[a]</code> would mean the length of longest directed path which starts at node <code class="highlighter-rouge">a</code>. We will just use normal DFS but keep on updating the DP array accordingly.
+<p><code class="language-plaintext highlighter-rouge">DP[a]</code> would mean the length of longest directed path which starts at node <code class="language-plaintext highlighter-rouge">a</code>. We will just use normal DFS but keep on updating the DP array accordingly.
 The dfs function will look like this :</p>
 
 <figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">){</span>
@@ -271,13 +280,13 @@ The dfs function will look like this :</p>
 
 <p><em>Identifying the states</em></p>
 
-<p>In this problem we need to calculate number of paths in going from <code class="highlighter-rouge">(1, 1)</code> to <code class="highlighter-rouge">(H, W)</code> and we can only go if the the square is empty (has a <code class="highlighter-rouge">.</code>) and we cannot pass if there is a wall (<code class="highlighter-rouge">#</code>). Also Taro can go only <strong>Down or Right</strong>.</p>
+<p>In this problem we need to calculate number of paths in going from <code class="language-plaintext highlighter-rouge">(1, 1)</code> to <code class="language-plaintext highlighter-rouge">(H, W)</code> and we can only go if the the square is empty (has a <code class="language-plaintext highlighter-rouge">.</code>) and we cannot pass if there is a wall (<code class="language-plaintext highlighter-rouge">#</code>). Also Taro can go only <strong>Down or Right</strong>.</p>
 
-<p>The states will be clearly <code class="highlighter-rouge">i</code> and <code class="highlighter-rouge">j</code> which denote the length and width of a column.</p>
+<p>The states will be clearly <code class="language-plaintext highlighter-rouge">i</code> and <code class="language-plaintext highlighter-rouge">j</code> which denote the length and width of a column.</p>
 
 <p><em>Meaning of DP state</em></p>
 
-<p>Here <code class="highlighter-rouge">DP[i][j]</code> would denote the number of paths from <code class="highlighter-rouge">(1, 1)</code> to <code class="highlighter-rouge">(i, j)</code>.</p>
+<p>Here <code class="language-plaintext highlighter-rouge">DP[i][j]</code> would denote the number of paths from <code class="language-plaintext highlighter-rouge">(1, 1)</code> to <code class="language-plaintext highlighter-rouge">(i, j)</code>.</p>
 
 <p>We can see in the below image how we are making our dp array. to reach every (i, j) the number of options are (i, j-1) + (i-1, j).</p>
 
@@ -291,7 +300,7 @@ The dfs function will look like this :</p>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
-<p>The final answer will be ofcourse <code class="highlighter-rouge">DP[n][m]</code> which means the number of ways to reach <code class="highlighter-rouge">n</code> row and <code class="highlighter-rouge">m</code> column.</p>
+<p>The final answer will be ofcourse <code class="language-plaintext highlighter-rouge">DP[n][m]</code> which means the number of ways to reach <code class="language-plaintext highlighter-rouge">n</code> row and <code class="language-plaintext highlighter-rouge">m</code> column.</p>
 
 <hr />
 
@@ -345,5 +354,17 @@ We can understand more by trying to make the DP table. -->
       </div>
     </div>
     
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'G-2WNHZ5BJ2N', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
   </body>
 </html>
