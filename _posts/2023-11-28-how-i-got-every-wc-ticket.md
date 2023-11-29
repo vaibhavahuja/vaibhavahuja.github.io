@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      How I secured CWC'23 tickets by exploiting flaws in BookMyShow
-date:       2022-01-12 11:21:29
+date:       2023-11-29 11:21:29
 summary:    The Playbook for Securing World Cup Tickets using BookMyShow
 categories: 
 tags: [strategy]
