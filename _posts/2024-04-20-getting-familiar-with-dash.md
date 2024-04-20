@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Getting familiar with DASH
-date:       2023-11-29 11:21:29
+date:       2024-04-20 11:21:29
 summary:    Understanding how DASH works
 categories: 
 tags: [video, streaming]
