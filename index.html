@@ -26,6 +26,11 @@ layout: default
 				{% if post.tags contains 'iot' %}
 					<b style="color:#b100de"> iot/ </b>
 				{% endif %}
+
+				{% if post.tags contains 'video' %}
+					<b style="color:#67a4ff"> video/ </b>
+				{% endif %}
+				
 				<a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}"> {{ post.title }} 
 					{% if post.tags contains 'wip' %}
 						🚧
