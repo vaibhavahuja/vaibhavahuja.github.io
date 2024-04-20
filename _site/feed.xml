@@ -5,9 +5,125 @@
     <description>my personal space where i write about stuff that excites me.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 29 Nov 2023 22:31:09 +0530</pubDate>
-    <lastBuildDate>Wed, 29 Nov 2023 22:31:09 +0530</lastBuildDate>
+    <pubDate>Sat, 20 Apr 2024 16:57:33 +0530</pubDate>
+    <lastBuildDate>Sat, 20 Apr 2024 16:57:33 +0530</lastBuildDate>
     <generator>Jekyll v3.9.3</generator>
+    
+      <item>
+        <title>Getting familiar with DASH</title>
+        <description>&lt;h3 id=&quot;what-is-dash&quot;&gt;What is DASH?&lt;/h3&gt;
+
+&lt;p&gt;DASH is a video streaming format, which allows delivering high-quality video content. It stands for Dynamic Adaptive Streaming over HTTP, and allows adjusting the video quality based on bandwidth of the user.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/dash_intro_pic.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;For example, when you are streaming a video (VOD/LIVE) and your internet connection is flaky, you must have observed the player auto adjusts the quality to a lower resolution (1080p -&amp;gt; 480p), and restores it back to 1080p if internet is stable and high bandwidth. That is because of dash in action.
+DASH describes the mechanics of ABR - Adaptive Bitrate Streaming, ensuring smooth delivery of a stream over internet.&lt;/p&gt;
+
+&lt;h4 id=&quot;how-does-a-player-do-that&quot;&gt;How does a player do that?&lt;/h4&gt;
+
+&lt;p&gt;Video is transcoded into multiple resolutions and bitrate combinations, known as “rendition”.
+Renditions are broken down into multiple segments which are further downloaded by the player.&lt;/p&gt;
+
+&lt;p&gt;Lets understand with an example.&lt;/p&gt;
+
+&lt;p&gt;There is a video with total duration of 100 seconds. It is first transcoded into different bitrate variations (1080p, 720p, 480p, 360p) and every variation is broken into multiple segments, say 2 seconds each. 
+Now, we have a total of 4 x 2 x 50 segments in total. These DASH files are packaged, and the chunks are stored on some server.&lt;/p&gt;
+
+&lt;p&gt;There is usually a CDN which reads data from the server, and stores it in its cache, and serves the content to the client.&lt;/p&gt;
+
+&lt;p&gt;The player downloads the segments in real time as you stream, according to the principles of ABR (Adaptive Bitrate Streaming).&lt;/p&gt;
+
+&lt;p&gt;It gets the information of segment from the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.mpd&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/dash_principles.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;structure-of-mpd-file&quot;&gt;Structure of .mpd file&lt;/h3&gt;
+
+&lt;p&gt;How does a client/player know the path of the segment? That information is stored in an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.mpd&lt;/code&gt; file. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.mpd&lt;/code&gt; file is an XML file containing information about the paths of all segments, so the player knows exactly from where to download a particular segment in order to stream according to the representation ID.&lt;/p&gt;
+
+&lt;p&gt;Sample &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.mpd&lt;/code&gt; file :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- MPD file Generated with GPAC version 0.5.1-DEV-rev4736M  on 2013-09-11T09:51:52Z--&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;MPD&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;urn:mpeg:dash:schema:mpd:2011&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;minBufferTime=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;PT1.500000S&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;static&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;mediaPresentationDuration=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;PT0H10M54.00S&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;profiles=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;urn:mpeg:dash:profile:isoff-live:2011,http://dashif.org/guidelines/dash264&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;Period&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;duration=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;PT0H10M54.00S&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;AdaptationSet&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;segmentAlignment=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxWidth=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1280&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxHeight=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;720&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxFrameRate=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;24&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;par=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;16:9&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;Representation&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;mimeType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;video/mp4&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;codecs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;avc1.42c01f&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;width=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;512&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;height=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;288&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;frameRate=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;24&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sar=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1:1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;startWithSAP=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;bandwidth=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1082580&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;SegmentTemplate&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;timescale=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;12288&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;media=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ED_512_640K_MPEG2_video_$Time$.mp4&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;initialization=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ED_512_640K_MPEG2_video_init.mp4&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;SegmentTimeline&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;S&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;d=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;24576&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;r=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-1&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/SegmentTimeline&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/SegmentTemplate&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/Representation&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;Representation&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;mimeType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;video/mp4&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;codecs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;avc1.42c01f&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;width=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;768&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;height=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;432&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;frameRate=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;24&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sar=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1:1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;startWithSAP=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;bandwidth=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1880897&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;SegmentTemplate&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;timescale=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;12288&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;media=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ED_768_1440K_MPEG2_video_$Time$.mp4&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;initialization=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ED_768_1440K_MPEG2_video_init.mp4&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;SegmentTimeline&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;S&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;d=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;24576&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;r=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-1&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/SegmentTimeline&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/SegmentTemplate&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/Representation&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;Representation&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;3&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;mimeType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;video/mp4&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;codecs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;avc1.42c01f&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;width=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1280&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;height=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;720&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;frameRate=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;24&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sar=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1:1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;startWithSAP=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;bandwidth=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;4114301&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;SegmentTemplate&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;timescale=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;12288&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;media=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ED_1280_4M_MPEG2_video_$Time$.mp4&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;initialization=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ED_1280_4M_MPEG2_video_init.mp4&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;SegmentTimeline&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;S&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;d=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;24576&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;r=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-1&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/SegmentTimeline&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/SegmentTemplate&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/Representation&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/AdaptationSet&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;AdaptationSet&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;segmentAlignment=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;Representation&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;4&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;mimeType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;audio/mp4&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;codecs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mp4a.40.29&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;audioSamplingRate=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;48000&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;startWithSAP=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;bandwidth=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;33432&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;AudioChannelConfiguration&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;schemeIdUri=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;urn:mpeg:dash:23003:3:audio_channel_configuration:2011&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;SegmentTemplate&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;timescale=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;48000&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;media=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ED_MPEG2_32k_$Time$.mp4&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;initialization=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ED_MPEG2_32k_init.mp4&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;SegmentTimeline&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;S&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;d=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;94208&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;r=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-1&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/SegmentTimeline&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/SegmentTemplate&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/Representation&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/AdaptationSet&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/Period&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/MPD&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Lets understand this with a quick diagram :&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/structure_of_mpd_file.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Every file is divided into multiple periods&lt;/li&gt;
+  &lt;li&gt;Every period has multiple AdaptationSets, which tell if that adaptation set contains content-type for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;video&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;audio&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;image&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;text&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Now, say you get inside adaptation set for Video, that wil have multiple RepresentationIds, which we discussed earlier, telling about the quality, and a segmentTemplate.&lt;/li&gt;
+  &lt;li&gt;A long video can have 1000’s of segments, so in order to not make a file too big, segmentTemplate is a way to tell the player to generate the segments on the basis of other information provided.&lt;/li&gt;
+  &lt;li&gt;It contains the initialisationPath, and a segmentTimeline. The player would use this information to generate paths of the content.&lt;/li&gt;
+  &lt;li&gt;It further downloads the files, and plays it in a DASH player.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;try-checking-how-dash-works&quot;&gt;Try checking how DASH works&lt;/h3&gt;
+
+&lt;p&gt;Use this link : &lt;a href=&quot;https://dash.akamaized.net/dash264/TestCases/2c/qualcomm/1/MultiResMPEG2.mpd&quot;&gt;https://dash.akamaized.net/dash264/TestCases/2c/qualcomm/1/MultiResMPEG2.mpd&lt;/a&gt; and copy it in some online DASH player : &lt;a href=&quot;https://players.akamai.com/players/dashjs&quot;&gt;Akamai Dash Player&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on playStream and head on to the Network tab to see the video segments being downloaded in real time.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/dash_segment_download.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Compare the path of every segment, with the mpd file shared above and things will become more clear.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;That is it for now. Hope you got some idea about how DASH works, another popular format for ABR is HLS. Will be writing about that soon.&lt;/p&gt;
+
+&lt;p&gt;Hope you liked it.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 29 Nov 2023 16:51:29 +0530</pubDate>
+        <link>http://localhost:4000/getting-familiar-with-dash</link>
+        <guid isPermaLink="true">http://localhost:4000/getting-familiar-with-dash</guid>
+        
+        <category>video</category>
+        
+        <category>streaming</category>
+        
+        
+      </item>
     
       <item>
         <title>How I secured CWC'23 tickets by exploiting flaws in BookMyShow</title>
@@ -133,7 +249,7 @@ There was very little chances that I could get the tickets this way, so I tried 
 
 &lt;p&gt;&lt;img src=&quot;../images/jayShahCricket.jpeg&quot; alt=&quot;JayShah&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Wed, 12 Jan 2022 16:51:29 +0530</pubDate>
+        <pubDate>Wed, 29 Nov 2023 16:51:29 +0530</pubDate>
         <link>http://localhost:4000/how-i-got-every-wc-ticket</link>
         <guid isPermaLink="true">http://localhost:4000/how-i-got-every-wc-ticket</guid>
         
@@ -1623,94 +1739,6 @@ We can understand more by trying to make the DP table. --&gt;
         
         
         <category>codes</category>
-        
-      </item>
-    
-      <item>
-        <title>Cryptocurrency explained</title>
-        <description>&lt;!-- # cryptocurrency explained.  --&gt;
-
-&lt;p&gt;Over the past few days I have been going through various blogs, research papers, youtube videos, books to read and gain knowledge about Cryptocurrency, which has been a pretty talked about topic recently. Unless you have been living under a rock, it is highly unlikely that you have never heard of &lt;em&gt;(bitcoin, blockchain, ethereum, mining)&lt;/em&gt; before. Through this post, I will try to explain how these technologies/currencies work and why were they created, and how can they change the way we do transactions now.&lt;/p&gt;
-
-&lt;p&gt;To understand this Digital Currency, let us understand, how currency works and has been working so far. 
-Initially, we had &lt;a href=&quot;https://en.wikipedia.org/wiki/Barter&quot;&gt;barter&lt;/a&gt; system, which was replaced by money mainly because exchange is not always convenient and efficient. 
-Due to this, currency started to mint. The exchange problems were solved and this system was largely based on trust. The kings used to have their &lt;a href=&quot;https://en.wikipedia.org/wiki/Alyattes_of_Lydia&quot;&gt;royal seal&lt;/a&gt; on the coin signifying that this currency is valid. However forgery was very common as making a coin and copying the seal was not that a difficult task, but still way much better than Barter. 
-With time, the gold coins transformed into paper money, which was widely circulated across the world by &lt;a href=&quot;https://en.wikisource.org/wiki/The_Travels_of_Marco_Polo/Book_2/Chapter_24&quot;&gt;explorers&lt;/a&gt;. Trade flourished across countries through this paper money, and exchange of currency started around that time too, and by around 1860, Western Union, spearheaded e-money with electronic func transfer via telegram. With time cards came, and with the rise of internet the e-money started to boom. 
-The reason, why I am focussing on the history of currency, is because I want you to understand what is common between all these systems of currency. From exchanging coins with royal seals, to exchanging paper currency, with issuance from bank/government, to starting e-money (banks giving cards). If you try to find the pattern, you will see that all of these currencies are &lt;strong&gt;Centralized&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;By centralized, what I mean is that everytime there is an authority that is responsible for issuing the currency. Someone who says that, Yes, I am accountable for this currency and this currency is valid. Be it a king, who imprints the coin with its royal seal, or the government. The transactions have always been based on &lt;strong&gt;Trust&lt;/strong&gt;. If I pay ₹100 to X, the bank issuing the currency is responsible to pay that ₹100 to X. Hence the currency so far being used is based on Trust, and is Centralized. Due to this we are always bound to law, cannot be innovative and creative with our money, always under control and at a risk of interference. Also, the banks would charge some amount for transactions as &lt;em&gt;transaction fee&lt;/em&gt;. The point to be noted is that, crypto currency is not flawless, so it just provides as an alternative currency as of now. Due to all this, a currency was needed which was not based on trust, and is not centralized.&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cryptocurrency is a decentralized trustless verification system + Math.&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Now, one thing I would like to mention here is that just like normal currency, you need not know how cryptocurrency is made or how it works to use it. Diving into the technical details, let us understand everything with an example.&lt;/p&gt;
-
-&lt;p&gt;Say there are 4 friends A, B, C and D who hang out pretty often, and hence they need a system to keep track of money. What they do is, they keep a ledger and add all the transactions in it. At the end of the month they take all the transactions and then total it up and settle it and pay accordingly.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* ledger *
-A gives B 200 rupees
-B gives C 500 rupees
-C gives A 1000 rupees
-D gives B 300 rupees
-..............and so on
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The catch here is that the ledger is accessible to all four of them, i.e anyone can add or delete the transactions. D might just add that, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C gives D 500 rupees&lt;/code&gt;, as there is no one stopping D. He can keep on adding fraudulent transactions until someone catches him, and resolve this. So, what we need is a system to verify that the correct person is writing the ledger. The solution to this is &lt;em&gt;Digital Signatures&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Before I start with explaining what Digital Signatures are, I would like to mention Cryptographic Hashing. Hashing is a method that converts any form of data in a unique string of text. Typically the output of every hash function is a fixed length of string. Now what cryptographic hash functions are, are hash functions which cannot be reversed. 
-So cryptographic hash functions will take any input, no matter how big or small, and output a fixed length of string which is irreversible. It is practically impossible to determine what input caused that hash except hit and trial. Now coming to digital signatures, these are used to verify the identity of the person signing a message. Through digital signatures we can be sure that the person signing the message is actually the person writing the message. It mainly consists of &lt;em&gt;private key and public key.&lt;/em&gt; Private key can be thought of your PIN card and public key as your A/C number. You keep the private key with yourself, but can give everyone your public key. Now to make a transaction, you write a message and encrypt that with your private key. And you send the hash message to the receiver. The receiver would see the hashed message, and verify if it was sent by you using the public key. The cryptographic hash function used is mainly SHA-256. The bit string generated is 256 digits long, i.e there can be 2&lt;sup&gt;256&lt;/sup&gt; combinations. 2 &lt;sup&gt;256&lt;/sup&gt; is an extremely large large number.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/bitcoin2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The functions would look something like this:&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dig_sign(message, private key) -&amp;gt; signature
-
-verify(message, signature, public key) -&amp;gt; true/false
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Now that you have a fair idea of how digital signatures work, we can go back to the example. D can no longer write any fraudulent transactions in the ledger as they all will be from now on digitally signed. The verification system apart from checking if the message was signed from the trusted party or not, it also checks if the party sending the money actually has it or not.&lt;/p&gt;
-
-&lt;p&gt;The problem with this solution is that the fate of the entire money system depends on the company running the mint, with every transaction having to go through them, just like a bank. We need a way for the payee to know that the previous owners did not sign any earlier transactions.&lt;/p&gt;
-
-&lt;p&gt;One thing which you might have noticed, is that this system of ledger that I just explained is centralized as well, which I had focussed on earlier. We have found a way to secure the transactions but there is only one ledger, and everyone is making transactions in their own ledger. As I had mentioned earlier, the cryptocurrency is decentralized. To make this currency decentralized, we will give one copy of the ledger to all four friends (A B C and D). Now this ledger becomes a decentralized currency.&lt;/p&gt;
-
-&lt;p&gt;So now, all have personal copies of the ledger, and now adding the transaction has become a different process. Like they can still add the transaction in their personal ledger, but it wont match with the ledger of someone else. Say, B adds &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;B gave ₹5000 to C&lt;/code&gt; to his ledger, but that information wont be added on the ledger of A or C or D. To have all the ledgers on the same track, one must broadcast their ledger so that everyone in the network updates their ledgers with the most recent transactions. So, B would update its ledger, and then broadcast his ledger so that everyone verifies the transaction and update their ledgers as well. Hence through this example, we have made a trustless decentralized verification system.&lt;/p&gt;
-
-&lt;p&gt;A big problem with this system is that, what if D broadcasts that he has sent 500 rupees to A, and at the same time, it broadcasts that he has sent 500 rupees to B. This is how D can double spend his money. This problem has been address in the original &lt;a href=&quot;https://bitcoin.org/bitcoin.pdf&quot;&gt;Bitcoin Paper&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;The bitcoin paper mainly said to trust the block/ledger with the most computational work being done &lt;em&gt;(proof of work)&lt;/em&gt;. This ledger is mainly the blockchain. The below diagram will help you understand the chain structure of the ledger.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/bitcoin1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The proof of work involves scanning for a value that when hashed, such as with SHA-256 the hash begins with a number of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n zero bits&lt;/code&gt;. 
-For our network, we implement the proof of work by incrementing a nonce in the block until a value is found that gives the blocks hash the required zero bits. Finding this number is called &lt;em&gt;mining&lt;/em&gt;, and the people who do this are called &lt;em&gt;miners&lt;/em&gt;. The paper also said to trust that chain with the most number of nodes, hence while updating their ledger, they also keep track of all other chains, and then eliminate the smaller chains as miners start working on the longest chain. 
-Proof-of-work is essentially one-CPU-one-vote. The majority decision is represented by the longest chain, which has the greatest proof-of-work effort invested in it. If a majority of CPU power is controlled by honest nodes, the honest chain will grow the fastest and outpace any competing chains. To modify a past block, an attacker would have to redo the proof-of-work of the block and all blocks after it and then catch up with and surpass the work of the honest nodes the number of zeros vary a lot. What the miner gets in return is a block reward. With every block added to the network, the total amount of money increases in the economy, as there is no one issuing the block reward. Hence through this proof of work, it is nearly impossible to create fraudulent transactions. This miniature lottery is such that there is one winner every 10 minutes (in case of  bitcoin). This time may change for other cryptocurrencies.&lt;/p&gt;
-
-&lt;p&gt;We can understand the whole network through these steps&lt;/p&gt;
-
-&lt;p&gt;The steps to run the network are as follows:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;New transactions are broadcast to all nodes.&lt;/li&gt;
-  &lt;li&gt;Each node collects new transactions into a block.&lt;/li&gt;
-  &lt;li&gt;Each node works on finding a difficult proof-of-work for its block.&lt;/li&gt;
-  &lt;li&gt;When a node finds a proof-of-work, it broadcasts the block to all nodes.&lt;/li&gt;
-  &lt;li&gt;Nodes accept the block only if all transactions in it are valid and not already spent.&lt;/li&gt;
-  &lt;li&gt;Nodes express their acceptance of the block by working on creating the next block in the chain, using the hash of the accepted block as the previous hash. Nodes always consider the longest chain to be the correct one and will keep working on extending it. If two nodes broadcast different versions of the next block simultaneously, some nodes may receive one or the other first. In that case, they work on the first one they received, but save the other branch in case it becomes longer. The tie will be broken when the next proof of work is found and one branch becomes longer; the nodes that were working on the other branch will then switch to the longer one.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Through this post, I hope you have a fair idea of how cryptocurrencies work.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 05 Oct 2019 18:01:19 +0530</pubDate>
-        <link>http://localhost:4000/blockchain/understanding-bitcoin</link>
-        <guid isPermaLink="true">http://localhost:4000/blockchain/understanding-bitcoin</guid>
-        
-        <category>Blockchain</category>
-        
-        
-        <category>blockchain</category>
         
       </item>
     
