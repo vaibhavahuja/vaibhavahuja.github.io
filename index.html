@@ -28,7 +28,11 @@ layout: default
 				{% endif %}
 
 				{% if post.tags contains 'video' %}
-					<b style="color:#67a4ff"> video/ </b>
+					<b style="color:#8e3563"> video/ </b>
+				{% endif %}
+
+				{% if post.tags contains 'golang' %}
+					<b style="color:#00ADD8"> golang/ </b>
 				{% endif %}
 				
 				<a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}"> {{ post.title }} 
