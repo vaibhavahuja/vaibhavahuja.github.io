@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Concurrency Patterns - Vaibhav Ahuja</title>
+  <meta name="description" content="my personal space where i write about stuff that excites me.">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/concurrency-patterns">
+  <link rel="alternate" type="application/rss+xml" title="Vaibhav Ahuja" href="http://localhost:4000/feed.xml">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2WNHZ5BJ2N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2WNHZ5BJ2N');
+</script>
+</head>
+
+  <body>
+    <div class="page-content">
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Concurrency Patterns</h1>
+    <p class="post-meta">
+      <time datetime="2024-08-22T16:51:29+05:30" itemprop="datePublished">Aug 22, 2024</time>
+      
+
+      
+  		
+
+  		
+  		
+
+  		&middot;	<span class="tags" itemprop="tags">
+  				<a href="http://localhost:4000/tagged#golang">#golang</a>
+  			</span>
+
+  	  
+
+    </p>
+  </header>
+  <div class="post-content" itemprop="articleBody">
+    <p><img src="../images/concurrency_patterns_cover.png" alt="" /></p>
+
+<h1 id="what-is-concurrency-how-is-it-different-from-parallelism">What is concurrency? How is it different from parallelism?</h1>
+
+<p>Say you go to a very small pizza 🍕 shop. <em>How small?</em> There is only one person behind the counter who does all the work, named Mark. Mark is responsible for making sure you get the pizza, and handles all the accounting and billing, and taking the order, basically everything.</p>
+
+<p>You see Mark, and place your order. Mark takes the payment and goes to the kitchen to start preparing the order. He turns on the oven, prepares the pizza and puts it in the oven. More customers line up behind you, but Mark is inside waiting for the oven to prepare the pizza. Mark takes out the pizza from the oven, cuts it into 6 slices, and serves you fresh before taking any other orders, and the process goes on.</p>
+
+<p>During the time the pizza was in the oven, Mark could have taken more orders and started preparing the pizza base for other orders. Switching between different tasks as and when he can. This is like interleaving tasks without actually performing them simultaneously, i.e working concurrently. Here, concurrency would mean the ability of Mark to handle multiple tasks or operations simultaneously, by interleaving their execution.</p>
+
+<p>Parallelism would mean to get Mark’s friend Tom to help him in the whole process. Get a separate oven, and Mark and Tom can do their work independently, truly performing tasks simultaneously.</p>
+
+<p>That is the difference between concurrency and parallelism.</p>
+
+<h1 id="what-are-concurrency-patterns-why-golang">What are concurrency patterns? Why goLang?</h1>
+
+<p>GoLang is made for concurrency, having goRoutines and channels to communicate between them, truly makes it a top candidate to write concurrent tasks. In my experience, writing concurrent code was never this easier before goLang. <em>What are goRoutines and how do they work?</em> Will cover that in detail in some other blog, for now you can say, that goroutines are independently executing function, having its own call stack, grows and shrinks as required, and <strong>it’s not a thread</strong> GoRoutines are multiplexed dynamically onto threads as needed.</p>
+
+<p>Concurrency patterns address common challenges such as task coordination, resource sharing, sync and communication between running processes or threads. If you plan on working with goLang and wish to add concurrency, chances are high that your problem can be solved with one of these patterns, easily. Similar to design patterns, but for <strong>concurrency</strong>.</p>
+
+<h1 id="patterns">Patterns</h1>
+
+<h2 id="generator--function-that-returns-a-channel">Generator : Function that returns a channel</h2>
+
+<p>Since channels are blocking, first and second although are concurrent, but will be printed one after another in order.</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">first</span> <span class="o">:=</span> <span class="n">test</span><span class="p">(</span><span class="s">"first"</span><span class="p">)</span>
+    <span class="n">second</span> <span class="o">:=</span> <span class="n">test</span><span class="p">(</span><span class="s">"second"</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="m">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="o">&lt;-</span><span class="n">first</span><span class="p">)</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="o">&lt;-</span><span class="n">second</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"i am done"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">test</span><span class="p">(</span><span class="n">msg</span> <span class="kt">string</span><span class="p">)</span> <span class="o">&lt;-</span><span class="k">chan</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="n">c</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="k">chan</span> <span class="kt">string</span><span class="p">)</span>
+    <span class="k">go</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+            <span class="n">c</span> <span class="o">&lt;-</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Sprintf</span><span class="p">(</span><span class="s">"%s %d"</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">Sleep</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="n">rand</span><span class="o">.</span><span class="n">Intn</span><span class="p">(</span><span class="m">1e3</span><span class="p">))</span> <span class="o">*</span> <span class="n">time</span><span class="o">.</span><span class="n">Millisecond</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}()</span>
+    <span class="k">return</span> <span class="n">c</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>How to remove order, and return whichever is available first? We have multiplexing for that.</p>
+
+<h3 id="multiplexing">Multiplexing</h3>
+
+<h3 id="fan-in">Fan-In</h3>
+<p>Takes two channels and returns one channel.</p>
+
+<p><img src="../images/fan_in.png" alt="" /></p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">c</span> <span class="o">:=</span> <span class="n">fanIn</span><span class="p">(</span><span class="n">test</span><span class="p">(</span><span class="s">"first"</span><span class="p">),</span> <span class="n">test</span><span class="p">(</span><span class="s">"second"</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="m">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="o">&lt;-</span><span class="n">c</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"i am done"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">fanIn</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span> <span class="n">input2</span> <span class="o">&lt;-</span><span class="k">chan</span> <span class="kt">string</span><span class="p">)</span> <span class="o">&lt;-</span><span class="k">chan</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="n">c</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="k">chan</span> <span class="kt">string</span><span class="p">)</span>
+    <span class="k">go</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">{</span>
+            <span class="n">c</span> <span class="o">&lt;-</span> <span class="o">&lt;-</span><span class="n">input1</span>
+        <span class="p">}</span>
+    <span class="p">}()</span>
+    <span class="k">go</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">{</span>
+            <span class="n">c</span> <span class="o">&lt;-</span> <span class="o">&lt;-</span><span class="n">input2</span>
+        <span class="p">}</span>
+    <span class="p">}()</span>
+    <span class="k">return</span> <span class="n">c</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Channels become arguments of my <code class="language-plaintext highlighter-rouge">fanIn</code> method, and now when it runs, it is not necessarily synchronous.</p>
+
+<h3 id="select-statement">Select Statement</h3>
+
+<p>jash
+Provides another way to handle multiple channels. It works like a switch, where each case is a communication. 
+It blocks the program until one communication can proceed. If multiple channels have somed data in it, select chooses randomly.</p>
+
+<p>If there is a default clause, it executes immediately if no channel is ready.</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go">    <span class="k">select</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">v1</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="n">c1</span><span class="o">:</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"received %v from c1"</span><span class="p">,</span> <span class="n">v1</span><span class="p">)</span>
+    <span class="k">case</span> <span class="n">v2</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="n">c2</span><span class="o">:</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"received %v from c2"</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+    <span class="k">default</span><span class="o">:</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"no one ready to communicate"</span><span class="p">)</span>
+    <span class="p">}</span></code></pre></figure>
+
+<h3 id="daisy-chain">Daisy Chain</h3>
+<p><img src="../images/daisy_chain.png" alt="" /></p>
+
+<p>The below code simulates the above picture, except the number of gophers is 10000.</p>
+
+<p>The function <code class="language-plaintext highlighter-rouge">f</code> takes two goroutines, right and left, and adds the value received on right and sends it to left.</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">func</span> <span class="n">f</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="k">chan</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">left</span> <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">+</span> <span class="o">&lt;-</span><span class="n">right</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="n">n</span> <span class="o">=</span> <span class="m">1e5</span>
+    <span class="n">leftmost</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="k">chan</span> <span class="kt">int</span><span class="p">)</span>
+    <span class="n">right</span> <span class="o">:=</span> <span class="n">leftmost</span>
+    <span class="n">left</span> <span class="o">:=</span> <span class="n">leftmost</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="nb">make</span><span class="p">(</span><span class="k">chan</span> <span class="kt">int</span><span class="p">)</span>
+        <span class="k">go</span> <span class="n">f</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">right</span>
+    <span class="p">}</span>
+    <span class="k">go</span> <span class="k">func</span><span class="p">(</span><span class="n">c</span> <span class="k">chan</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span> <span class="n">c</span> <span class="o">&lt;-</span> <span class="m">1</span> <span class="p">}(</span><span class="n">right</span><span class="p">)</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="o">&lt;-</span><span class="n">leftmost</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="timeout-pattern">Timeout pattern</h3>
+
+<p>When we call external services in goroutines we don’t want to be stuck/blocked waiting for them, we can use the timeout pattern in order to exit as soon as the time gets over.</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"> <span class="n">c</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="k">chan</span> <span class="n">Result</span><span class="p">)</span>
+    <span class="k">go</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span> <span class="n">c</span> <span class="o">&lt;-</span> <span class="n">Web</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="p">}</span> <span class="p">()</span>
+    <span class="k">go</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span> <span class="n">c</span> <span class="o">&lt;-</span> <span class="n">Image</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="p">}</span> <span class="p">()</span>
+    <span class="k">go</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span> <span class="n">c</span> <span class="o">&lt;-</span> <span class="n">Video</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="p">}</span> <span class="p">()</span>
+
+    <span class="n">timeout</span> <span class="o">:=</span> <span class="n">time</span><span class="o">.</span><span class="n">After</span><span class="p">(</span><span class="m">80</span> <span class="o">*</span> <span class="n">time</span><span class="o">.</span><span class="n">Millisecond</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="m">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+        <span class="k">select</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="n">result</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="n">c</span><span class="o">:</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="nb">append</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+        <span class="k">case</span> <span class="o">&lt;-</span><span class="n">timeout</span><span class="o">:</span>
+            <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"timed out"</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span></code></pre></figure>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>goRoutines make the program really fast, but we need to understand when and how to use it. I have seen people use them to make a synchronous task, synchronous. Just because it looks impressive doesn’t mean it needs to be used every time.</p>
+
+<p>We also have <code class="language-plaintext highlighter-rouge">waitGroups</code> and <code class="language-plaintext highlighter-rouge">mutexes</code> which are used to solve problems, so having a knowledge of all is important. Always use the right tool for the job.</p>
+
+<p>I will be writing more about how goroutines work internally and will be showing how to solve real life examples of using waitGroups and mutextes. Let me know what you think of this blog.</p>
+
+<p>Have a good day!</p>
+
+
+  </div>
+  <hr>
+  
+    
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname  = 'https-vaibhavahuja-github-io-1';
+    var disqus_identifier = '/concurrency-patterns';
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+
+  
+</article>
+
+      <div class="copyright">
+      <p> Powered by <a href="https://jekyllrb.com/">Jekyll</a> </p>
+      </div>
+    </div>
+    
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'G-2WNHZ5BJ2N', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+  </body>
+</html>
