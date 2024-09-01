@@ -5,9 +5,92 @@
     <description>my personal space where i write about stuff that excites me.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 25 Aug 2024 16:33:21 +0530</pubDate>
-    <lastBuildDate>Sun, 25 Aug 2024 16:33:21 +0530</lastBuildDate>
+    <pubDate>Sun, 01 Sep 2024 18:21:40 +0530</pubDate>
+    <lastBuildDate>Sun, 01 Sep 2024 18:21:40 +0530</lastBuildDate>
     <generator>Jekyll v3.10.0</generator>
+    
+      <item>
+        <title>Diving Deep into GoRoutines</title>
+        <description>&lt;p&gt;&lt;img src=&quot;../images/understanding_goroutines_0.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;what-are-goroutines-how-are-they-different-from-threads&quot;&gt;What are goRoutines? How are they different from threads?&lt;/h1&gt;
+
+&lt;p&gt;In my previous blog post, I talked about what concurrency is, and how is it different from parallelism. Here, I will be mainly talking about how GoRoutines work internally, and how are they so performant giving it an edge over all the other languages out there.&lt;/p&gt;
+
+&lt;p&gt;GoRoutines are lightweight abstractions over threads, managed by the GoRuntime itself. 
+To Understand how are they different from threads, we see 3 factors - memory consumption, initialising and removing and switching time.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/understanding_goroutines_1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;memory&quot;&gt;Memory&lt;/h3&gt;
+&lt;p&gt;Creation of goroutine requires around 2kb of space, whereas a thread start out at around 2MB (1000 x). The goroutines grow by allocating and freeing heap space as and when required.&lt;/p&gt;
+
+&lt;h3 id=&quot;initialising-and-removing&quot;&gt;Initialising and removing&lt;/h3&gt;
+&lt;p&gt;In order to create a thread, a program needs to request for resources from the OS, and return back once the process is complete. However, since goroutines are managed by the run time, a pool of threads is maintained and goroutines are created and destroyed very cheaply.&lt;/p&gt;
+
+&lt;h3 id=&quot;switching-time&quot;&gt;Switching time&lt;/h3&gt;
+&lt;p&gt;When a thread blocks, another has to be scheduled in its place. Threads follow preemptive scheduling, and during the thread switch the scheduler needs to save all registers. This is quite significant when there is rapid switching between the threads.&lt;/p&gt;
+
+&lt;p&gt;GoRoutines on the other hand are scheduled cooperatively (will talk more about this below), and only required 3 registers, hence the cost is much lower. Switching time is not affected by the number of goroutines.&lt;/p&gt;
+
+&lt;h1 id=&quot;scheduling-in-go&quot;&gt;Scheduling in Go&lt;/h1&gt;
+
+&lt;p&gt;In cooperative scheduling, goroutines yield the control periodically when they are idle of logically blocked in order to run multiple goRoutines. The switch between goRoutines happen only at well defined points - when call is made to the Goruntime scheduler. Those points are&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Channels send and receive operations&lt;/li&gt;
+  &lt;li&gt;Go Statement&lt;/li&gt;
+  &lt;li&gt;Blocking sys calls&lt;/li&gt;
+  &lt;li&gt;After being stopped for Garbage Collection cycle.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/understanding_goroutines_2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;pmg&quot;&gt;PMG&lt;/h3&gt;
+&lt;p&gt;Go uses 3 entities to explain the GoRoutine Scheduling.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Processor (P)&lt;/li&gt;
+  &lt;li&gt;OS Thread (M)&lt;/li&gt;
+  &lt;li&gt;GoRoutines (G)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Go has M:N scheduler that can also utilize multiple processors. At any time, M goroutines need to be scheduled on N OS threads that run on most &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GOMAXPROCS&lt;/code&gt; number of processors.&lt;/p&gt;
+
+&lt;p&gt;The go runtime initiates a number of OS threads that is equal to the number of logical processors available to it.
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;logical processors = number of physical cores * number of threads that can run on each core (hardware threads)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;There is a P-specific local and a global goroutine queue. Each M should be assigned to a P. Ps may have no Ms if they are blocked or in a system call. At any time, there are at most GOMAXPROCS number of P. At any time, only one M can run per P. More Ms can be created by the scheduler if required.&lt;/p&gt;
+
+&lt;p&gt;LRQ has the already scheduled goroutines, while GRQ contains the unscheduled ones. When the LRQ are getting emptied they get filled by fetching goroutines from Grq.&lt;/p&gt;
+
+&lt;p&gt;In each round of scheduling, the scheduler finds a runnable goroutine and executes it. Search happens in following order&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-go&quot; data-lang=&quot;go&quot;&gt;&lt;span class=&quot;n&quot;&gt;runtime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;schedule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;// only 1/61 of the time, check the global runnable queue for a G.&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;// if not found, check the local queue.&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;// if not found,&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;//     try to steal from other Ps.&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;//     if not, check the global runnable queue.&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;//     if not found, poll network.&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Go scheduler does a lot to avoid excessive preemption of OS threads by scheduling them to the right and underutilized processors by stealing, as well as implementing “spinning” threads to avoid high occurrence of blocked/unblocked transitions.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;GoRoutines was named after a concept called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;coroutines&lt;/code&gt;. Very cheap performant wise, and this multiplexing goroutines and stealing ensures that highest efficiency is ensured. This makes GoLang an obvious choice while writing concurrent programs. Hope you learnt something and will consider GoLang while writing a highly &lt;em&gt;go&lt;/em&gt;ncurrent program.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion-1&quot;&gt;Conclusion&lt;/h1&gt;
+
+</description>
+        <pubDate>Tue, 27 Aug 2024 16:51:29 +0530</pubDate>
+        <link>http://localhost:4000/understanding-goroutines</link>
+        <guid isPermaLink="true">http://localhost:4000/understanding-goroutines</guid>
+        
+        <category>golang</category>
+        
+        
+      </item>
     
       <item>
         <title>Concurrency Patterns</title>
@@ -1005,79 +1088,6 @@ Effective Testing Strategy can be achieved using our application as it will resu
         
         
         <category>algo</category>
-        
-      </item>
-    
-      <item>
-        <title>Secura - store passwords securely</title>
-        <description>&lt;p&gt;This weekend I decided to study more about hashing and thought of creating my own hashing function, which would obviously, hash. Hashing is different from encryption, with encryption you can decrypt the message into the original form, but hashing should be one way, i.e no matter what the output is, it should be irreversible, which makes the problem even harder. I ended up creating my own hashing algorithm, which I was able to crack myself in around 20 minutes or so. I further studied about how dangerous it can be to roll your own hash (yes &lt;em&gt;roll your hash&lt;/em&gt;) if you are not a cryptographic expert so I decided to give up on creating my own hashing algorithm, however I did dig deep on how hashing is used to store passwords.&lt;/p&gt;
-
-&lt;p&gt;Well, of course, good hashing algorithms exist which are one way (SHA-512, SHA-256, and MD5) however they are crackable. By crackable I mean, although the hash itself is irreversible the hackers calculate the hash of tons(^tons) of common words, and compare it with the existing hash. The process is repeated for every possible word, until they match some passwords. That is exactly why when we choose a password, we are asked to choose a long (7+ digits) with special characters, since the more complicated the password is, the more time it will take to brute force it. Ofcourse, even after all these complications, hackers are still able to crack the passwords. There are many different attacks which the hackers use to crack them such as :  &lt;a href=&quot;https://en.wikipedia.org/wiki/Rainbow_table&quot;&gt;Rainbow Table&lt;/a&gt;, Dictionary, Brute Force attacks which poses a great security threat to the users.&lt;/p&gt;
-
-&lt;p&gt;While creating my node app, I found out that it was difficult for me to choose a hashing algorithm which is secure for storing my passwords, and understanding about cryptography took a lot of time. I believe that it should not be necessary for someone to be a cryptographic expert to hash their passwords securely, hence I created a library : &lt;a href=&quot;https://www.npmjs.com/package/secura&quot;&gt;Secura&lt;/a&gt; which one can use to hash the passwords securely and compare the asynchronous way. This module returns a promise with the hashed password and also compares it.&lt;/p&gt;
-
-&lt;p&gt;Below I have described the usage :&lt;/p&gt;
-
-&lt;h3 id=&quot;usage&quot;&gt;Usage&lt;/h3&gt;
-
-&lt;p&gt;Install the module :&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;secura
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Usage is very simple and straightforward. You can import the module using :&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;secura&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;secura&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Generate Password&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This converts the user password to a secure hash.&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;secura&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;generatePassword&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;hash&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;c1&quot;&gt;//store the hash in the database&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Verify Password&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This verifies if the password entered by the user matches the hashed password stored in the database.&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;secura&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;validatePassword&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;hash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isMatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;c1&quot;&gt;//returns true if password matches and false otherwise&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;features&quot;&gt;Features&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Simple and straightforward to use. No knowledge of cryptography required to hash passwords and compare.&lt;/li&gt;
-  &lt;li&gt;Every hashed password is 61 digits long.&lt;/li&gt;
-  &lt;li&gt;Protection from Brute Force &amp;amp; Dictionary Attacks.&lt;/li&gt;
-  &lt;li&gt;Protection from &lt;a href=&quot;https://en.wikipedia.org/wiki/Rainbow_table&quot;&gt;Rainbow Table&lt;/a&gt; Attacks.&lt;/li&gt;
-  &lt;li&gt;Randomly generated salt for every password.&lt;/li&gt;
-  &lt;li&gt;Extra field is not required for storing salt in the database.&lt;/li&gt;
-  &lt;li&gt;Uses &lt;a href=&quot;https://en.wikipedia.org/wiki/PBKDF2&quot;&gt;PBKDF2&lt;/a&gt; to compute hash.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;You can contribute to this library by sending a pull request or opening an issue at : &lt;a href=&quot;https://github.com/vaibhavahuja/secura/&quot;&gt;repo link&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Thanks for reading. Hoping you will find this library useful.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 25 May 2020 05:30:00 +0530</pubDate>
-        <link>http://localhost:4000/hash/secura</link>
-        <guid isPermaLink="true">http://localhost:4000/hash/secura</guid>
-        
-        <category>project</category>
-        
-        <category>javascript</category>
-        
-        <category>cryptography</category>
-        
-        
-        <category>hash</category>
         
       </item>
     

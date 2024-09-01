@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diving Deep into GoRoutines - Vaibhav Ahuja</title>
+  <meta name="description" content="my personal space where i write about stuff that excites me.">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/understanding-goroutines">
+  <link rel="alternate" type="application/rss+xml" title="Vaibhav Ahuja" href="http://localhost:4000/feed.xml">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2WNHZ5BJ2N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2WNHZ5BJ2N');
+</script>
+</head>
+
+  <body>
+    <div class="page-content">
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Diving Deep into GoRoutines</h1>
+    <p class="post-meta">
+      <time datetime="2024-08-27T16:51:29+05:30" itemprop="datePublished">Aug 27, 2024</time>
+      
+
+      
+  		
+
+  		
+  		
+
+  		&middot;	<span class="tags" itemprop="tags">
+  				<a href="http://localhost:4000/tagged#golang">#golang</a>
+  			</span>
+
+  	  
+
+    </p>
+  </header>
+  <div class="post-content" itemprop="articleBody">
+    <p><img src="../images/understanding_goroutines_0.png" alt="" /></p>
+
+<h1 id="what-are-goroutines-how-are-they-different-from-threads">What are goRoutines? How are they different from threads?</h1>
+
+<p>In my previous blog post, I talked about what concurrency is, and how is it different from parallelism. Here, I will be mainly talking about how GoRoutines work internally, and how are they so performant giving it an edge over all the other languages out there.</p>
+
+<p>GoRoutines are lightweight abstractions over threads, managed by the GoRuntime itself. 
+To Understand how are they different from threads, we see 3 factors - memory consumption, initialising and removing and switching time.</p>
+
+<p><img src="../images/understanding_goroutines_1.png" alt="" /></p>
+
+<h3 id="memory">Memory</h3>
+<p>Creation of goroutine requires around 2kb of space, whereas a thread start out at around 2MB (1000 x). The goroutines grow by allocating and freeing heap space as and when required.</p>
+
+<h3 id="initialising-and-removing">Initialising and removing</h3>
+<p>In order to create a thread, a program needs to request for resources from the OS, and return back once the process is complete. However, since goroutines are managed by the run time, a pool of threads is maintained and goroutines are created and destroyed very cheaply.</p>
+
+<h3 id="switching-time">Switching time</h3>
+<p>When a thread blocks, another has to be scheduled in its place. Threads follow preemptive scheduling, and during the thread switch the scheduler needs to save all registers. This is quite significant when there is rapid switching between the threads.</p>
+
+<p>GoRoutines on the other hand are scheduled cooperatively (will talk more about this below), and only required 3 registers, hence the cost is much lower. Switching time is not affected by the number of goroutines.</p>
+
+<h1 id="scheduling-in-go">Scheduling in Go</h1>
+
+<p>In cooperative scheduling, goroutines yield the control periodically when they are idle of logically blocked in order to run multiple goRoutines. The switch between goRoutines happen only at well defined points - when call is made to the Goruntime scheduler. Those points are</p>
+<ul>
+  <li>Channels send and receive operations</li>
+  <li>Go Statement</li>
+  <li>Blocking sys calls</li>
+  <li>After being stopped for Garbage Collection cycle.</li>
+</ul>
+
+<p><img src="../images/understanding_goroutines_2.png" alt="" /></p>
+
+<h3 id="pmg">PMG</h3>
+<p>Go uses 3 entities to explain the GoRoutine Scheduling.</p>
+
+<ul>
+  <li>Processor (P)</li>
+  <li>OS Thread (M)</li>
+  <li>GoRoutines (G)</li>
+</ul>
+
+<p>Go has M:N scheduler that can also utilize multiple processors. At any time, M goroutines need to be scheduled on N OS threads that run on most <code class="language-plaintext highlighter-rouge">GOMAXPROCS</code> number of processors.</p>
+
+<p>The go runtime initiates a number of OS threads that is equal to the number of logical processors available to it.
+<code class="language-plaintext highlighter-rouge">logical processors = number of physical cores * number of threads that can run on each core (hardware threads)</code></p>
+
+<p>There is a P-specific local and a global goroutine queue. Each M should be assigned to a P. Ps may have no Ms if they are blocked or in a system call. At any time, there are at most GOMAXPROCS number of P. At any time, only one M can run per P. More Ms can be created by the scheduler if required.</p>
+
+<p>LRQ has the already scheduled goroutines, while GRQ contains the unscheduled ones. When the LRQ are getting emptied they get filled by fetching goroutines from Grq.</p>
+
+<p>In each round of scheduling, the scheduler finds a runnable goroutine and executes it. Search happens in following order</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="n">runtime</span><span class="o">.</span><span class="n">schedule</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c">// only 1/61 of the time, check the global runnable queue for a G.</span>
+    <span class="c">// if not found, check the local queue.</span>
+    <span class="c">// if not found,</span>
+    <span class="c">//     try to steal from other Ps.</span>
+    <span class="c">//     if not, check the global runnable queue.</span>
+    <span class="c">//     if not found, poll network.</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Go scheduler does a lot to avoid excessive preemption of OS threads by scheduling them to the right and underutilized processors by stealing, as well as implementing “spinning” threads to avoid high occurrence of blocked/unblocked transitions.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>GoRoutines was named after a concept called <code class="language-plaintext highlighter-rouge">coroutines</code>. Very cheap performant wise, and this multiplexing goroutines and stealing ensures that highest efficiency is ensured. This makes GoLang an obvious choice while writing concurrent programs. Hope you learnt something and will consider GoLang while writing a highly <em>go</em>ncurrent program.</p>
+
+<h1 id="conclusion-1">Conclusion</h1>
+
+
+  </div>
+  <hr>
+  
+    
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname  = 'https-vaibhavahuja-github-io-1';
+    var disqus_identifier = '/understanding-goroutines';
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+
+  
+</article>
+
+      <div class="copyright">
+      <p> Powered by <a href="https://jekyllrb.com/">Jekyll</a> </p>
+      </div>
+    </div>
+    
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'G-2WNHZ5BJ2N', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+  </body>
+</html>
