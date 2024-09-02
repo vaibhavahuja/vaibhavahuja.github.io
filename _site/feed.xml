@@ -5,8 +5,8 @@
     <description>my personal space where i write about stuff that excites me.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 01 Sep 2024 18:21:40 +0530</pubDate>
-    <lastBuildDate>Sun, 01 Sep 2024 18:21:40 +0530</lastBuildDate>
+    <pubDate>Mon, 02 Sep 2024 18:12:49 +0530</pubDate>
+    <lastBuildDate>Mon, 02 Sep 2024 18:12:49 +0530</lastBuildDate>
     <generator>Jekyll v3.10.0</generator>
     
       <item>
@@ -88,6 +88,49 @@ To Understand how are they different from threads, we see 3 factors - memory con
         <guid isPermaLink="true">http://localhost:4000/understanding-goroutines</guid>
         
         <category>golang</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Rate Limiter Service Design</title>
+        <description>&lt;p&gt;In this project, I will be building a rate limiter service. Below is the HLD and the detailed tech doc for the same. This blog post is a placeholder for the complete tech doc, which is on Google Docs and is linked below.&lt;/p&gt;
+
+&lt;h3 id=&quot;requirements&quot;&gt;Requirements&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Limit the requests sent to the service as per the rate/rules defined.&lt;/li&gt;
+  &lt;li&gt;Shared amongst different services.&lt;/li&gt;
+  &lt;li&gt;Allows multiple services to register rules, on the basis of which rate limiting is supposed to happen. Rules can be of the following types :
+    &lt;ul&gt;
+      &lt;li&gt;field &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x&lt;/code&gt; (from the request) should not appear more than &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;y&lt;/code&gt; times per minute&lt;/li&gt;
+      &lt;li&gt;limit requests to the service to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;y&lt;/code&gt; times per ‘time_unit’&lt;/li&gt;
+      &lt;li&gt;Tells what return message should be sent to the client in case of request rejection. For example :
+        &lt;ul&gt;
+          &lt;li&gt;Retry with exponential backoff&lt;/li&gt;
+          &lt;li&gt;Retry with fixed time&lt;/li&gt;
+          &lt;li&gt;Daily Limit Reached&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Minimal overhead latency&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;hld&quot;&gt;HLD&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/rate_limiter_hld.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can go through the complete tech document : &lt;a href=&quot;https://docs.google.com/document/d/1v14bOs-zXegk_AmMWduAnNVyI_Lus2q_ahYjxFAQe8E/edit#heading=h.10r0locdkasw&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The implementation with tech stack : (Go/DynamoDB/Redis): &lt;a href=&quot;https://github.com/vaibhavahuja/rate-limiter&quot;&gt;github.com/vaibhavahuja/rate-limiter&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 23 Aug 2024 16:51:29 +0530</pubDate>
+        <link>http://localhost:4000/rate-limiter-tech-doc</link>
+        <guid isPermaLink="true">http://localhost:4000/rate-limiter-tech-doc</guid>
+        
+        <category>project</category>
         
         
       </item>
@@ -995,99 +1038,6 @@ Effective Testing Strategy can be achieved using our application as it will resu
         
         
         <category>project</category>
-        
-      </item>
-    
-      <item>
-        <title>Range Queries</title>
-        <description>&lt;p&gt;This post is just for revising range queries. Have highlighted the topics and problems. Might write solutions (my approach) for these problems as well for future reference.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;to do : create collapsible for solutions + also to put the same in DP post&lt;/em&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;table-of-contents-segment-tree&quot;&gt;Table of Contents (segment tree)&lt;/h4&gt;
-&lt;p&gt;Link: &lt;a href=&quot;https://cp-algorithms.com/data_structures/segment_tree.html&quot;&gt;cp-algorithms - Segment tree&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Simplest form of a Segment Tree ✔️
-    &lt;ul&gt;
-      &lt;li&gt;Structure of the Segment Tree ✔️&lt;/li&gt;
-      &lt;li&gt;Construction ✔️&lt;/li&gt;
-      &lt;li&gt;Sum queries ✔️&lt;/li&gt;
-      &lt;li&gt;Update queries ✔️&lt;/li&gt;
-      &lt;li&gt;Implementation ✔️&lt;/li&gt;
-      &lt;li&gt;Memory efficient implementation ✔️&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Advanced versions of Segment Trees
-    &lt;ul&gt;
-      &lt;li&gt;More complex queries ✔️&lt;/li&gt;
-      &lt;li&gt;Saving the entire subarrays in each vertex ✔️&lt;/li&gt;
-      &lt;li&gt;Range updates (Lazy Propagation) ✔️&lt;/li&gt;
-      &lt;li&gt;Generalization to higher dimensions 📝&lt;/li&gt;
-      &lt;li&gt;Preserving the history of its values (Persistent Segment Tree)&lt;/li&gt;
-      &lt;li&gt;Implicit segment tree&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;table-of-contents-fenwick-tree-or-bit&quot;&gt;Table of Contents (fenwick tree or BIT)&lt;/h4&gt;
-&lt;p&gt;Link: &lt;a href=&quot;https://cp-algorithms.com/data_structures/fenwick.html&quot;&gt;cp-algorithms - Fenwick tree&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Description
-    &lt;ul&gt;
-      &lt;li&gt;Overview ✔️&lt;/li&gt;
-      &lt;li&gt;Definition of g(i) ✔️&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Implementation
-    &lt;ul&gt;
-      &lt;li&gt;Finding sum in one-dimensional array ✔️&lt;/li&gt;
-      &lt;li&gt;Finding minimum of [0,r] in one-dimensional array ✔️&lt;/li&gt;
-      &lt;li&gt;Finding sum in two-dimensional array ✔️&lt;/li&gt;
-      &lt;li&gt;One-based indexing approach ✔️&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Range operations
-    &lt;ol&gt;
-      &lt;li&gt;Point Update and Range Query ✔️&lt;/li&gt;
-      &lt;li&gt;Range Update and Point Query 📝&lt;/li&gt;
-      &lt;li&gt;Range Updates and Range Queries 📝&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h6 id=&quot;csesfi-problemset-range-queries&quot;&gt;CSES.fi problemSet (Range Queries)&lt;/h6&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1646&quot;&gt;Range Sum Queries I ✔️&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1646&quot;&gt;Range Sum Queries I ✔️&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1647&quot;&gt;Range Minimum Queries I ✔️&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1648&quot;&gt;Range Sum Queries II ✔️&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1649&quot;&gt;Range Minimum Queries II ✔️&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1650&quot;&gt;Range Xor Queries ✔️&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1651&quot;&gt;Range Update Queries ✔️&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1652&quot;&gt;Forest Queries ✔️&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1143&quot;&gt;Hotel Queries ✔️&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1749&quot;&gt;List Removals ✔️&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1144&quot;&gt;Salary Queries&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1190&quot;&gt;Subarray Sum Queries&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1734&quot;&gt;Distinct Values Queries&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1739&quot;&gt;Forest Queries II&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1735&quot;&gt;Range Updates and Sums&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1736&quot;&gt;Polynomial Queries&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cses.fi/problemset/task/1737&quot;&gt;Range Queries and Copies&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Mon, 13 Jul 2020 05:30:00 +0530</pubDate>
-        <link>http://localhost:4000/algo/rangeQueries</link>
-        <guid isPermaLink="true">http://localhost:4000/algo/rangeQueries</guid>
-        
-        <category>algo</category>
-        
-        <category>progress</category>
-        
-        
-        <category>algo</category>
         
       </item>
     
